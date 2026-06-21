@@ -1,0 +1,2473 @@
+{
+  "topics": {
+    "simple_past": {
+      "label": "Simple Past",
+      "icon": "📖",
+      "description": "Ações concluídas no passado",
+      "exercises": {
+        "beginner": [
+          {
+            "id": "sp_b_1",
+            "type": "multiple_choice",
+            "question": "Choose the correct Simple Past form: She ___ to the store yesterday.",
+            "options": [
+              "go",
+              "goes",
+              "went",
+              "gone"
+            ],
+            "answer": "went",
+            "explanation": "'Went' is the irregular past tense of 'go'. We use Simple Past for completed actions in the past."
+          },
+          {
+            "id": "sp_b_2",
+            "type": "multiple_choice",
+            "question": "Which sentence is in the Simple Past tense?",
+            "options": [
+              "I am eating lunch",
+              "I eat lunch every day",
+              "I ate lunch at noon",
+              "I will eat lunch soon"
+            ],
+            "answer": "I ate lunch at noon",
+            "explanation": "'Ate' is the past tense of 'eat'. The time marker 'at noon' helps confirm it's a completed past action."
+          },
+          {
+            "id": "sp_b_3",
+            "type": "fill_blank",
+            "question": "They ___ (play) football last Sunday.",
+            "answer": "played",
+            "hint": "Regular verb: add -ed",
+            "explanation": "'Play' is a regular verb. To form Simple Past, just add '-ed': played."
+          },
+          {
+            "id": "sp_b_4",
+            "type": "multiple_choice",
+            "question": "He ___ his homework before dinner.",
+            "options": [
+              "do",
+              "does",
+              "did",
+              "done"
+            ],
+            "answer": "did",
+            "explanation": "'Did' is the Simple Past of 'do'. It's an irregular verb that must be memorized."
+          },
+          {
+            "id": "sp_b_5",
+            "type": "fill_blank",
+            "question": "We ___ (watch) a movie last night.",
+            "answer": "watched",
+            "hint": "Regular verb: add -ed",
+            "explanation": "'Watch' is a regular verb. Add '-ed' to form the past tense: watched."
+          },
+          {
+            "id": "sp_b_6",
+            "type": "multiple_choice",
+            "question": "The cat ___ on the chair all afternoon.",
+            "options": [
+              "sit",
+              "sat",
+              "sitting",
+              "sitted"
+            ],
+            "answer": "sat",
+            "explanation": "'Sat' is the irregular past tense of 'sit'. Note: 'sitted' does not exist in English."
+          },
+          {
+            "id": "sp_b_7",
+            "type": "translation",
+            "question": "Translate to English: 'Ela cozinhou o jantar ontem à noite.'",
+            "answer": "She cooked dinner last night",
+            "hint": "Regular verb 'cook' + time marker",
+            "explanation": "'Cook' is a regular verb (cooked). 'Last night' indicates the past time."
+          },
+          {
+            "id": "sp_b_8",
+            "type": "multiple_choice",
+            "question": "I ___ a letter to my friend last week.",
+            "options": [
+              "write",
+              "wrote",
+              "written",
+              "writed"
+            ],
+            "answer": "wrote",
+            "explanation": "'Write' is irregular. Past tense: wrote. Past participle: written."
+          },
+          {
+            "id": "sp_b_9",
+            "type": "multiple_choice",
+            "question": "Choose the correct Simple Past form: We ___ at school at 8 AM yesterday.",
+            "options": [
+              "arrive",
+              "arrived",
+              "arrives",
+              "arriving"
+            ],
+            "answer": "arrived",
+            "explanation": "'Arrive' is a regular verb. Add '-ed' to talk about a completed action in the past."
+          },
+          {
+            "id": "sp_b_10",
+            "type": "fill_blank",
+            "question": "My brother ___ (clean) his room last Saturday.",
+            "answer": "cleaned",
+            "hint": "Regular verb: add -ed",
+            "explanation": "'Clean' is regular, so the Simple Past form is 'cleaned'."
+          },
+          {
+            "id": "sp_b_11",
+            "type": "multiple_choice",
+            "question": "She ___ a new phone two days ago.",
+            "options": [
+              "buy",
+              "buys",
+              "bought",
+              "buyed"
+            ],
+            "answer": "bought",
+            "explanation": "'Bought' is the irregular past tense of 'buy'. 'Buyed' is incorrect."
+          },
+          {
+            "id": "sp_b_12",
+            "type": "translation",
+            "question": "Translate to English: 'Nós visitámos o museu ontem.'",
+            "answer": "We visited the museum yesterday",
+            "hint": "visited + yesterday",
+            "explanation": "'Visit' is regular: visited. 'Yesterday' marks a completed past action."
+          }
+        ],
+        "intermediate": [
+          {
+            "id": "sp_i_1",
+            "type": "multiple_choice",
+            "question": "By the time we arrived, the party ___.",
+            "options": [
+              "already ended",
+              "had already ended",
+              "was already ending",
+              "already ends"
+            ],
+            "answer": "had already ended",
+            "explanation": "Past Perfect 'had ended' is used because the party ending happened BEFORE you arrived — both are in the past, but one is earlier."
+          },
+          {
+            "id": "sp_i_2",
+            "type": "fill_blank",
+            "question": "She didn't ___ (know) about the surprise party.",
+            "answer": "know",
+            "hint": "After 'didn't', use base form",
+            "explanation": "After auxiliary 'did/didn't', always use the base form of the verb (infinitive without 'to')."
+          },
+          {
+            "id": "sp_i_3",
+            "type": "multiple_choice",
+            "question": "Which question form is CORRECT for Simple Past?",
+            "options": [
+              "Did she went to school?",
+              "Did she go to school?",
+              "Does she went to school?",
+              "She did go to school?"
+            ],
+            "answer": "Did she go to school?",
+            "explanation": "Questions in Simple Past use 'Did + subject + base verb'. Never use the past tense after 'did'."
+          },
+          {
+            "id": "sp_i_4",
+            "type": "translation",
+            "question": "Translate: 'Eles não vieram à reunião porque estavam ocupados.'",
+            "answer": "They didn't come to the meeting because they were busy",
+            "hint": "Negative form: didn't + base verb",
+            "explanation": "Negative Simple Past: 'didn't + base verb'. 'Were' is past of 'are' (to be)."
+          },
+          {
+            "id": "sp_i_5",
+            "type": "multiple_choice",
+            "question": "When I ___ home, my sister ___ dinner.",
+            "options": [
+              "got / cooked",
+              "got / was cooking",
+              "was getting / cooked",
+              "had got / cooked"
+            ],
+            "answer": "got / was cooking",
+            "explanation": "Simple Past (got) is used for the sudden interruption. Past Continuous (was cooking) describes the ongoing background action."
+          },
+          {
+            "id": "sp_i_6",
+            "type": "fill_blank",
+            "question": "The scientist ___ (discover) penicillin in 1928.",
+            "answer": "discovered",
+            "hint": "Regular verb + -ed",
+            "explanation": "Fleming discovered penicillin. Historical facts use Simple Past."
+          },
+          {
+            "id": "sp_i_7",
+            "type": "multiple_choice",
+            "question": "He ___ to three universities but ___ accepted by only one.",
+            "options": [
+              "applied / got",
+              "applied / was",
+              "had applied / was",
+              "apply / got"
+            ],
+            "answer": "applied / was",
+            "explanation": "Both actions are Simple Past. 'Was accepted' is passive voice in Simple Past."
+          },
+          {
+            "id": "sp_i_8",
+            "type": "translation",
+            "question": "Translate: 'Quanto tempo você ficou em Lisboa no ano passado?'",
+            "answer": "How long did you stay in Lisbon last year?",
+            "hint": "Question with 'How long' + did",
+            "explanation": "Wh-questions in past: How long + did + subject + base verb?"
+          },
+          {
+            "id": "sp_i_9",
+            "type": "multiple_choice",
+            "question": "Which sentence uses Simple Past correctly?",
+            "options": [
+              "Did you watched the match?",
+              "Did you watch the match?",
+              "You did watched the match?",
+              "Do you watched the match?"
+            ],
+            "answer": "Did you watch the match?",
+            "explanation": "After 'did', use the base verb: 'watch', not 'watched'."
+          },
+          {
+            "id": "sp_i_10",
+            "type": "fill_blank",
+            "question": "I ___ (not / understand) the instructions at first.",
+            "answer": "didn't understand",
+            "hint": "didn't + base verb",
+            "explanation": "Negative Simple Past uses 'didn't + base verb': didn't understand."
+          },
+          {
+            "id": "sp_i_11",
+            "type": "multiple_choice",
+            "question": "While we ___ for the bus, it suddenly ___ raining.",
+            "options": [
+              "waited / started",
+              "were waiting / started",
+              "waited / was starting",
+              "had waited / started"
+            ],
+            "answer": "were waiting / started",
+            "explanation": "Past Continuous describes the background action; Simple Past marks the interruption."
+          },
+          {
+            "id": "sp_i_12",
+            "type": "translation",
+            "question": "Translate: 'Ela perdeu o comboio porque acordou tarde.'",
+            "answer": "She missed the train because she woke up late",
+            "hint": "missed + woke up",
+            "explanation": "'Missed' is regular; 'woke up' is the past of 'wake up'."
+          }
+        ],
+        "advanced": [
+          {
+            "id": "sp_a_1",
+            "type": "multiple_choice",
+            "question": "No sooner ___ the door than the phone ___.",
+            "options": [
+              "I opened / rang",
+              "had I opened / rang",
+              "I had opened / rang",
+              "did I open / had rung"
+            ],
+            "answer": "had I opened / rang",
+            "explanation": "'No sooner had + subject + Past Participle + than + Simple Past' is an inverted structure for emphasis. The Past Perfect shows the sequence."
+          },
+          {
+            "id": "sp_a_2",
+            "type": "fill_blank",
+            "question": "It was only when she ___ (leave) that I realized she had taken my keys.",
+            "answer": "left",
+            "hint": "Simple Past in the 'when' clause",
+            "explanation": "The 'when' clause uses Simple Past (left). The realization is Past Simple; the taking is Past Perfect (had taken)."
+          },
+          {
+            "id": "sp_a_3",
+            "type": "multiple_choice",
+            "question": "The manuscript, which ___ for centuries, ___ a scholar in 1943.",
+            "options": [
+              "was losing / discovered",
+              "had been lost / was discovered by",
+              "lost / had been discovered",
+              "has been lost / discovered"
+            ],
+            "answer": "had been lost / was discovered by",
+            "explanation": "Past Perfect Passive (had been lost) for the earlier event. Simple Past Passive (was discovered by) for the second event."
+          },
+          {
+            "id": "sp_a_4",
+            "type": "translation",
+            "question": "Translate: 'Se eu soubesse da conferência, teria me preparado melhor.'",
+            "answer": "Had I known about the conference, I would have prepared better",
+            "hint": "Third conditional with inversion (Had I + past participle)",
+            "explanation": "Advanced inversion: 'Had I known' replaces 'If I had known'. This is formal/literary style."
+          },
+          {
+            "id": "sp_a_5",
+            "type": "multiple_choice",
+            "question": "He ___ English for 5 years before he ___ abroad.",
+            "options": [
+              "was studying / moved",
+              "had been studying / moved",
+              "studied / had moved",
+              "had studied / was moving"
+            ],
+            "answer": "had been studying / moved",
+            "explanation": "Past Perfect Continuous (had been studying) emphasizes duration before a past point. Simple Past (moved) marks that point."
+          },
+          {
+            "id": "sp_a_6",
+            "type": "multiple_choice",
+            "question": "Hardly ___ the announcement when the audience ___ clapping.",
+            "options": [
+              "had he finished / began",
+              "he finished / began",
+              "did he finish / had begun",
+              "he had finished / begun"
+            ],
+            "answer": "had he finished / began",
+            "explanation": "After 'hardly' at the start, use inversion: 'Hardly had he finished... when...'."
+          },
+          {
+            "id": "sp_a_7",
+            "type": "fill_blank",
+            "question": "The witness claimed that she ___ (see) the suspect before the police arrived.",
+            "answer": "had seen",
+            "hint": "Earlier past action",
+            "explanation": "Use Past Perfect for the earlier action: she had seen him before the police arrived."
+          },
+          {
+            "id": "sp_a_8",
+            "type": "multiple_choice",
+            "question": "The bridge ___ in 1890 and ___ several times before it was demolished.",
+            "options": [
+              "built / repaired",
+              "was built / had been repaired",
+              "had built / was repaired",
+              "was building / had repaired"
+            ],
+            "answer": "was built / had been repaired",
+            "explanation": "Use Simple Past Passive for the construction date and Past Perfect Passive for repairs before demolition."
+          },
+          {
+            "id": "sp_a_9",
+            "type": "translation",
+            "question": "Translate formally: 'Mal tínhamos chegado quando a palestra começou.'",
+            "answer": "Hardly had we arrived when the lecture began",
+            "hint": "Hardly had + subject + past participle",
+            "explanation": "This is an advanced inverted structure: 'Hardly had we arrived when...'."
+          },
+          {
+            "id": "sp_a_10",
+            "type": "multiple_choice",
+            "question": "The CEO ___ the report after the auditors ___ all the figures.",
+            "options": [
+              "signed / had checked",
+              "had signed / checked",
+              "was signing / had check",
+              "signed / have checked"
+            ],
+            "answer": "signed / had checked",
+            "explanation": "The auditors checked first, so use Past Perfect for that earlier action."
+          },
+          {
+            "id": "sp_a_11",
+            "type": "fill_blank",
+            "question": "Only after the contract ___ (be) signed did the team start the project.",
+            "answer": "had been",
+            "hint": "Past Perfect Passive",
+            "explanation": "The signing happened before the project started, so use 'had been signed'."
+          },
+          {
+            "id": "sp_a_12",
+            "type": "multiple_choice",
+            "question": "Which sentence is the most formal and grammatically correct?",
+            "options": [
+              "If I knew earlier, I would helped.",
+              "Had I been informed earlier, I would have helped.",
+              "Did I know earlier, I helped.",
+              "If I had knew earlier, I would help."
+            ],
+            "answer": "Had I been informed earlier, I would have helped.",
+            "explanation": "This uses third conditional inversion and passive voice correctly."
+          }
+        ]
+      }
+    },
+    "phrasal_verbs": {
+      "label": "Phrasal Verbs",
+      "icon": "🔗",
+      "description": "Verbos frasais essenciais",
+      "exercises": {
+        "beginner": [
+          {
+            "id": "pv_b_1",
+            "type": "multiple_choice",
+            "question": "What does 'wake up' mean?",
+            "options": [
+              "Go to sleep",
+              "Stop sleeping / get out of bed",
+              "Feel tired",
+              "Stay in bed"
+            ],
+            "answer": "Stop sleeping / get out of bed",
+            "explanation": "'Wake up' means to stop sleeping and become conscious. Example: I wake up at 7 AM every day."
+          },
+          {
+            "id": "pv_b_2",
+            "type": "fill_blank",
+            "question": "Please ___ your coat before going outside. (put + on)",
+            "answer": "put on",
+            "hint": "Phrasal verb = put + on",
+            "explanation": "'Put on' means to wear or place clothing on your body."
+          },
+          {
+            "id": "pv_b_3",
+            "type": "multiple_choice",
+            "question": "She needs to ___ her flight. It's getting late!",
+            "options": [
+              "look after",
+              "hurry up",
+              "give up",
+              "look up"
+            ],
+            "answer": "hurry up",
+            "explanation": "'Hurry up' means to move faster or do something more quickly. It's often used as an imperative."
+          },
+          {
+            "id": "pv_b_4",
+            "type": "multiple_choice",
+            "question": "The teacher asked students to ___ their homework.",
+            "options": [
+              "hand in",
+              "hand out",
+              "hand on",
+              "hand at"
+            ],
+            "answer": "hand in",
+            "explanation": "'Hand in' means to submit work to a teacher or authority. 'Hand out' means to distribute something."
+          },
+          {
+            "id": "pv_b_5",
+            "type": "translation",
+            "question": "Translate using a phrasal verb: 'Por favor, desligue a televisão.'",
+            "answer": "Please turn off the television",
+            "hint": "turn + off",
+            "explanation": "'Turn off' means to stop a device from working. Opposite: 'turn on'."
+          },
+          {
+            "id": "pv_b_6",
+            "type": "multiple_choice",
+            "question": "I don't understand this word. I'll ___ it ___ in the dictionary.",
+            "options": [
+              "look / up",
+              "look / at",
+              "look / for",
+              "look / after"
+            ],
+            "answer": "look / up",
+            "explanation": "'Look up' means to search for information in a reference source like a dictionary or internet."
+          },
+          {
+            "id": "pv_b_7",
+            "type": "multiple_choice",
+            "question": "What does 'turn on' mean?",
+            "options": [
+              "Start a device",
+              "Stop a device",
+              "Throw away",
+              "Look for"
+            ],
+            "answer": "Start a device",
+            "explanation": "'Turn on' means to start a machine, light, or electronic device."
+          },
+          {
+            "id": "pv_b_8",
+            "type": "fill_blank",
+            "question": "Please ___ the light. It is too dark. (turn + on)",
+            "answer": "turn on",
+            "hint": "turn + on",
+            "explanation": "'Turn on the light' means to make the light start working."
+          },
+          {
+            "id": "pv_b_9",
+            "type": "multiple_choice",
+            "question": "What does 'stand up' mean?",
+            "options": [
+              "Sit down",
+              "Rise to your feet",
+              "Sleep",
+              "Run away"
+            ],
+            "answer": "Rise to your feet",
+            "explanation": "'Stand up' means to move from sitting to standing."
+          },
+          {
+            "id": "pv_b_10",
+            "type": "multiple_choice",
+            "question": "Choose the correct phrasal verb: ___ your name on the form.",
+            "options": [
+              "Fill in",
+              "Look after",
+              "Wake up",
+              "Give back"
+            ],
+            "answer": "Fill in",
+            "explanation": "'Fill in' means to write information in a form or blank space."
+          },
+          {
+            "id": "pv_b_11",
+            "type": "translation",
+            "question": "Translate using a phrasal verb: 'Levanta-te, por favor.'",
+            "answer": "Please stand up",
+            "hint": "stand + up",
+            "explanation": "'Stand up' is used when someone rises to their feet."
+          },
+          {
+            "id": "pv_b_12",
+            "type": "multiple_choice",
+            "question": "What does 'come in' mean?",
+            "options": [
+              "Enter",
+              "Leave",
+              "Sleep",
+              "Call"
+            ],
+            "answer": "Enter",
+            "explanation": "'Come in' means to enter a room or building."
+          }
+        ],
+        "intermediate": [
+          {
+            "id": "pv_i_1",
+            "type": "multiple_choice",
+            "question": "After years of struggling, she finally ___ her fear of public speaking.",
+            "options": [
+              "got over",
+              "got on",
+              "got through",
+              "got by"
+            ],
+            "answer": "got over",
+            "explanation": "'Get over' means to recover from something difficult, like an illness, fear, or heartbreak."
+          },
+          {
+            "id": "pv_i_2",
+            "type": "fill_blank",
+            "question": "The project was ___ (postpone) due to budget issues. Use: put + off",
+            "answer": "put off",
+            "hint": "put + off = postpone",
+            "explanation": "'Put off' means to delay or postpone something. Example: Don't put off till tomorrow what you can do today."
+          },
+          {
+            "id": "pv_i_3",
+            "type": "multiple_choice",
+            "question": "The new restaurant really ___ to its customers — the service is exceptional.",
+            "options": [
+              "lives up",
+              "comes up",
+              "makes up",
+              "shows up"
+            ],
+            "answer": "lives up",
+            "explanation": "'Live up to' means to meet expectations or standards. 'Live up to its reputation' is a common collocation."
+          },
+          {
+            "id": "pv_i_4",
+            "type": "translation",
+            "question": "Translate: 'Você deveria pensar bem antes de aceitar aquela oferta de emprego.'",
+            "answer": "You should think it over before accepting that job offer",
+            "hint": "think over = considerar cuidadosamente",
+            "explanation": "'Think over' means to carefully consider something before making a decision."
+          },
+          {
+            "id": "pv_i_5",
+            "type": "multiple_choice",
+            "question": "He ___ an interesting argument during the debate.",
+            "options": [
+              "brought up",
+              "brought out",
+              "brought on",
+              "brought down"
+            ],
+            "answer": "brought up",
+            "explanation": "'Bring up' has two meanings: 1) to raise a topic in conversation; 2) to raise a child. Here it means to introduce a topic."
+          },
+          {
+            "id": "pv_i_6",
+            "type": "multiple_choice",
+            "question": "The meeting was ___ until next Friday.",
+            "options": [
+              "put off",
+              "put on",
+              "put out",
+              "put up"
+            ],
+            "answer": "put off",
+            "explanation": "'Put off' means postpone or delay."
+          },
+          {
+            "id": "pv_i_7",
+            "type": "fill_blank",
+            "question": "I need to ___ ___ my notes before the exam. (review)",
+            "answer": "go over",
+            "hint": "go + over",
+            "explanation": "'Go over' means to review or check something carefully."
+          },
+          {
+            "id": "pv_i_8",
+            "type": "multiple_choice",
+            "question": "She ___ smoking last year and feels healthier now.",
+            "options": [
+              "gave up",
+              "gave in",
+              "gave away",
+              "gave out"
+            ],
+            "answer": "gave up",
+            "explanation": "'Give up' means to stop doing something, especially a habit."
+          },
+          {
+            "id": "pv_i_9",
+            "type": "translation",
+            "question": "Translate: 'Eles ficaram sem leite durante o pequeno-almoço.'",
+            "answer": "They ran out of milk during breakfast",
+            "hint": "run out of = ficar sem",
+            "explanation": "'Run out of' means to have none left."
+          },
+          {
+            "id": "pv_i_10",
+            "type": "multiple_choice",
+            "question": "I need to ___ who sent this email.",
+            "options": [
+              "find out",
+              "find in",
+              "find on",
+              "find over"
+            ],
+            "answer": "find out",
+            "explanation": "'Find out' means to discover information."
+          },
+          {
+            "id": "pv_i_11",
+            "type": "multiple_choice",
+            "question": "The football match was ___ because of heavy rain.",
+            "options": [
+              "called off",
+              "called up",
+              "called in",
+              "called back"
+            ],
+            "answer": "called off",
+            "explanation": "'Call off' means to cancel an event."
+          },
+          {
+            "id": "pv_i_12",
+            "type": "fill_blank",
+            "question": "Can you ___ ___ the baby while I cook? (take care of)",
+            "answer": "look after",
+            "hint": "look + after",
+            "explanation": "'Look after' means to take care of someone or something."
+          }
+        ],
+        "advanced": [
+          {
+            "id": "pv_a_1",
+            "type": "multiple_choice",
+            "question": "The scandal ___ years of political maneuvering and corruption.",
+            "options": [
+              "stemmed from",
+              "gave rise to",
+              "accounted for",
+              "made up for"
+            ],
+            "answer": "stemmed from",
+            "explanation": "'Stem from' means to originate from or be caused by. It implies a root cause. Compare: 'give rise to' means to cause/produce."
+          },
+          {
+            "id": "pv_a_2",
+            "type": "fill_blank",
+            "question": "The company's profits have been ___ (erode) by rising costs. Use: eaten + away + at",
+            "answer": "eaten away at",
+            "hint": "eat away at = gradually reduce/erode",
+            "explanation": "'Eat away at' means to gradually destroy or reduce. It's often used for financial or emotional erosion."
+          },
+          {
+            "id": "pv_a_3",
+            "type": "translation",
+            "question": "Translate: 'As negociações fracassaram, o que levou ambas as partes a reconsiderar sua posição.'",
+            "answer": "The negotiations fell through, which prompted both parties to reconsider their position",
+            "hint": "fall through = fracassar/não se concretizar",
+            "explanation": "'Fall through' means to fail to happen or be completed, especially plans or deals."
+          },
+          {
+            "id": "pv_a_4",
+            "type": "multiple_choice",
+            "question": "The manager tried to ___ the conflict before it affected the whole team.",
+            "options": [
+              "smooth over",
+              "smooth out",
+              "smooth up",
+              "smooth away"
+            ],
+            "answer": "smooth over",
+            "explanation": "'Smooth over' means to make a problem seem less serious and reduce tension."
+          },
+          {
+            "id": "pv_a_5",
+            "type": "fill_blank",
+            "question": "The plan ___ ___ when the main investor withdrew. (failed)",
+            "answer": "fell through",
+            "hint": "fall + through",
+            "explanation": "'Fall through' means that a plan or agreement fails to happen."
+          },
+          {
+            "id": "pv_a_6",
+            "type": "multiple_choice",
+            "question": "Her explanation did not ___ under close examination.",
+            "options": [
+              "hold up",
+              "hold on",
+              "hold out",
+              "hold back"
+            ],
+            "answer": "hold up",
+            "explanation": "'Hold up' can mean remain valid or convincing when tested."
+          },
+          {
+            "id": "pv_a_7",
+            "type": "translation",
+            "question": "Translate: 'Ele compensou o atraso trabalhando até tarde.'",
+            "answer": "He made up for the delay by working late",
+            "hint": "make up for = compensate",
+            "explanation": "'Make up for' means to compensate for something negative."
+          },
+          {
+            "id": "pv_a_8",
+            "type": "multiple_choice",
+            "question": "The proposal was ___ by several board members.",
+            "options": [
+              "shot down",
+              "shot up",
+              "shot out",
+              "shot over"
+            ],
+            "answer": "shot down",
+            "explanation": "'Shoot down' means to reject an idea strongly."
+          },
+          {
+            "id": "pv_a_9",
+            "type": "fill_blank",
+            "question": "The evidence ___ ___ his version of events. (supported)",
+            "answer": "backed up",
+            "hint": "back + up",
+            "explanation": "'Back up' means to support a claim with evidence."
+          },
+          {
+            "id": "pv_a_10",
+            "type": "multiple_choice",
+            "question": "She managed to ___ a convincing solution despite limited data.",
+            "options": [
+              "come up with",
+              "come down with",
+              "come out of",
+              "come across as"
+            ],
+            "answer": "come up with",
+            "explanation": "'Come up with' means to produce or think of an idea."
+          },
+          {
+            "id": "pv_a_11",
+            "type": "translation",
+            "question": "Translate: 'A equipa continuou apesar dos obstáculos.'",
+            "answer": "The team carried on despite the obstacles",
+            "hint": "carry on = continue",
+            "explanation": "'Carry on' means to continue doing something."
+          },
+          {
+            "id": "pv_a_12",
+            "type": "multiple_choice",
+            "question": "The speaker kept ___ the same point, which made the talk repetitive.",
+            "options": [
+              "going over",
+              "going under",
+              "going by",
+              "going off"
+            ],
+            "answer": "going over",
+            "explanation": "'Go over' can also mean to repeat or review a topic."
+          }
+        ]
+      }
+    },
+    "business_english": {
+      "label": "Business English",
+      "icon": "💼",
+      "description": "Inglês para o ambiente profissional",
+      "exercises": {
+        "beginner": [
+          {
+            "id": "be_b_1",
+            "type": "multiple_choice",
+            "question": "In a formal email, how do you start writing to someone you don't know?",
+            "options": [
+              "Hey there,",
+              "Dear Sir/Madam,",
+              "What's up,",
+              "Hiya,"
+            ],
+            "answer": "Dear Sir/Madam,",
+            "explanation": "'Dear Sir/Madam,' is the standard formal salutation when you don't know the recipient's name. Use 'Dear [Name]' if you know them."
+          },
+          {
+            "id": "be_b_2",
+            "type": "fill_blank",
+            "question": "I am writing with ___ to your job advertisement. (regarding/about)",
+            "answer": "regard",
+            "hint": "Formal phrase: 'with regard to'",
+            "explanation": "'With regard to' or 'regarding' are formal ways to introduce the topic of a letter or email."
+          },
+          {
+            "id": "be_b_3",
+            "type": "multiple_choice",
+            "question": "What is the correct way to end a formal email when you know the recipient's name?",
+            "options": [
+              "Bye!",
+              "Cheers,",
+              "Yours sincerely,",
+              "Yours faithfully,"
+            ],
+            "answer": "Yours sincerely,",
+            "explanation": "Use 'Yours sincerely' when you know the name (Dear Mr. Smith). Use 'Yours faithfully' when you don't (Dear Sir/Madam)."
+          },
+          {
+            "id": "be_b_4",
+            "type": "multiple_choice",
+            "question": "In a meeting, you want to suggest an idea. What do you say?",
+            "options": [
+              "Listen to my idea!",
+              "I was wondering if we could consider...",
+              "My idea is better.",
+              "Do my suggestion."
+            ],
+            "answer": "I was wondering if we could consider...",
+            "explanation": "Professional suggestions use tentative language: 'I was wondering...', 'Perhaps we could...', 'What about...?' to show respect for others' opinions."
+          },
+          {
+            "id": "be_b_5",
+            "type": "translation",
+            "question": "Translate: 'Por favor, encontre em anexo o relatório solicitado.'",
+            "answer": "Please find attached the requested report",
+            "hint": "Standard phrase for sending attachments",
+            "explanation": "'Please find attached' is the standard Business English phrase for email attachments. Alternative: 'I have attached...' or 'Attached please find...'"
+          },
+          {
+            "id": "be_b_6",
+            "type": "multiple_choice",
+            "question": "Your colleague is speaking too fast in a meeting. What do you say?",
+            "options": [
+              "Talk slower!",
+              "You're going too fast.",
+              "Could you slow down a little, please?",
+              "I can't understand you."
+            ],
+            "answer": "Could you slow down a little, please?",
+            "explanation": "Use polite requests with 'Could you...?' in professional settings. Adding 'please' and softeners like 'a little' makes it more diplomatic."
+          },
+          {
+            "id": "be_b_7",
+            "type": "multiple_choice",
+            "question": "Which phrase is polite for asking for help at work?",
+            "options": [
+              "Help me now.",
+              "Could you help me with this, please?",
+              "Do this for me.",
+              "You must help."
+            ],
+            "answer": "Could you help me with this, please?",
+            "explanation": "Use 'Could you... please?' for polite workplace requests."
+          },
+          {
+            "id": "be_b_8",
+            "type": "fill_blank",
+            "question": "Thank you ___ your email.",
+            "answer": "for",
+            "hint": "thank you + for",
+            "explanation": "The correct phrase is 'Thank you for your email'."
+          },
+          {
+            "id": "be_b_9",
+            "type": "multiple_choice",
+            "question": "Choose the best subject line for a work email.",
+            "options": [
+              "hello",
+              "Question about Friday meeting",
+              "IMPORTANT!!!!",
+              "read this"
+            ],
+            "answer": "Question about Friday meeting",
+            "explanation": "A good subject line is clear, specific, and professional."
+          },
+          {
+            "id": "be_b_10",
+            "type": "translation",
+            "question": "Translate: 'Obrigado pela sua resposta rápida.'",
+            "answer": "Thank you for your quick reply",
+            "hint": "quick reply",
+            "explanation": "This is a common polite phrase in professional emails."
+          },
+          {
+            "id": "be_b_11",
+            "type": "multiple_choice",
+            "question": "You are late to a meeting. What do you say?",
+            "options": [
+              "I am late.",
+              "Sorry for the delay.",
+              "Wait for me.",
+              "I forgot."
+            ],
+            "answer": "Sorry for the delay.",
+            "explanation": "'Sorry for the delay' is polite and professional."
+          },
+          {
+            "id": "be_b_12",
+            "type": "multiple_choice",
+            "question": "Which closing is appropriate in a semi-formal email?",
+            "options": [
+              "Best regards,",
+              "See ya,",
+              "Love,",
+              "Bye bye,"
+            ],
+            "answer": "Best regards,",
+            "explanation": "'Best regards' is a safe and professional email closing."
+          }
+        ],
+        "intermediate": [
+          {
+            "id": "be_i_1",
+            "type": "multiple_choice",
+            "question": "What does 'to table a proposal' mean in British English?",
+            "options": [
+              "To reject a proposal",
+              "To put a proposal forward for discussion",
+              "To write a proposal",
+              "To delay a proposal"
+            ],
+            "answer": "To put a proposal forward for discussion",
+            "explanation": "IMPORTANT: 'To table' means OPPOSITE things in British vs American English! British: to table = to bring up for discussion. American: to table = to postpone/shelve."
+          },
+          {
+            "id": "be_i_2",
+            "type": "fill_blank",
+            "question": "We need to ___ (touch base) with the client about the project timeline. Use 2 words.",
+            "answer": "touch base",
+            "hint": "Idiomatic: make contact/check in",
+            "explanation": "'Touch base' is a common business idiom meaning to briefly contact someone to share updates. Example: Let's touch base on Monday."
+          },
+          {
+            "id": "be_i_3",
+            "type": "multiple_choice",
+            "question": "The quarterly results were below expectations. Which is the most professional way to report this?",
+            "options": [
+              "We totally failed this quarter.",
+              "Q3 performance fell short of our projected targets by 8%.",
+              "Numbers are bad.",
+              "We didn't do well."
+            ],
+            "answer": "Q3 performance fell short of our projected targets by 8%.",
+            "explanation": "Business English uses precise language ('fell short of', 'projected targets', 'by 8%') rather than vague or overly casual expressions."
+          },
+          {
+            "id": "be_i_4",
+            "type": "translation",
+            "question": "Translate in a professional tone: 'Precisamos adiar a reunião de amanhã. Podemos reagendar para quinta-feira?'",
+            "answer": "I'm afraid we need to reschedule tomorrow's meeting. Would Thursday work for you?",
+            "hint": "Use 'I'm afraid' to soften bad news",
+            "explanation": "'I'm afraid' softens negative messages. 'Would... work for you?' is more polite than 'Can we meet on Thursday?'"
+          },
+          {
+            "id": "be_i_5",
+            "type": "multiple_choice",
+            "question": "In a negotiation, you want to make a concession. You say:",
+            "options": [
+              "Fine, we'll do it your way.",
+              "We might be willing to move on the deadline if you can offer a more competitive rate.",
+              "OK, I give up.",
+              "That's not what I want, but whatever."
+            ],
+            "answer": "We might be willing to move on the deadline if you can offer a more competitive rate.",
+            "explanation": "Conditional concessions ('If you... then we...') are a powerful negotiation tool. 'Might be willing' shows flexibility without full commitment."
+          },
+          {
+            "id": "be_i_6",
+            "type": "multiple_choice",
+            "question": "Which phrase politely asks for clarification?",
+            "options": [
+              "Explain again.",
+              "Could you clarify what you mean by that?",
+              "That is confusing.",
+              "Say it better."
+            ],
+            "answer": "Could you clarify what you mean by that?",
+            "explanation": "This phrase is polite, direct, and suitable for meetings."
+          },
+          {
+            "id": "be_i_7",
+            "type": "fill_blank",
+            "question": "I would like to ___ a meeting for next Tuesday.",
+            "answer": "schedule",
+            "hint": "arrange formally",
+            "explanation": "'Schedule a meeting' is a standard business collocation."
+          },
+          {
+            "id": "be_i_8",
+            "type": "multiple_choice",
+            "question": "Which sentence is best for giving bad news professionally?",
+            "options": [
+              "This is bad.",
+              "Unfortunately, we are unable to approve the request at this stage.",
+              "No.",
+              "Your request failed."
+            ],
+            "answer": "Unfortunately, we are unable to approve the request at this stage.",
+            "explanation": "Use 'Unfortunately' and neutral wording to soften bad news."
+          },
+          {
+            "id": "be_i_9",
+            "type": "translation",
+            "question": "Translate professionally: 'Podemos discutir isto na próxima reunião?'",
+            "answer": "Can we discuss this in the next meeting?",
+            "hint": "discuss this",
+            "explanation": "'Discuss' is transitive in English: discuss this, not discuss about this."
+          },
+          {
+            "id": "be_i_10",
+            "type": "multiple_choice",
+            "question": "What does \"deadline\" mean?",
+            "options": [
+              "A meeting room",
+              "The latest time something must be finished",
+              "A company rule",
+              "A salary increase"
+            ],
+            "answer": "The latest time something must be finished",
+            "explanation": "A deadline is the final time or date for completing work."
+          },
+          {
+            "id": "be_i_11",
+            "type": "multiple_choice",
+            "question": "Which phrase means \"give someone updated information\"?",
+            "options": [
+              "Keep someone posted",
+              "Keep someone tired",
+              "Keep someone open",
+              "Keep someone late"
+            ],
+            "answer": "Keep someone posted",
+            "explanation": "'Keep me posted' means keep me informed about updates."
+          },
+          {
+            "id": "be_i_12",
+            "type": "fill_blank",
+            "question": "Please let me know if you have any ___ questions.",
+            "answer": "further",
+            "hint": "additional",
+            "explanation": "'Further questions' is a common formal phrase meaning additional questions."
+          }
+        ],
+        "advanced": [
+          {
+            "id": "be_a_1",
+            "type": "multiple_choice",
+            "question": "Which phrase best demonstrates diplomatic disagreement in a board meeting?",
+            "options": [
+              "You're completely wrong about this.",
+              "I see where you're coming from, though I'd perhaps challenge the assumption that market conditions will remain stable.",
+              "I disagree.",
+              "That doesn't make sense to me."
+            ],
+            "answer": "I see where you're coming from, though I'd perhaps challenge the assumption that market conditions will remain stable.",
+            "explanation": "Diplomatic disagreement: acknowledge the person's point, then use hedging language ('I'd perhaps challenge') and focus on the idea, not the person."
+          },
+          {
+            "id": "be_a_2",
+            "type": "translation",
+            "question": "Translate formally: 'Gostaríamos de discutir os termos do contrato com mais detalhes antes de prosseguirmos.'",
+            "answer": "We would like to discuss the contractual terms in greater detail before proceeding",
+            "hint": "Use formal vocabulary: contractual, in greater detail, proceeding",
+            "explanation": "'Contractual terms' (not 'contract conditions'), 'in greater detail' (not 'more'), 'proceeding' (not 'going ahead')."
+          },
+          {
+            "id": "be_a_3",
+            "type": "multiple_choice",
+            "question": "What is the most nuanced response when a client complains about a delay?",
+            "options": [
+              "It's not our fault.",
+              "We sincerely apologize for any inconvenience caused. We've identified the root cause and have implemented measures to prevent recurrence.",
+              "Sorry about that!",
+              "We'll try to do better."
+            ],
+            "answer": "We sincerely apologize for any inconvenience caused. We've identified the root cause and have implemented measures to prevent recurrence.",
+            "explanation": "Advanced complaint handling: sincere apology, identification of the problem, corrective action already taken. This builds trust and professionalism."
+          },
+          {
+            "id": "be_a_4",
+            "type": "multiple_choice",
+            "question": "Which phrase is the most diplomatic way to reject a proposal?",
+            "options": [
+              "No, that will not work.",
+              "We appreciate the proposal; however, it does not fully align with our current strategic priorities.",
+              "Bad idea.",
+              "We reject it."
+            ],
+            "answer": "We appreciate the proposal; however, it does not fully align with our current strategic priorities.",
+            "explanation": "Advanced business writing acknowledges the offer before giving a clear, polite reason."
+          },
+          {
+            "id": "be_a_5",
+            "type": "translation",
+            "question": "Translate formally: 'Agradecemos a sua compreensão relativamente a este assunto.'",
+            "answer": "We appreciate your understanding regarding this matter",
+            "hint": "regarding this matter",
+            "explanation": "This is a formal closing phrase often used after explaining a problem."
+          },
+          {
+            "id": "be_a_6",
+            "type": "multiple_choice",
+            "question": "Which phrase best signals a strategic recommendation?",
+            "options": [
+              "Do this.",
+              "I would recommend prioritizing customer retention over short-term acquisition.",
+              "Maybe try customers.",
+              "Retention is good."
+            ],
+            "answer": "I would recommend prioritizing customer retention over short-term acquisition.",
+            "explanation": "Use 'I would recommend + -ing' for professional recommendations."
+          },
+          {
+            "id": "be_a_7",
+            "type": "fill_blank",
+            "question": "The proposal is financially viable, but it requires further ___ before approval.",
+            "answer": "assessment",
+            "hint": "formal word for evaluation",
+            "explanation": "'Further assessment' means additional evaluation before a decision."
+          },
+          {
+            "id": "be_a_8",
+            "type": "multiple_choice",
+            "question": "What does \"to leverage existing resources\" mean?",
+            "options": [
+              "Ignore current resources",
+              "Use current resources effectively",
+              "Sell all resources",
+              "Replace current resources"
+            ],
+            "answer": "Use current resources effectively",
+            "explanation": "'Leverage' means use something to gain an advantage."
+          },
+          {
+            "id": "be_a_9",
+            "type": "translation",
+            "question": "Translate: 'Devemos alinhar os objetivos do projeto com as expectativas do cliente.'",
+            "answer": "We should align the project's objectives with the client's expectations",
+            "hint": "align objectives with expectations",
+            "explanation": "'Align X with Y' is a common business collocation."
+          },
+          {
+            "id": "be_a_10",
+            "type": "multiple_choice",
+            "question": "Which sentence uses hedging appropriately?",
+            "options": [
+              "This will definitely solve everything.",
+              "This approach may help mitigate some of the operational risks.",
+              "This fixes all risks.",
+              "There are no problems now."
+            ],
+            "answer": "This approach may help mitigate some of the operational risks.",
+            "explanation": "Hedging with 'may' and 'some' sounds accurate and professional."
+          },
+          {
+            "id": "be_a_11",
+            "type": "fill_blank",
+            "question": "The team needs to ___ stakeholder concerns before moving forward.",
+            "answer": "address",
+            "hint": "deal with formally",
+            "explanation": "'Address concerns' means to respond to or deal with concerns."
+          },
+          {
+            "id": "be_a_12",
+            "type": "multiple_choice",
+            "question": "Which is the best phrase for summarizing action points?",
+            "options": [
+              "Here are the next steps.",
+              "Things to do maybe.",
+              "Everyone knows.",
+              "Do stuff."
+            ],
+            "answer": "Here are the next steps.",
+            "explanation": "'Next steps' is a clear and professional way to summarize actions after a meeting."
+          }
+        ]
+      }
+    },
+    "present_perfect": {
+      "label": "Present Perfect",
+      "icon": "⏱️",
+      "description": "Ações passadas com relevância no presente",
+      "exercises": {
+        "beginner": [
+          {
+            "id": "pp_b_1",
+            "type": "multiple_choice",
+            "question": "Choose the correct Present Perfect sentence:",
+            "options": [
+              "I seen that movie.",
+              "I have seen that movie.",
+              "I saw that movie yesterday.",
+              "I am seeing that movie."
+            ],
+            "answer": "I have seen that movie.",
+            "explanation": "Present Perfect = have/has + past participle. 'Have seen' is correct. Note: 'I saw that movie yesterday' is Simple Past (specific time in the past)."
+          },
+          {
+            "id": "pp_b_2",
+            "type": "fill_blank",
+            "question": "She ___ ___ (never / be) to Paris before.",
+            "answer": "has never been",
+            "hint": "have/has + never + past participle",
+            "explanation": "Frequency adverbs (never, ever, already, yet) go between 'have/has' and the past participle in Present Perfect."
+          },
+          {
+            "id": "pp_b_3",
+            "type": "multiple_choice",
+            "question": "___ you ___ your keys? I can't find mine.",
+            "options": [
+              "Did you see",
+              "Have you seen",
+              "Do you see",
+              "Are you seeing"
+            ],
+            "answer": "Have you seen",
+            "explanation": "'Have you seen?' is Present Perfect because we're asking about an unspecified time in the past that's relevant now (we still need the keys)."
+          },
+          {
+            "id": "pp_b_4",
+            "type": "fill_blank",
+            "question": "The students ___ ___ (already / finish) the exam.",
+            "answer": "have already finished",
+            "hint": "have + already + past participle",
+            "explanation": "'Already' in Present Perfect means something happened sooner than expected. It goes between 'have' and the past participle."
+          },
+          {
+            "id": "pp_b_5",
+            "type": "multiple_choice",
+            "question": "Choose the correct form: He ___ finished his homework.",
+            "options": [
+              "has",
+              "have",
+              "is",
+              "did"
+            ],
+            "answer": "has",
+            "explanation": "Use 'has' with he/she/it in the Present Perfect."
+          },
+          {
+            "id": "pp_b_6",
+            "type": "fill_blank",
+            "question": "I ___ ___ (visit) London twice.",
+            "answer": "have visited",
+            "hint": "have + past participle",
+            "explanation": "Present Perfect is used for life experiences without a specific past time."
+          },
+          {
+            "id": "pp_b_7",
+            "type": "multiple_choice",
+            "question": "Which word often appears in Present Perfect questions?",
+            "options": [
+              "yesterday",
+              "ever",
+              "last week",
+              "in 2020"
+            ],
+            "answer": "ever",
+            "explanation": "'Ever' is common in Present Perfect questions about life experience."
+          },
+          {
+            "id": "pp_b_8",
+            "type": "translation",
+            "question": "Translate: 'Eu já terminei o trabalho.'",
+            "answer": "I have already finished the work",
+            "hint": "already + past participle",
+            "explanation": "'Already' goes between 'have' and the past participle."
+          },
+          {
+            "id": "pp_b_9",
+            "type": "multiple_choice",
+            "question": "She ___ never eaten sushi.",
+            "options": [
+              "has",
+              "have",
+              "did",
+              "was"
+            ],
+            "answer": "has",
+            "explanation": "Use 'has never eaten' for a negative life experience."
+          },
+          {
+            "id": "pp_b_10",
+            "type": "fill_blank",
+            "question": "They ___ ___ (not / arrive) yet.",
+            "answer": "haven't arrived",
+            "hint": "negative + yet",
+            "explanation": "'Yet' is often used in negative Present Perfect sentences."
+          },
+          {
+            "id": "pp_b_11",
+            "type": "multiple_choice",
+            "question": "Choose the correct Present Perfect sentence with a plural subject:",
+            "options": [
+              "We has arrived.",
+              "We have arrived.",
+              "We have arrive.",
+              "We arrived yet."
+            ],
+            "answer": "We have arrived.",
+            "explanation": "Use 'have + past participle': have arrived."
+          },
+          {
+            "id": "pp_b_12",
+            "type": "translation",
+            "question": "Translate: 'Ela nunca viu neve.'",
+            "answer": "She has never seen snow",
+            "hint": "has never seen",
+            "explanation": "'Seen' is the past participle of 'see'."
+          }
+        ],
+        "intermediate": [
+          {
+            "id": "pp_i_1",
+            "type": "multiple_choice",
+            "question": "Choose the correct sentence:",
+            "options": [
+              "I have seen her yesterday.",
+              "I have lived here since 2010.",
+              "She has wrote three books.",
+              "They have went to Paris."
+            ],
+            "answer": "I have lived here since 2010.",
+            "explanation": "'Since' + a specific past time point is used with Present Perfect. Never use Present Perfect with specific past times like 'yesterday', 'last year', 'in 2010' alone."
+          },
+          {
+            "id": "pp_i_2",
+            "type": "fill_blank",
+            "question": "He ___ ___ (work) at this company ___ ten years.",
+            "answer": "has been working / for",
+            "hint": "Present Perfect Continuous + for/since",
+            "explanation": "'For' + duration (ten years). Present Perfect Continuous (has been working) emphasizes the ongoing nature of the activity."
+          },
+          {
+            "id": "pp_i_3",
+            "type": "translation",
+            "question": "Translate: 'É a primeira vez que ela dirige um carro elétrico.'",
+            "answer": "It's the first time she has driven an electric car",
+            "hint": "It's the first/second/only time + Present Perfect",
+            "explanation": "'It's the first time...' is always followed by Present Perfect. This structure shows a new experience."
+          },
+          {
+            "id": "pp_i_4",
+            "type": "multiple_choice",
+            "question": "Choose the correct sentence with \"for\":",
+            "options": [
+              "I know him for five years.",
+              "I have known him for five years.",
+              "I knew him for five years now.",
+              "I am knowing him for five years."
+            ],
+            "answer": "I have known him for five years.",
+            "explanation": "Use Present Perfect with 'for + duration' when the situation continues now."
+          },
+          {
+            "id": "pp_i_5",
+            "type": "fill_blank",
+            "question": "She ___ ___ (live) in Porto since 2021.",
+            "answer": "has lived",
+            "hint": "since + starting point",
+            "explanation": "'Since 2021' needs Present Perfect for a continuing situation."
+          },
+          {
+            "id": "pp_i_6",
+            "type": "multiple_choice",
+            "question": "Which sentence is incorrect?",
+            "options": [
+              "I have already eaten.",
+              "Have you finished yet?",
+              "She has just left.",
+              "I have seen him yesterday."
+            ],
+            "answer": "I have seen him yesterday.",
+            "explanation": "Do not use Present Perfect with a finished specific time like 'yesterday'."
+          },
+          {
+            "id": "pp_i_7",
+            "type": "translation",
+            "question": "Translate: 'Trabalho aqui há três meses.'",
+            "answer": "I have worked here for three months",
+            "hint": "for three months",
+            "explanation": "Use Present Perfect because the work started in the past and continues now."
+          },
+          {
+            "id": "pp_i_8",
+            "type": "multiple_choice",
+            "question": "Choose the best option: I ___ my phone. Can I use yours?",
+            "options": [
+              "lost",
+              "have lost",
+              "was losing",
+              "lose"
+            ],
+            "answer": "have lost",
+            "explanation": "Present Perfect connects a past event to the present result: I don't have my phone now."
+          },
+          {
+            "id": "pp_i_9",
+            "type": "fill_blank",
+            "question": "How long ___ you ___ (study) English?",
+            "answer": "have studied",
+            "hint": "How long + have/has",
+            "explanation": "Use 'How long have you studied...?' for duration up to now."
+          },
+          {
+            "id": "pp_i_10",
+            "type": "multiple_choice",
+            "question": "Present Perfect Continuous emphasizes:",
+            "options": [
+              "A finished exact time",
+              "Duration or ongoing activity",
+              "Only future plans",
+              "Passive voice only"
+            ],
+            "answer": "Duration or ongoing activity",
+            "explanation": "Present Perfect Continuous focuses on activity over time, often still relevant now."
+          },
+          {
+            "id": "pp_i_11",
+            "type": "translation",
+            "question": "Translate: 'Ela tem estudado muito ultimamente.'",
+            "answer": "She has been studying a lot lately",
+            "hint": "has been + -ing",
+            "explanation": "'Lately' often goes with Present Perfect Continuous."
+          },
+          {
+            "id": "pp_i_12",
+            "type": "multiple_choice",
+            "question": "Choose the correct difference:",
+            "options": [
+              "I have read the book = I finished it",
+              "I have been reading the book = I definitely finished it",
+              "Both always mean the same",
+              "Neither is correct"
+            ],
+            "answer": "I have read the book = I finished it",
+            "explanation": "Present Perfect Simple can emphasize completion; Continuous emphasizes the activity."
+          }
+        ],
+        "advanced": [
+          {
+            "id": "pp_a_1",
+            "type": "multiple_choice",
+            "question": "Scientists ___ that the compound ___ promising results in early trials.",
+            "options": [
+              "reported / showed",
+              "have reported / has shown",
+              "reported / has shown",
+              "have reported / showed"
+            ],
+            "answer": "have reported / has shown",
+            "explanation": "Both main actions use Present Perfect (recent news with present relevance). This is typical in academic/scientific writing for recent findings."
+          },
+          {
+            "id": "pp_a_2",
+            "type": "translation",
+            "question": "Translate formally: 'A pesquisa revelou que o nível de poluição tem aumentado dramaticamente desde 2000.'",
+            "answer": "The research has revealed that pollution levels have risen dramatically since 2000",
+            "hint": "Two Present Perfect constructions with 'since'",
+            "explanation": "Both 'has revealed' (recent discovery) and 'have risen' (ongoing trend since 2000) use Present Perfect correctly."
+          },
+          {
+            "id": "pp_a_3",
+            "type": "multiple_choice",
+            "question": "The committee ___ several amendments, but none ___ approved yet.",
+            "options": [
+              "has proposed / have been",
+              "has proposed / has been",
+              "proposed / has been",
+              "have proposed / have been"
+            ],
+            "answer": "has proposed / has been",
+            "explanation": "'Committee' is singular here, and 'none' can take singular agreement in formal style."
+          },
+          {
+            "id": "pp_a_4",
+            "type": "translation",
+            "question": "Translate formally: 'A procura por soluções sustentáveis tem crescido significativamente nos últimos anos.'",
+            "answer": "The demand for sustainable solutions has grown significantly in recent years",
+            "hint": "has grown + in recent years",
+            "explanation": "'In recent years' commonly pairs with Present Perfect for recent trends."
+          },
+          {
+            "id": "pp_a_5",
+            "type": "fill_blank",
+            "question": "This is the most challenging assignment I ___ ever ___ (complete).",
+            "answer": "have ever completed",
+            "hint": "superlative + Present Perfect",
+            "explanation": "After a superlative with life experience, use Present Perfect."
+          },
+          {
+            "id": "pp_a_6",
+            "type": "multiple_choice",
+            "question": "Which sentence is most natural in academic writing?",
+            "options": [
+              "Recent studies showed that...",
+              "Recent studies have shown that...",
+              "Recent studies are showing yesterday...",
+              "Recent studies had shown now..."
+            ],
+            "answer": "Recent studies have shown that...",
+            "explanation": "Present Perfect is common for recent research with current relevance."
+          },
+          {
+            "id": "pp_a_7",
+            "type": "translation",
+            "question": "Translate: 'Nunca antes a empresa tinha enfrentado um desafio tão complexo.'",
+            "answer": "Never before has the company faced such a complex challenge",
+            "hint": "Negative adverbial inversion",
+            "explanation": "With 'Never before' at the beginning, use inversion: has the company faced."
+          },
+          {
+            "id": "pp_a_8",
+            "type": "multiple_choice",
+            "question": "Choose the best option: The policy ___ in place for decades, yet its impact ___ only recently.",
+            "options": [
+              "has been / has been questioned",
+              "was / has questioned",
+              "has been / questioned",
+              "had been / is questioning"
+            ],
+            "answer": "has been / has been questioned",
+            "explanation": "Both actions connect past duration or recent debate to the present."
+          },
+          {
+            "id": "pp_a_9",
+            "type": "fill_blank",
+            "question": "The data ___ ___ (consistently / indicate) a gradual decline.",
+            "answer": "has consistently indicated",
+            "hint": "adverb between has and participle",
+            "explanation": "Adverbs like 'consistently' often go between the auxiliary and participle."
+          },
+          {
+            "id": "pp_a_10",
+            "type": "multiple_choice",
+            "question": "Which phrase best expresses an unfinished time period?",
+            "options": [
+              "last year",
+              "yesterday",
+              "this week",
+              "in 2015"
+            ],
+            "answer": "this week",
+            "explanation": "'This week' may still be unfinished, so Present Perfect can be used."
+          },
+          {
+            "id": "pp_a_11",
+            "type": "translation",
+            "question": "Translate formally: 'Até agora, não recebemos qualquer confirmação oficial.'",
+            "answer": "So far, we have not received any official confirmation",
+            "hint": "so far + Present Perfect",
+            "explanation": "'So far' means up to now, so Present Perfect is natural."
+          },
+          {
+            "id": "pp_a_12",
+            "type": "multiple_choice",
+            "question": "Which sentence shows Present Perfect Passive correctly?",
+            "options": [
+              "The results have published.",
+              "The results have been published.",
+              "The results has been published.",
+              "The results were been published."
+            ],
+            "answer": "The results have been published.",
+            "explanation": "Present Perfect Passive = have/has been + past participle."
+          }
+        ]
+      }
+    },
+    "conditionals": {
+      "label": "Conditionals",
+      "icon": "🔀",
+      "description": "Frases condicionais: If clauses",
+      "exercises": {
+        "beginner": [
+          {
+            "id": "co_b_1",
+            "type": "multiple_choice",
+            "question": "Zero Conditional: If you ___ water, it ___ at 100°C.",
+            "options": [
+              "heat / boils",
+              "heated / boiled",
+              "will heat / will boil",
+              "heat / will boil"
+            ],
+            "answer": "heat / boils",
+            "explanation": "Zero Conditional: If + Present Simple, Present Simple. Used for facts/scientific truths that are always true."
+          },
+          {
+            "id": "co_b_2",
+            "type": "multiple_choice",
+            "question": "First Conditional: If it ___ tomorrow, we ___ the picnic.",
+            "options": [
+              "will rain / cancel",
+              "rains / will cancel",
+              "rains / cancel",
+              "rained / would cancel"
+            ],
+            "answer": "rains / will cancel",
+            "explanation": "First Conditional: If + Present Simple, will + base verb. Used for real, possible future situations."
+          },
+          {
+            "id": "co_b_3",
+            "type": "fill_blank",
+            "question": "Second Conditional: If I ___ (be) rich, I would travel the world.",
+            "answer": "were",
+            "hint": "Use 'were' for all persons in 2nd conditional (not 'was')",
+            "explanation": "Second Conditional uses Past Simple in the if-clause. For 'to be', always use 'were' (not 'was') in formal English."
+          },
+          {
+            "id": "co_b_4",
+            "type": "multiple_choice",
+            "question": "If I am tired, I ___ to bed early.",
+            "options": [
+              "go",
+              "will went",
+              "would went",
+              "going"
+            ],
+            "answer": "go",
+            "explanation": "Zero Conditional uses present simple in both clauses for habits or facts."
+          },
+          {
+            "id": "co_b_5",
+            "type": "fill_blank",
+            "question": "If it rains, I ___ (take) an umbrella.",
+            "answer": "will take",
+            "hint": "First conditional",
+            "explanation": "First Conditional: If + present, will + base verb."
+          },
+          {
+            "id": "co_b_6",
+            "type": "multiple_choice",
+            "question": "Choose the correct First Conditional sentence:",
+            "options": [
+              "If I will study, I pass.",
+              "If I study, I will pass.",
+              "If I studied, I will pass.",
+              "If I study, I passed."
+            ],
+            "answer": "If I study, I will pass.",
+            "explanation": "Do not use 'will' in the if-clause."
+          },
+          {
+            "id": "co_b_7",
+            "type": "translation",
+            "question": "Translate: 'Se estiver sol, vamos à praia.'",
+            "answer": "If it's sunny, we will go to the beach",
+            "hint": "If + present, will + base verb",
+            "explanation": "This is a real possible future situation, so use First Conditional."
+          },
+          {
+            "id": "co_b_8",
+            "type": "multiple_choice",
+            "question": "If you heat ice, it ___.",
+            "options": [
+              "melts",
+              "will melts",
+              "melted",
+              "would melt"
+            ],
+            "answer": "melts",
+            "explanation": "Zero Conditional describes scientific facts."
+          },
+          {
+            "id": "co_b_9",
+            "type": "fill_blank",
+            "question": "If she ___ (call), I will answer.",
+            "answer": "calls",
+            "hint": "Present simple after if",
+            "explanation": "Use present simple in the if-clause: she calls."
+          },
+          {
+            "id": "co_b_10",
+            "type": "multiple_choice",
+            "question": "Which conditional is used for real future possibilities?",
+            "options": [
+              "Zero conditional",
+              "First conditional",
+              "Third conditional",
+              "Mixed conditional"
+            ],
+            "answer": "First conditional",
+            "explanation": "First Conditional talks about real future possibilities."
+          },
+          {
+            "id": "co_b_11",
+            "type": "translation",
+            "question": "Translate: 'Se chegares tarde, vais perder o filme.'",
+            "answer": "If you arrive late, you will miss the movie",
+            "hint": "arrive late + will miss",
+            "explanation": "Use First Conditional for a likely future result."
+          },
+          {
+            "id": "co_b_12",
+            "type": "multiple_choice",
+            "question": "If water reaches 100°C, it ___.",
+            "options": [
+              "boils",
+              "will boiling",
+              "would boil",
+              "boiled"
+            ],
+            "answer": "boils",
+            "explanation": "Facts use Zero Conditional: present + present."
+          }
+        ],
+        "intermediate": [
+          {
+            "id": "co_i_1",
+            "type": "multiple_choice",
+            "question": "Third Conditional: If she ___ the interview, she ___ the job.",
+            "options": [
+              "prepared / would get",
+              "had prepared / would have got",
+              "prepared / would have got",
+              "had prepared / would get"
+            ],
+            "answer": "had prepared / would have got",
+            "explanation": "Third Conditional: If + Past Perfect, would have + Past Participle. Used for imaginary past situations (she didn't prepare, so she didn't get the job)."
+          },
+          {
+            "id": "co_i_2",
+            "type": "translation",
+            "question": "Translate: 'Se eu tivesse estudado mais, teria passado no exame.'",
+            "answer": "If I had studied more, I would have passed the exam",
+            "hint": "Third conditional (impossible past situation)",
+            "explanation": "Third Conditional expresses regret about the past. The implication: I didn't study, so I didn't pass."
+          },
+          {
+            "id": "co_i_3",
+            "type": "multiple_choice",
+            "question": "Mixed Conditional: If she ___ more carefully as a child, she ___ better eyesight now.",
+            "options": [
+              "read / would have",
+              "had read / would have",
+              "had read / would have had",
+              "reads / would have"
+            ],
+            "answer": "had read / would have",
+            "explanation": "Mixed Conditional: If + Past Perfect (past condition), would + base verb (present result). The poor reading in childhood affects her eyesight NOW."
+          },
+          {
+            "id": "co_i_4",
+            "type": "multiple_choice",
+            "question": "If I ___ more time, I would learn German.",
+            "options": [
+              "have",
+              "had",
+              "will have",
+              "would have"
+            ],
+            "answer": "had",
+            "explanation": "Second Conditional uses Past Simple for unreal present situations."
+          },
+          {
+            "id": "co_i_5",
+            "type": "fill_blank",
+            "question": "If they ___ (invite) me, I would go.",
+            "answer": "invited",
+            "hint": "Second conditional",
+            "explanation": "Use Past Simple in the if-clause: invited."
+          },
+          {
+            "id": "co_i_6",
+            "type": "multiple_choice",
+            "question": "Which sentence expresses regret about the past?",
+            "options": [
+              "If I study, I pass.",
+              "If I studied, I would pass.",
+              "If I had studied, I would have passed.",
+              "If I will study, I pass."
+            ],
+            "answer": "If I had studied, I would have passed.",
+            "explanation": "Third Conditional is used for impossible past situations and regrets."
+          },
+          {
+            "id": "co_i_7",
+            "type": "translation",
+            "question": "Translate: 'Se eu tivesse mais dinheiro, compraria um portátil novo.'",
+            "answer": "If I had more money, I would buy a new laptop",
+            "hint": "Second conditional",
+            "explanation": "This is an unreal present situation, so use Second Conditional."
+          },
+          {
+            "id": "co_i_8",
+            "type": "multiple_choice",
+            "question": "If he had left earlier, he ___ the train.",
+            "options": [
+              "would catch",
+              "would have caught",
+              "will catch",
+              "caught"
+            ],
+            "answer": "would have caught",
+            "explanation": "Third Conditional result: would have + past participle."
+          },
+          {
+            "id": "co_i_9",
+            "type": "fill_blank",
+            "question": "If she ___ ___ (not / forget) her password, she would have logged in.",
+            "answer": "hadn't forgotten",
+            "hint": "Past Perfect negative",
+            "explanation": "Third Conditional if-clause uses Past Perfect: hadn't forgotten."
+          },
+          {
+            "id": "co_i_10",
+            "type": "multiple_choice",
+            "question": "Choose the correct mixed conditional:",
+            "options": [
+              "If I had slept earlier, I would be less tired now.",
+              "If I sleep earlier, I would have been tired.",
+              "If I slept earlier, I will be tired now.",
+              "If I had sleep earlier, I would be fine."
+            ],
+            "answer": "If I had slept earlier, I would be less tired now.",
+            "explanation": "Past condition with present result: mixed conditional."
+          },
+          {
+            "id": "co_i_11",
+            "type": "translation",
+            "question": "Translate: 'Se ele falasse inglês melhor, conseguiria o emprego.'",
+            "answer": "If he spoke better English, he would get the job",
+            "hint": "Second conditional",
+            "explanation": "Use Past Simple after if and would + base verb in the result."
+          },
+          {
+            "id": "co_i_12",
+            "type": "multiple_choice",
+            "question": "Which clause can replace \"if not\"?",
+            "options": [
+              "unless",
+              "although",
+              "because",
+              "while"
+            ],
+            "answer": "unless",
+            "explanation": "'Unless' means 'if not'."
+          }
+        ],
+        "advanced": [
+          {
+            "id": "co_a_1",
+            "type": "multiple_choice",
+            "question": "Which shows correct use of 'unless' in a conditional?",
+            "options": [
+              "Unless you don't call me, I won't come.",
+              "Unless you call me, I won't come.",
+              "Unless if you call, I'll come.",
+              "I won't come unless if you'll call."
+            ],
+            "answer": "Unless you call me, I won't come.",
+            "explanation": "'Unless' = 'if not'. Never use 'unless + negative'. 'Unless you call' = 'If you don't call'. The result is negative because the condition is not met."
+          },
+          {
+            "id": "co_a_2",
+            "type": "translation",
+            "question": "Translate using inversion: 'Se você tivesse me avisado mais cedo, eu poderia ter ajudado.'",
+            "answer": "Had you warned me earlier, I could have helped",
+            "hint": "Inversion: Had + subject + Past Participle (omit 'If')",
+            "explanation": "Formal/literary inversion omits 'if': 'Had you warned' = 'If you had warned'. Common in formal writing and legal language."
+          },
+          {
+            "id": "co_a_3",
+            "type": "multiple_choice",
+            "question": "Were the company to reduce prices, demand ___ considerably.",
+            "options": [
+              "would increase",
+              "will increase",
+              "would have increased",
+              "increased"
+            ],
+            "answer": "would increase",
+            "explanation": "'Were + subject + to + verb' is formal inversion for Second Conditional."
+          },
+          {
+            "id": "co_a_4",
+            "type": "translation",
+            "question": "Translate with inversion: 'Se o projeto falhasse, perderíamos o financiamento.'",
+            "answer": "Were the project to fail, we would lose the funding",
+            "hint": "Were + subject + to + verb",
+            "explanation": "This is a formal inverted Second Conditional."
+          },
+          {
+            "id": "co_a_5",
+            "type": "fill_blank",
+            "question": "Should you ___ (require) further information, please contact us.",
+            "answer": "require",
+            "hint": "Formal first conditional inversion",
+            "explanation": "'Should you require...' means 'If you require...' in formal writing."
+          },
+          {
+            "id": "co_a_6",
+            "type": "multiple_choice",
+            "question": "Which sentence uses a mixed conditional correctly?",
+            "options": [
+              "Had she accepted the offer, she would be working in London now.",
+              "Had she accepts, she works now.",
+              "If she accepted yesterday, she would have work now.",
+              "If she had accept, she would work now."
+            ],
+            "answer": "Had she accepted the offer, she would be working in London now.",
+            "explanation": "Past unreal condition with present continuous result."
+          },
+          {
+            "id": "co_a_7",
+            "type": "translation",
+            "question": "Translate: 'Se não fosse pela tua ajuda, eu ainda estaria perdido.'",
+            "answer": "If it were not for your help, I would still be lost",
+            "hint": "If it were not for...",
+            "explanation": "Use 'If it were not for' to show that something prevents a bad present result."
+          },
+          {
+            "id": "co_a_8",
+            "type": "multiple_choice",
+            "question": "Choose the correct formal structure:",
+            "options": [
+              "Should you have questions, contact us.",
+              "Should you had questions, contact us.",
+              "Should you will have questions, contact us.",
+              "Should have questions you, contact us."
+            ],
+            "answer": "Should you have questions, contact us.",
+            "explanation": "Formal conditional inversion: Should + subject + base verb."
+          },
+          {
+            "id": "co_a_9",
+            "type": "fill_blank",
+            "question": "Had the data been more reliable, the conclusion ___ ___ ___ (be) stronger.",
+            "answer": "would have been",
+            "hint": "Third conditional result",
+            "explanation": "Third Conditional result uses would have + past participle."
+          },
+          {
+            "id": "co_a_10",
+            "type": "multiple_choice",
+            "question": "Which sentence avoids a common error with unless?",
+            "options": [
+              "Unless you study, you will fail.",
+              "Unless you don't study, you will fail.",
+              "Unless if you study, you fail.",
+              "Unless you will study, you fail."
+            ],
+            "answer": "Unless you study, you will fail.",
+            "explanation": "Do not use a negative after 'unless' when it already means 'if not'."
+          },
+          {
+            "id": "co_a_11",
+            "type": "translation",
+            "question": "Translate formally: 'Caso necessite de assistência, contacte a receção.'",
+            "answer": "Should you require assistance, please contact reception",
+            "hint": "Should you require...",
+            "explanation": "This is a formal First Conditional used in notices and emails."
+          },
+          {
+            "id": "co_a_12",
+            "type": "multiple_choice",
+            "question": "If only I ___ the warning signs earlier.",
+            "options": [
+              "noticed",
+              "had noticed",
+              "would notice",
+              "have noticed"
+            ],
+            "answer": "had noticed",
+            "explanation": "'If only + Past Perfect' expresses regret about the past."
+          }
+        ]
+      }
+    },
+    "vocabulary": {
+      "label": "Vocabulary",
+      "icon": "📚",
+      "description": "Vocabulário avançado e expressões idiomáticas",
+      "exercises": {
+        "beginner": [
+          {
+            "id": "vo_b_1",
+            "type": "multiple_choice",
+            "question": "What is the synonym of 'happy'?",
+            "options": [
+              "Sad",
+              "Angry",
+              "Joyful",
+              "Tired"
+            ],
+            "answer": "Joyful",
+            "explanation": "'Joyful' means feeling great happiness. Other synonyms: pleased, delighted, cheerful, content."
+          },
+          {
+            "id": "vo_b_2",
+            "type": "multiple_choice",
+            "question": "Choose the correct word: The movie was so ___ that I fell asleep.",
+            "options": [
+              "exciting",
+              "terrifying",
+              "boring",
+              "hilarious"
+            ],
+            "answer": "boring",
+            "explanation": "'Boring' means not interesting or dull. If something is boring, it doesn't capture your attention and you might fall asleep."
+          },
+          {
+            "id": "vo_b_3",
+            "type": "fill_blank",
+            "question": "The opposite of 'cheap' is ___.",
+            "answer": "expensive",
+            "hint": "Think: affordable vs costly",
+            "explanation": "'Expensive' means costing a lot of money. Antonym of 'cheap/affordable/inexpensive'."
+          },
+          {
+            "id": "vo_b_4",
+            "type": "multiple_choice",
+            "question": "Which word describes someone who works very hard?",
+            "options": [
+              "Lazy",
+              "Diligent",
+              "Careless",
+              "Passive"
+            ],
+            "answer": "Diligent",
+            "explanation": "'Diligent' means working carefully and with a lot of effort. Synonyms: hardworking, industrious, conscientious."
+          },
+          {
+            "id": "vo_b_5",
+            "type": "multiple_choice",
+            "question": "What is the opposite of 'early'?",
+            "options": [
+              "Late",
+              "Fast",
+              "Slow",
+              "Soon"
+            ],
+            "answer": "Late",
+            "explanation": "'Late' is the opposite of 'early'."
+          },
+          {
+            "id": "vo_b_6",
+            "type": "fill_blank",
+            "question": "A person who tells the truth is ___.",
+            "answer": "honest",
+            "hint": "Not lying",
+            "explanation": "'Honest' means truthful and fair."
+          },
+          {
+            "id": "vo_b_7",
+            "type": "multiple_choice",
+            "question": "Choose the correct word: I am very ___ because I didn't sleep.",
+            "options": [
+              "tired",
+              "clean",
+              "wide",
+              "cheap"
+            ],
+            "answer": "tired",
+            "explanation": "'Tired' means needing rest or sleep."
+          },
+          {
+            "id": "vo_b_8",
+            "type": "translation",
+            "question": "Translate: 'A comida está deliciosa.'",
+            "answer": "The food is delicious",
+            "hint": "delicious",
+            "explanation": "'Delicious' means very tasty."
+          },
+          {
+            "id": "vo_b_9",
+            "type": "multiple_choice",
+            "question": "What does 'friendly' mean?",
+            "options": [
+              "Kind and pleasant",
+              "Very expensive",
+              "Full of danger",
+              "Extremely loud"
+            ],
+            "answer": "Kind and pleasant",
+            "explanation": "'Friendly' describes someone kind, pleasant, and easy to talk to."
+          },
+          {
+            "id": "vo_b_10",
+            "type": "fill_blank",
+            "question": "The opposite of \"dirty\" is ___.",
+            "answer": "clean",
+            "hint": "No dirt",
+            "explanation": "'Clean' means not dirty."
+          },
+          {
+            "id": "vo_b_11",
+            "type": "multiple_choice",
+            "question": "Which word means \"very big\"?",
+            "options": [
+              "Tiny",
+              "Huge",
+              "Narrow",
+              "Weak"
+            ],
+            "answer": "Huge",
+            "explanation": "'Huge' means very big."
+          },
+          {
+            "id": "vo_b_12",
+            "type": "translation",
+            "question": "Translate: 'Ela é muito simpática.'",
+            "answer": "She is very friendly",
+            "hint": "friendly",
+            "explanation": "'Friendly' is often used for a nice, kind person."
+          }
+        ],
+        "intermediate": [
+          {
+            "id": "vo_i_1",
+            "type": "multiple_choice",
+            "question": "Choose the correct colocation: She made a ___ decision after careful consideration.",
+            "options": [
+              "strong",
+              "heavy",
+              "weighty",
+              "large"
+            ],
+            "answer": "weighty",
+            "explanation": "'Weighty decision' is a common collocation meaning an important, serious decision. We don't say 'heavy decision' or 'large decision' in this context."
+          },
+          {
+            "id": "vo_i_2",
+            "type": "multiple_choice",
+            "question": "What does 'ubiquitous' mean?",
+            "options": [
+              "Rare and unusual",
+              "Seemingly present everywhere",
+              "Extremely dangerous",
+              "Difficult to understand"
+            ],
+            "answer": "Seemingly present everywhere",
+            "explanation": "'Ubiquitous' (adjective) means appearing or found everywhere. Example: Smartphones are ubiquitous in modern society."
+          },
+          {
+            "id": "vo_i_3",
+            "type": "fill_blank",
+            "question": "The politician's speech was full of ___ — he spoke for an hour but said nothing concrete. (Word: empty/meaningless language)",
+            "answer": "rhetoric",
+            "hint": "Starts with 'rh', often used negatively in politics",
+            "explanation": "'Rhetoric' can mean persuasive language or, pejoratively, empty/manipulative speech. 'Political rhetoric' often implies lack of substance."
+          },
+          {
+            "id": "vo_i_4",
+            "type": "multiple_choice",
+            "question": "Choose the best synonym for \"brief\".",
+            "options": [
+              "Short",
+              "Heavy",
+              "Angry",
+              "Ancient"
+            ],
+            "answer": "Short",
+            "explanation": "'Brief' means short in time or length."
+          },
+          {
+            "id": "vo_i_5",
+            "type": "fill_blank",
+            "question": "The company launched a new advertising ___ to attract young customers.",
+            "answer": "campaign",
+            "hint": "marketing project",
+            "explanation": "'Advertising campaign' is a common collocation."
+          },
+          {
+            "id": "vo_i_6",
+            "type": "multiple_choice",
+            "question": "What does \"reliable\" mean?",
+            "options": [
+              "Can be trusted",
+              "Very funny",
+              "Difficult to see",
+              "Always late"
+            ],
+            "answer": "Can be trusted",
+            "explanation": "'Reliable' describes someone or something you can trust."
+          },
+          {
+            "id": "vo_i_7",
+            "type": "translation",
+            "question": "Translate: 'A solução foi eficaz, mas cara.'",
+            "answer": "The solution was effective but expensive",
+            "hint": "effective but expensive",
+            "explanation": "'Effective' means producing the desired result."
+          },
+          {
+            "id": "vo_i_8",
+            "type": "multiple_choice",
+            "question": "Choose the correct collocation:",
+            "options": [
+              "make homework",
+              "do homework",
+              "do a mistake",
+              "make a photo"
+            ],
+            "answer": "do homework",
+            "explanation": "In English we say 'do homework' and 'make a mistake'."
+          },
+          {
+            "id": "vo_i_9",
+            "type": "fill_blank",
+            "question": "The instructions were clear and easy to ___.",
+            "answer": "follow",
+            "hint": "understand and use",
+            "explanation": "'Follow instructions' is the correct collocation."
+          },
+          {
+            "id": "vo_i_10",
+            "type": "multiple_choice",
+            "question": "What does \"affordable\" mean?",
+            "options": [
+              "Cheap enough to buy",
+              "Impossible to buy",
+              "Very old",
+              "Not useful"
+            ],
+            "answer": "Cheap enough to buy",
+            "explanation": "'Affordable' means not too expensive."
+          },
+          {
+            "id": "vo_i_11",
+            "type": "translation",
+            "question": "Translate: 'Ele tem uma forte tendência para adiar tarefas.'",
+            "answer": "He has a strong tendency to postpone tasks",
+            "hint": "tendency + postpone",
+            "explanation": "'Tendency' means a habit or inclination to do something."
+          },
+          {
+            "id": "vo_i_12",
+            "type": "multiple_choice",
+            "question": "Which word means \"to improve something gradually\"?",
+            "options": [
+              "refine",
+              "destroy",
+              "ignore",
+              "delay"
+            ],
+            "answer": "refine",
+            "explanation": "'Refine' means to improve by making small changes."
+          }
+        ],
+        "advanced": [
+          {
+            "id": "vo_a_1",
+            "type": "multiple_choice",
+            "question": "The philosopher's argument was ___ — it appeared logical on the surface but contained a fundamental flaw.",
+            "options": [
+              "perspicuous",
+              "specious",
+              "sagacious",
+              "loquacious"
+            ],
+            "answer": "specious",
+            "explanation": "'Specious' means superficially plausible but actually wrong. 'Perspicuous' = clear. 'Sagacious' = wise. 'Loquacious' = talkative."
+          },
+          {
+            "id": "vo_a_2",
+            "type": "fill_blank",
+            "question": "Her ___ for detail was remarkable — she noticed the single comma out of place in a 500-page document. (Word for extreme attention to detail)",
+            "answer": "penchant",
+            "hint": "Could also be 'eye' or 'meticulous attention' but the precise noun is a French loanword",
+            "explanation": "'Penchant' means a strong liking or tendency toward something. Alternative: 'predilection', 'proclivity', 'propensity'."
+          },
+          {
+            "id": "vo_a_3",
+            "type": "multiple_choice",
+            "question": "The author's prose style can best be described as ___: dense, complex, and requiring multiple readings.",
+            "options": [
+              "pellucid",
+              "abstruse",
+              "facile",
+              "lucid"
+            ],
+            "answer": "abstruse",
+            "explanation": "'Abstruse' means difficult to understand; obscure. Opposite: 'pellucid/lucid' = clear. 'Facile' = simplistic/superficial."
+          },
+          {
+            "id": "vo_a_4",
+            "type": "multiple_choice",
+            "question": "The evidence was ___; it proved the defendant could not have been present.",
+            "options": [
+              "inconclusive",
+              "conclusive",
+              "ambiguous",
+              "tenuous"
+            ],
+            "answer": "conclusive",
+            "explanation": "'Conclusive' means proving something decisively."
+          },
+          {
+            "id": "vo_a_5",
+            "type": "fill_blank",
+            "question": "His apology sounded ___, so nobody believed he was truly sorry.",
+            "answer": "insincere",
+            "hint": "not genuine",
+            "explanation": "'Insincere' means not honest or not genuinely felt."
+          },
+          {
+            "id": "vo_a_6",
+            "type": "multiple_choice",
+            "question": "What does \"mitigate\" mean?",
+            "options": [
+              "Make less severe",
+              "Make more expensive",
+              "Hide completely",
+              "Explain quickly"
+            ],
+            "answer": "Make less severe",
+            "explanation": "'Mitigate' means reduce the seriousness or impact of something."
+          },
+          {
+            "id": "vo_a_7",
+            "type": "translation",
+            "question": "Translate: 'A decisão foi arbitrária e difícil de justificar.'",
+            "answer": "The decision was arbitrary and difficult to justify",
+            "hint": "arbitrary",
+            "explanation": "'Arbitrary' means based on personal choice rather than reason or rules."
+          },
+          {
+            "id": "vo_a_8",
+            "type": "multiple_choice",
+            "question": "Choose the best word: The report was ___, covering every detail of the investigation.",
+            "options": [
+              "comprehensive",
+              "superficial",
+              "fragile",
+              "obsolete"
+            ],
+            "answer": "comprehensive",
+            "explanation": "'Comprehensive' means complete and including all important details."
+          },
+          {
+            "id": "vo_a_9",
+            "type": "fill_blank",
+            "question": "The speaker gave a ___ explanation that was easy for everyone to understand.",
+            "answer": "lucid",
+            "hint": "clear",
+            "explanation": "'Lucid' means clear and easy to understand."
+          },
+          {
+            "id": "vo_a_10",
+            "type": "multiple_choice",
+            "question": "What does \"plausible\" mean?",
+            "options": [
+              "Seeming reasonable or likely",
+              "Clearly impossible",
+              "Extremely noisy",
+              "Morally wrong"
+            ],
+            "answer": "Seeming reasonable or likely",
+            "explanation": "'Plausible' means believable or seeming likely."
+          },
+          {
+            "id": "vo_a_11",
+            "type": "translation",
+            "question": "Translate: 'A explicação dele foi convincente, mas incompleta.'",
+            "answer": "His explanation was convincing but incomplete",
+            "hint": "convincing but incomplete",
+            "explanation": "'Convincing' means able to make people believe something."
+          },
+          {
+            "id": "vo_a_12",
+            "type": "multiple_choice",
+            "question": "Which word means \"lasting for a very short time\"?",
+            "options": [
+              "ephemeral",
+              "permanent",
+              "robust",
+              "tedious"
+            ],
+            "answer": "ephemeral",
+            "explanation": "'Ephemeral' means lasting only a short time."
+          }
+        ]
+      }
+    }
+  },
+  "pronunciation_sentences": {
+    "beginner": [
+      "The cat sat on the mat.",
+      "She sells seashells by the seashore.",
+      "I like to eat apples and bananas.",
+      "Good morning! How are you today?",
+      "The dog is sleeping under the tree.",
+      "Can you help me find my keys?",
+      "I want a cup of coffee, please.",
+      "What time does the bus arrive?",
+      "My name is John and I live in New York.",
+      "The weather is beautiful today.",
+      "Please open the window.",
+      "The blue book is on the table.",
+      "I can swim in the pool.",
+      "My sister likes chocolate cake.",
+      "We go to school by bus."
+    ],
+    "intermediate": [
+      "She thoroughly enjoyed the theatrical performance last evening.",
+      "The researchers published their findings in a peer-reviewed journal.",
+      "Although the weather was unpredictable, they decided to proceed with the outdoor event.",
+      "He has been working on this project for the past six months.",
+      "The government implemented new regulations to protect environmental resources.",
+      "Could you please elaborate on the main points of your presentation?",
+      "The documentary provided fascinating insights into the behavior of deep-sea creatures.",
+      "Despite the challenges, the team managed to deliver the project on time.",
+      "The interview was scheduled for Thursday afternoon.",
+      "She accidentally deleted the presentation before the meeting.",
+      "The museum attracts thousands of visitors every summer.",
+      "We should compare the results before making a decision.",
+      "His explanation was clear, concise, and surprisingly persuasive.",
+      "The students have already completed the grammar exercises.",
+      "Could you recommend a reliable restaurant near the station?"
+    ],
+    "advanced": [
+      "The philosophical implications of artificial intelligence extend far beyond mere technological considerations.",
+      "Notwithstanding the complexity of the geopolitical situation, diplomatic channels remain the most viable path forward.",
+      "The ubiquity of digital technology has fundamentally altered the way we perceive and interact with the world around us.",
+      "Her meticulous attention to the nuances of language enabled her to craft an extraordinarily compelling narrative.",
+      "The unprecedented convergence of economic, social, and environmental crises demands a holistic and multidisciplinary approach.",
+      "The committee's decision to postpone the referendum has been met with considerable skepticism by political analysts.",
+      "The entrepreneur emphasized scalability, sustainability, and long-term stakeholder value.",
+      "Her pronunciation improved substantially after months of deliberate phonetic practice.",
+      "The legislation was criticized for its ambiguity and lack of practical enforcement mechanisms.",
+      "Interdisciplinary collaboration often produces insights that isolated research cannot achieve.",
+      "The negotiations deteriorated when both delegations refused to compromise on key provisions.",
+      "Technological innovation can accelerate productivity, provided ethical safeguards are carefully maintained.",
+      "The documentary scrutinized the consequences of misinformation in contemporary public discourse.",
+      "His ostensibly persuasive argument collapsed under rigorous empirical analysis.",
+      "The organization implemented comprehensive measures to mitigate reputational and financial risk."
+    ]
+  }
+}

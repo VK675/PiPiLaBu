@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'">
+  <title>PiPiLabu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./intro.css">
+</head>
+<body>
+
+<!-- ── CINEMATIC LAUNCH INTRO (auto-plays, then reveals app) ──── -->
+<div id="intro" role="dialog" aria-label="Intro PiPiLabu">
+  <div class="intro-progress-top"><span id="intro-pct">0%</span></div>
+  <button class="intro-skip" id="intro-skip">Saltar ✕</button>
+
+  <div class="intro-track" id="intro-track">
+
+    <!-- Scene 1 — Loader -->
+    <section class="intro-scene scene-load">
+      <span class="intro-eyebrow">🐕 PiPiLabu</span>
+      <div class="intro-dog-wrap floatY">
+        <img src="./mascot/dog-front.png" alt="" class="intro-dog">
+      </div>
+      <div class="intro-loadbar"><i id="intro-bar"></i></div>
+      <p class="intro-caption" id="intro-caption">A preparar a fofura…</p>
+    </section>
+
+    <!-- Scene 2 — Word reveal -->
+    <section class="intro-scene scene-word">
+      <img src="./mascot/dog-3q.png" alt="" class="intro-dog side-dog from-left">
+      <h2 class="intro-big">Aprende <span>inglês</span></h2>
+    </section>
+
+    <!-- Scene 3 — Word reveal -->
+    <section class="intro-scene scene-word">
+      <img src="./mascot/dog-side.png" alt="" class="intro-dog side-dog from-right">
+      <h2 class="intro-big">a <em>brincar</em></h2>
+    </section>
+
+    <!-- Scene 4 — Brand lockup -->
+    <section class="intro-scene scene-brand">
+      <img src="./mascot/dog-front.png" alt="" class="intro-dog brand-dog floatY">
+      <h1 class="intro-wordmark">PiPi<strong>Labu</strong></h1>
+      <p class="intro-tagline">O teu amigo fofo para dominar o inglês 🐾</p>
+      <button class="intro-start" id="intro-start">Vamos lá! →</button>
+    </section>
+
+  </div>
+</div>
+
+<!-- ── BACKGROUND BLOBS (CRYSTAL GRADIENTS) ───────────────────── -->
+<div class="bg-fill"></div>
+<div class="glass-bg" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ── APP CONTAINER ─────────────────────────────────────────── -->
+<div class="app-shell">
+
+  <!-- TITLEBAR -->
+  <header class="titlebar" id="titlebar">
+    <div class="titlebar-drag">
+      <div class="titlebar-logo">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none" class="app-logo-svg">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#22d3ee" />
+              <stop offset="50%" stop-color="#3b82f6" />
+              <stop offset="100%" stop-color="#8b5cf6" />
+            </linearGradient>
+          </defs>
+          <rect x="6" y="14" width="7" height="20" rx="2.5" fill="url(#logo-grad)"/>
+          <rect x="16.5" y="6" width="7" height="28" rx="2.5" fill="url(#logo-grad)"/>
+          <rect x="27" y="16" width="7" height="18" rx="2.5" fill="url(#logo-grad)"/>
+        </svg>
+        <span class="titlebar-name">PiPi<strong class="gradient-text">Labu</strong></span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="titlebar-nav" id="main-nav" role="tablist">
+        <button class="nav-btn active" data-view="home" role="tab" aria-selected="true">
+          <span class="nav-btn-icon">🏠</span> Início
+        </button>
+        <button class="nav-btn" data-view="practice" role="tab" aria-selected="false">
+          <span class="nav-btn-icon">📝</span> Praticar
+        </button>
+        <button class="nav-btn" data-view="pronunciation" role="tab" aria-selected="false">
+          <span class="nav-btn-icon">🎤</span> Pronúncia
+        </button>
+        <button class="nav-btn" data-view="progress" role="tab" aria-selected="false">
+          <span class="nav-btn-icon">📊</span> Progresso
+        </button>
+        <button class="nav-btn" data-view="school" role="tab" aria-selected="false">
+          <span class="nav-btn-icon">🏫</span> Escola
+        </button>
+        <button class="nav-btn" data-view="authors" role="tab" aria-selected="false">
+          <span class="nav-btn-icon">👥</span> Autores
+        </button>
+        <button class="nav-btn" data-view="settings" role="tab" aria-selected="false">
+          <span class="nav-btn-icon">⚙️</span> IA & Definições
+        </button>
+      </nav>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="titlebar-controls-wrapper">
+      <!-- Animated Theme Selector -->
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Alternar Modo Claro/Escuro" aria-label="Alternar tema visual">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Window controls -->
+      <div class="titlebar-controls">
+        <button class="wctrl" id="wc-min" title="Minimizar janela" aria-label="Minimizar">
+          <svg width="11" height="11" viewBox="0 0 12 12"><rect x="1.5" y="5.5" width="9" height="1.2" fill="currentColor"/></svg>
+        </button>
+        <button class="wctrl" id="wc-max" title="Maximizar janela" aria-label="Maximizar">
+          <svg width="11" height="11" viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        </button>
+        <button class="wctrl wctrl-close" id="wc-close" title="Fechar aplicação" aria-label="Fechar">
+          <svg width="11" height="11" viewBox="0 0 12 12"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN SCROLLABLE WRAPPER -->
+  <main class="main-content">
+
+    <!-- ═══ VIEW: HOME ════════════════════════════════════════ -->
+    <div class="view active" id="view-home">
+      <div class="home-layout">
+
+        <!-- Hero Panel -->
+        <section class="hero-section glass-panel">
+          <div class="hero-text">
+            <p class="hero-eyebrow"><span class="dot-live"></span>Aprender Sem Limites</p>
+            <h1 class="hero-title">PiPi<span class="gradient-text">Labu</span></h1>
+            <p class="hero-subtitle">Eleva o teu nível de inglês com exercícios inteligentes, feedback imediato e explicações localizadas geradas por Inteligência Artificial.</p>
+            <button class="btn-primary btn-large" id="btn-start-home">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Praticar Agora
+            </button>
+          </div>
+          <div class="hero-stats-panel" id="hero-stats">
+            <div class="stat-glass-card">
+              <span class="stat-number" id="stat-topics">6</span>
+              <span class="stat-label">Tópicos Ativos</span>
+            </div>
+            <div class="stat-glass-card">
+              <span class="stat-number" id="stat-exercises">0</span>
+              <span class="stat-label">Respondidos</span>
+            </div>
+            <div class="stat-glass-card">
+              <span class="stat-number" id="stat-streak">0</span>
+              <span class="stat-label">Dias Seguidos</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic Selection Grid -->
+        <section class="home-grid-section">
+          <h2 class="section-title">Escolhe um Tópico de Estudo</h2>
+          <div class="topics-grid" id="topics-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Recent Activity Feed -->
+        <section class="recent-section">
+          <h2 class="section-title">Últimas Atividades</h2>
+          <div class="recent-list glass-panel" id="recent-list">
+            <p class="empty-state">Ainda não tens sessões registadas. Começa a praticar!</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ═══ VIEW: PRACTICE ════════════════════════════════════ -->
+    <div class="view" id="view-practice">
+      <div class="practice-container">
+
+        <!-- STEP 1: Config Panel -->
+        <div class="practice-config glass-panel" id="practice-config">
+          <div class="config-header">
+            <h2>Configurar Treino</h2>
+            <p>Define as preferências para a tua sessão de aprendizagem.</p>
+          </div>
+
+          <div class="config-form">
+            <!-- Topic Pills Selection -->
+            <div class="config-field">
+              <label>Escolher Tópico</label>
+              <div class="topic-pills" id="topic-pills">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+
+            <!-- Difficulty Levels -->
+            <div class="config-field">
+              <label>Dificuldade</label>
+              <div class="diff-pills" role="radiogroup">
+                <button class="diff-pill active" data-diff="beginner" role="radio" aria-checked="true">
+                  <span class="diff-dot diff-green"></span> Iniciante
+                </button>
+                <button class="diff-pill" data-diff="intermediate" role="radio" aria-checked="false">
+                  <span class="diff-dot diff-amber"></span> Intermédio
+                </button>
+                <button class="diff-pill" data-diff="advanced" role="radio" aria-checked="false">
+                  <span class="diff-dot diff-red"></span> Avançado
+                </button>
+              </div>
+            </div>
+
+            <!-- Quantity Sliders -->
+            <div class="config-field">
+              <div class="config-slider-header">
+                <label>Quantidade de Exercícios</label>
+                <span class="qty-display" id="qty-display">10</span>
+              </div>
+              <div class="slider-wrapper">
+                <input type="range" class="qty-slider" id="qty-slider" min="3" max="20" value="10" step="1" aria-valuemin="3" aria-valuemax="20" aria-valuenow="10">
+                <div class="qty-ticks"><span>3</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
+              </div>
+            </div>
+
+            <!-- Informational Badges -->
+            <div class="config-field">
+              <label>Estão Incluídos Exercícios de</label>
+              <div class="type-badges">
+                <span class="type-badge">✨ Escolha múltipla</span>
+                <span class="type-badge">📝 Preencher espaços</span>
+                <span class="type-badge">🔄 Tradução</span>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <button class="btn-primary btn-large btn-full" id="btn-start-session">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Iniciar Sessão Inteligente
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Active Practice Session -->
+        <div class="practice-session hidden" id="practice-session">
+          <!-- Session Header & Metrics -->
+          <div class="session-topbar glass-panel">
+            <button class="btn-secondary btn-sm" id="btn-abort-session">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              Sair
+            </button>
+            <div class="session-progress-wrap">
+              <div class="session-progress-bar">
+                <div class="session-progress-fill" id="session-progress-fill"></div>
+              </div>
+              <span class="session-counter" id="session-counter">1 / 10</span>
+            </div>
+            <div class="session-score-badge" id="session-score-badge">✓ 0</div>
+          </div>
+
+          <!-- Dynamic Exercise Card Container -->
+          <div class="exercise-card-wrap" id="exercise-card-wrap">
+            <!-- Rendered via App.js -->
+          </div>
+        </div>
+
+        <!-- STEP 3: Complete Results Overview -->
+        <div class="practice-results hidden" id="practice-results">
+          <div class="results-card glass-panel">
+            <div class="results-icon-container">
+              <span class="results-icon" id="results-icon">🏆</span>
+            </div>
+            <h2 class="results-title" id="results-title">Sessão Concluída!</h2>
+            
+            <div class="results-score-wrap">
+              <span class="results-big" id="results-big">0</span>
+              <span class="results-total" id="results-total">/ 0</span>
+            </div>
+            
+            <p class="results-msg" id="results-msg"></p>
+            
+            <div class="results-breakdown" id="results-breakdown">
+              <!-- Rendered via App.js -->
+            </div>
+            
+            <div class="results-actions">
+              <button class="btn-secondary" id="btn-results-review">
+                👁️ Ver Respostas
+              </button>
+              <button class="btn-primary" id="btn-results-again">
+                🔄 Repetir Treino
+              </button>
+              <button class="btn-ghost" id="btn-results-home">
+                🏠 Início
+              </button>
+            </div>
+          </div>
+
+          <!-- Question Review Accordion -->
+          <div class="review-panel glass-panel hidden" id="review-panel">
+            <h3>Revisão Detalhada das Respostas</h3>
+            <div class="review-list" id="review-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ VIEW: PRONUNCIATION ═══════════════════════════════ -->
+    <div class="view" id="view-pronunciation">
+      <div class="pronunciation-layout">
+
+        <div class="pronunciation-header">
+          <h2>Módulo de Pronúncia</h2>
+          <p>Treina a tua fonética em tempo real. Fala para o microfone e avalia a tua taxa de aproximação.</p>
+        </div>
+
+        <!-- Current Phrase Display -->
+        <div class="phrase-card glass-panel" id="phrase-card">
+          <span class="phrase-category" id="phrase-category">Pronto</span>
+          <div class="phrase-text" id="phrase-text">Carrega em "Nova frase" para começar</div>
+          <div class="phrase-phonetic" id="phrase-phonetic"></div>
+          <div class="phrase-translation" id="phrase-translation"></div>
+        </div>
+
+        <!-- Mic and Voice controls -->
+        <div class="pronunciation-controls">
+          <button class="btn-secondary" id="btn-new-phrase">
+            🔀 Nova Frase
+          </button>
+          
+          <button class="btn-mic" id="btn-mic" title="Gravar a minha pronúncia" aria-label="Microfone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="22"></line>
+            </svg>
+          </button>
+          
+          <button class="btn-secondary" id="btn-listen" title="Ouvir pronúncia original" aria-label="Ouvir">
+            🔊 Ouvir
+          </button>
+        </div>
+
+        <!-- Voice Waves Shimmer -->
+        <div class="mic-status glass-panel hidden" id="mic-status">
+          <div class="mic-waves">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p>O sistema está a ouvir... Fala agora com clareza.</p>
+        </div>
+
+        <!-- Speech Result Metric -->
+        <div class="pronunciation-result glass-panel hidden" id="pronunciation-result">
+          <div class="result-evaluation-header">
+            <div class="pron-result-icon" id="pron-result-icon">✓</div>
+            <div style="flex:1;">
+              <p class="pron-result-heard">Entendi: "<span id="pron-heard-text"></span>"</p>
+              <p class="pron-result-msg" id="pron-result-msg"></p>
+            </div>
+          </div>
+          <div class="pron-score-bar-wrapper">
+            <div class="pron-score-label">Precisão Fonética</div>
+            <div class="pron-score-bar">
+              <div class="pron-score-fill" id="pron-score-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pronunciation Session Feed -->
+        <div class="pron-history glass-panel">
+          <h3>Histórico Recente</h3>
+          <div class="pron-history-list" id="pron-history-list">
+            <p class="empty-state">Ainda sem tentativas nesta sessão.</p>
+          </div>
+        </div>
+
+        <!-- Speech recognition fallback panel -->
+        <div class="no-speech-notice glass-panel hidden" id="no-speech-notice">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--red-400); flex-shrink:0;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <p>O motor de reconhecimento de voz (SpeechRecognition) não está ativo. Recomenda-se utilizar o Google Chrome ou Microsoft Edge.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ VIEW: PROGRESS ════════════════════════════════════ -->
+    <div class="view" id="view-progress">
+      <div class="progress-layout">
+
+        <div class="progress-header">
+          <div>
+            <h2>O teu Painel de Progresso</h2>
+            <p>Consulta métricas de precisão, streaks e estatísticas globais das tuas sessões.</p>
+          </div>
+          <button class="btn-danger btn-sm" id="btn-reset-progress">
+            🗑️ Reiniciar Histórico
+          </button>
+        </div>
+
+        <!-- Stat Glass Cards Grid -->
+        <div class="progress-summary" id="progress-summary">
+          <div class="prog-card glass-panel">
+            <span class="prog-card-icon">📝</span>
+            <span class="prog-card-value" id="prog-total-sessions">0</span>
+            <span class="prog-card-label">Sessões Completas</span>
+          </div>
+          <div class="prog-card glass-panel">
+            <span class="prog-card-icon">✅</span>
+            <span class="prog-card-value" id="prog-total-correct">0</span>
+            <span class="prog-card-label">Exercícios Corretos</span>
+          </div>
+          <div class="prog-card glass-panel">
+            <span class="prog-card-icon">📊</span>
+            <span class="prog-card-value" id="prog-accuracy">0%</span>
+            <span class="prog-card-label">Precisão Média</span>
+          </div>
+          <div class="prog-card glass-panel">
+            <span class="prog-card-icon">🔥</span>
+            <span class="prog-card-value" id="prog-streak">0</span>
+            <span class="prog-card-label">Streak (Dias)</span>
+          </div>
+        </div>
+
+        <!-- Topic stats bars -->
+        <div class="topic-breakdown glass-panel">
+          <h3>Distribuição de Respostas por Tópico</h3>
+          <div class="topic-bars" id="topic-bars">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Full historical feed of sessions -->
+        <div class="session-history glass-panel">
+          <h3>Feed Completo de Atividades</h3>
+          <div class="session-history-list" id="session-history-list">
+            <p class="empty-state">Ainda sem sessões. Começa a praticar!</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ VIEW: SCHOOL — LESSON PATH ═══════════════════════════ -->
+    <div class="view" id="view-school">
+
+      <!-- Header: coach + stats -->
+      <div class="lesson-path-header">
+        <div class="lp-coach">
+          <div class="lp-coach-avatar">🧑‍🏫</div>
+          <div class="lp-coach-bubble">
+            Resolver <strong>uma lição por dia</strong> é a melhor forma de criar um hábito de estudo e progredir sem pressa.
+          </div>
+        </div>
+        <div class="lp-stats">
+          <div class="lp-stat">
+            <span class="lp-stat-num" id="lp-done-count">0</span>
+            <span class="lp-stat-label">Lições</span>
+          </div>
+          <div class="lp-stat">
+            <span class="lp-stat-num" id="lp-day-streak">0</span>
+            <span class="lp-stat-label">Dias seguidos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- The winding lesson path (nodes generated by app.js) -->
+      <div class="lesson-path" id="lesson-path"></div>
+
+      <!-- Bottom CTA -->
+      <div class="lesson-path-cta">
+        <button class="btn-primary btn-large btn-full" id="lp-continue-btn">Continuar Lição</button>
+        <p class="lp-cta-hint" id="lp-cta-hint"></p>
+      </div>
+
+      <!-- ── THEORY OVERLAY (reader) ─────────────────────────── -->
+      <div class="room-overlay hidden" id="overlay-theory">
+        <div class="overlay-inner">
+          <div class="overlay-header">
+            <h2 id="theory-overlay-title">📖 Teoria</h2>
+            <p>Lê todas as páginas para desbloquear os exercícios desta lição.</p>
+            <button class="overlay-close-btn" id="close-theory">✕ Sair</button>
+          </div>
+          <div class="book-reader" id="theory-reader">
+            <div class="reader-header">
+              <h3 id="reader-title">Título</h3>
+              <span id="reader-page-counter" style="color:var(--text-muted);font-size:0.85rem;">1 / 3</span>
+            </div>
+            <div class="reader-content" id="reader-content"></div>
+            <div class="reader-nav">
+              <button class="btn-secondary" id="btn-prev-page">← Anterior</button>
+              <div class="reader-dots" id="reader-dots"></div>
+              <button class="btn-primary" id="btn-next-page">Próximo →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LESSON OVERLAY (exercises + results) ─────────────── -->
+      <div class="room-overlay hidden" id="overlay-lesson">
+        <div class="overlay-inner">
+          <div class="overlay-header">
+            <h2 id="lesson-overlay-title">Lição</h2>
+            <p id="lesson-overlay-sub">Responde a todas as questões.</p>
+            <button class="overlay-close-btn" id="close-lesson">✕ Sair</button>
+          </div>
+
+          <!-- Active exercise -->
+          <div id="lesson-exercise-area">
+            <div class="session-topbar glass-panel" style="margin-bottom:16px;">
+              <button class="btn-secondary btn-sm" id="lesson-abort-btn">✕ Desistir</button>
+              <div class="session-progress-wrap">
+                <div class="session-progress-bar">
+                  <div class="session-progress-fill" id="lesson-progress-fill"></div>
+                </div>
+                <span class="session-counter" id="lesson-counter">1 / 6</span>
+              </div>
+              <div class="session-score-badge" id="lesson-score-badge">✓ 0</div>
+            </div>
+            <div id="lesson-exercise-card"></div>
+          </div>
+
+          <!-- Results -->
+          <div id="lesson-results" class="hidden">
+            <div class="results-card glass-panel">
+              <div class="results-icon-container">
+                <span id="lesson-results-icon">🏆</span>
+              </div>
+              <h2 id="lesson-results-title">Lição Concluída!</h2>
+              <div class="results-score-wrap">
+                <span class="results-big" id="lesson-results-big">0</span>
+                <span class="results-total" id="lesson-results-total">/ 0</span>
+              </div>
+              <p id="lesson-results-msg" style="color:var(--text-secondary);margin:8px 0 20px;"></p>
+              <div class="results-actions" id="lesson-results-actions"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end #view-school -->
+
+    <!-- ═══ VIEW: AUTHORS ═════════════════════════════════════ -->
+    <div class="view" id="view-authors">
+      <div class="authors-layout">
+        <section class="authors-hero glass-panel">
+          <div>
+            <p class="hero-eyebrow"><span class="dot-live"></span>Projeto Escolar</p>
+            <h2>Autores do PiPiLabu</h2>
+            <p>Aplicação desktop criada para apoiar o estudo de inglês com exercícios interativos, acompanhamento de progresso, treino de pronúncia e feedback assistido por IA local.</p>
+          </div>
+        </section>
+
+        <section class="authors-grid">
+          <article class="author-card glass-panel">
+            <div class="author-avatar-wrap">
+              <img src="./valerii.png" alt="Valerii Kravchenko" class="author-avatar">
+            </div>
+            <div class="author-info">
+              <span class="author-role">Desenvolvedor</span>
+              <h3>Valerii Kravchenko</h3>
+              <p class="author-school">Escola de Serviço e Comércio do Oeste</p>
+              <p class="author-course">Curso: PSI9</p>
+              <p>Aluno da Escola de Serviço e Comércio do Oeste, inscrito no curso PSI9. Apaixonado por desenvolvimento web e desktop, aprendizagem de línguas, cultura europeia e criação de experiências digitais imersivas.</p>
+            </div>
+          </article>
+
+          <article class="author-card glass-panel">
+            <div class="author-avatar-wrap">
+              <img src="./fillipe.png" alt="Filipe Ratchkine" class="author-avatar">
+            </div>
+            <div class="author-info">
+              <span class="author-role">Desenvolvedor</span>
+              <h3>Filipe Ratchkine</h3>
+              <p class="author-school">Escola de Serviço e Comércio do Oeste</p>
+              <p class="author-course">Curso: PSI9</p>
+              <p>Aluno da Escola de Serviço e Comércio do Oeste, inscrito no curso PSI9. Colaborador no desenvolvimento do PiPiLabu, com foco em criatividade, apoio ao projeto e construção de uma experiência de aprendizagem mais divertida e acessível.</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="tech-stack glass-panel">
+          <div class="tech-stack-header">
+            <span class="author-role">Tech Stack</span>
+            <h3>Tecnologias usadas neste projeto</h3>
+          </div>
+          <div class="tech-grid">
+            <span>Electron</span>
+            <span>JavaScript</span>
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>Electron Store</span>
+            <span>Ollama</span>
+            <span>Web Speech API</span>
+            <span>Web Audio API</span>
+            <span>JSON local</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ═══ VIEW: SETTINGS ════════════════════════════════════ -->
+    <div class="view" id="view-settings">
+      <div class="settings-layout">
+        
+        <div class="config-header">
+          <h2>Definições do Sistema & IA</h2>
+          <p>Configura o estado dos servidores locais do Ollama e gere o motor de som da aplicação.</p>
+        </div>
+
+        <div class="settings-form glass-panel">
+          <!-- Connection to local LLM server -->
+          <div class="config-field">
+            <label>Estado do Servidor Local Ollama</label>
+            <div class="ollama-status-container">
+              <span id="ollama-status-dot" class="diff-dot diff-red" style="width:10px; height:10px;"></span>
+              <span id="ollama-status-text">A verificar ligação com o servidor local...</span>
+              <button class="btn-secondary btn-sm" id="btn-ollama-retry">
+                🔄 Atualizar Estado
+              </button>
+            </div>
+          </div>
+
+          <!-- Model Choice Dropdown -->
+          <div class="config-field">
+            <label for="ollama-model-select">Modelo de Inteligência Artificial Ativo</label>
+            <div class="select-wrapper">
+              <select id="ollama-model-select" class="fill-input select-styled">
+                <option value="llama3.2:latest">A obter lista de LLMs locais...</option>
+              </select>
+              <span class="select-arrow-custom"></span>
+            </div>
+            <p class="settings-helper-text">
+              Para explicações pedagógicas ultra-rápidas e correção em tempo real, recomendamos correr o modelo leve <strong>llama3.2</strong> (2B ou 3B) ou <strong>llama3</strong> através do Ollama no teu sistema.
+            </p>
+          </div>
+
+          <!-- Interface and accessibility sound toggles -->
+          <div class="config-field">
+            <label>Definições de Áudio</label>
+            <div class="audio-preference-card">
+              <div class="audio-info">
+                <strong>Feedback Sonoro</strong>
+                <span>Sintetizar beeps harmoniosos quando acertas ou erras um exercício.</span>
+              </div>
+              <label class="switch-toggle" for="settings-sound">
+                <input type="checkbox" id="settings-sound" checked>
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Buttons -->
+          <button class="btn-primary btn-large btn-full" id="btn-save-settings" style="margin-top: 10px;">
+            💾 Gravar Definições
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── COMPACT NOTIFICATION SYSTEM (TOAST) ────────────────────── -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ── MAIN SCRIPT ───────────────────────────────────────────── -->
+<script src="./intro.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+*.exe
+*.dmg
+*.AppImage
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local editor / tool settings
+.claude/settings.local.json
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# Dev-only preview helper (kept local)
+_preview_server.js

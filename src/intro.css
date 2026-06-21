@@ -1,0 +1,282 @@
+/* ============================================================
+   PiPiLabu — intro.css
+   Cinematic auto-playing launch intro (meme / fun theme).
+   Self-contained warm palette, independent of the app theme.
+   ============================================================ */
+
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  overflow: hidden;
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #fff7ed 0%, #ffedd5 45%, #fed7aa 100%);
+  color: #7c2d12;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* exit animation: fade + gentle zoom-out, then JS removes the node */
+#intro.intro-done {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
+/* floating soft blobs for depth */
+#intro::before,
+#intro::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+#intro::before {
+  width: 460px; height: 460px;
+  top: -140px; left: -120px;
+  background: radial-gradient(circle, rgba(251,146,60,0.45), transparent 70%);
+  animation: introBlob 14s ease-in-out infinite;
+}
+#intro::after {
+  width: 520px; height: 520px;
+  bottom: -180px; right: -140px;
+  background: radial-gradient(circle, rgba(250,204,21,0.40), transparent 70%);
+  animation: introBlob 18s ease-in-out infinite reverse;
+}
+@keyframes introBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(40px, 30px) scale(1.12); }
+}
+
+/* ── TOP-RIGHT PERCENT + SKIP (hubtown-style HUD) ───────────── */
+.intro-progress-top {
+  position: absolute;
+  top: 22px; left: 28px;
+  z-index: 5;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  color: #9a3412;
+  opacity: 0.85;
+}
+
+.intro-skip {
+  position: absolute;
+  top: 18px; right: 22px;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(124, 45, 18, 0.18);
+  color: #7c2d12;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.intro-skip:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+/* ── AUTO-SCROLL TRACK (the "camera" that pans the scenes) ───── */
+.intro-track {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.intro-scene {
+  height: 100vh;
+  flex: 0 0 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 40px;
+  text-align: center;
+}
+
+/* ── SHARED DOG STYLING ─────────────────────────────────────── */
+.intro-dog {
+  width: clamp(180px, 26vh, 320px);
+  height: auto;
+  filter: drop-shadow(0 22px 30px rgba(124, 45, 18, 0.28));
+  pointer-events: none;
+}
+
+.floatY { animation: introFloat 3.2s ease-in-out infinite; }
+@keyframes introFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-16px) rotate(-1.5deg); }
+}
+
+/* ── SCENE 1: LOADER ────────────────────────────────────────── */
+.intro-eyebrow {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #c2410c;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 6px 18px;
+  border-radius: 9999px;
+}
+
+.intro-loadbar {
+  width: min(340px, 70vw);
+  height: 10px;
+  background: rgba(124, 45, 18, 0.12);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.intro-loadbar i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #fb923c, #f59e0b, #fbbf24);
+  transition: width 0.1s linear;
+}
+
+.intro-caption {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #9a3412;
+  min-height: 1.4em;
+}
+
+/* ── SCENES 2 & 3: BIG WORD REVEALS ─────────────────────────── */
+.scene-word { gap: 8px; }
+
+.intro-big {
+  font-size: clamp(2.6rem, 11vw, 7rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #7c2d12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.intro-big span {
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.intro-big em {
+  font-style: normal;
+  background: linear-gradient(135deg, #ea580c, #d97706);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* side dogs slide in from the edges when their scene is active */
+.side-dog { opacity: 0; }
+.from-left  { transform: translateX(-60px); }
+.from-right { transform: translateX(60px); }
+
+/* ── SCENE 4: BRAND LOCKUP ──────────────────────────────────── */
+.scene-brand { gap: 14px; }
+
+.brand-dog { width: clamp(200px, 30vh, 360px); }
+
+.intro-wordmark {
+  font-size: clamp(3rem, 12vw, 7.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #7c2d12;
+}
+.intro-wordmark strong {
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316, #f59e0b, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro-tagline {
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  font-weight: 500;
+  color: #9a3412;
+}
+
+.intro-start {
+  margin-top: 10px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #fff;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border: none;
+  padding: 15px 40px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(234, 88, 12, 0.4);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.intro-start:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 34px rgba(234, 88, 12, 0.5);
+  filter: brightness(1.05);
+}
+
+/* ── ACTIVE-SCENE ENTRANCE ANIMATIONS ───────────────────────── */
+.intro-scene.is-active .intro-big {
+  animation: introPop 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+.intro-scene.is-active .side-dog {
+  animation: introDogIn 0.7s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.08s both;
+}
+.intro-scene.is-active .intro-wordmark {
+  animation: introPop 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.1s both;
+}
+.intro-scene.is-active .intro-tagline {
+  animation: introRise 0.6s ease 0.35s both;
+}
+.intro-scene.is-active .intro-start {
+  animation: introRise 0.5s ease 0.7s forwards;
+}
+
+@keyframes introPop {
+  0%   { opacity: 0; transform: translateY(26px) scale(0.86); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes introDogIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes introRise {
+  0%   { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .intro-track { transition: transform 0.3s ease; }
+  .floatY, #intro::before, #intro::after { animation: none; }
+  .intro-scene.is-active .intro-big,
+  .intro-scene.is-active .intro-wordmark,
+  .intro-scene.is-active .intro-tagline,
+  .intro-scene.is-active .side-dog,
+  .intro-scene.is-active .intro-start {
+    animation-duration: 0.25s;
+  }
+}
