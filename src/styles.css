@@ -2969,3 +2969,35 @@ html[data-theme="light"] .nav-btn.active {
 @media (max-width: 1024px) {
   .hero-mascot { display: none; }
 }
+
+/* ── PRONUNCIATION (speaking & listening): warm up hardcoded cyan ── */
+html[data-theme="light"] .phrase-category {
+  background-color: rgba(249, 115, 22, 0.09);
+  border-color: rgba(249, 115, 22, 0.18);
+}
+html[data-theme="light"] .btn-mic {
+  background: rgba(249, 115, 22, 0.10);
+  border-color: rgba(249, 115, 22, 0.45);
+  color: var(--cyan-500);
+  box-shadow: 0 8px 22px rgba(249, 115, 22, 0.20);
+}
+html[data-theme="light"] .btn-mic:hover {
+  background: rgba(249, 115, 22, 0.18);
+  border-color: var(--cyan-400);
+  color: var(--cyan-500);
+}
+html[data-theme="light"] .mic-waves span { background-color: var(--cyan-400); }
+
+/* A slightly larger, friendlier mic with a soft idle glow. */
+.btn-mic {
+  width: 72px;
+  height: 72px;
+}
+.btn-mic:not(.active) { animation: micIdleGlow 2.8s ease-in-out infinite; }
+@keyframes micIdleGlow {
+  0%, 100% { box-shadow: 0 8px 22px rgba(249, 115, 22, 0.18); }
+  50%      { box-shadow: 0 8px 28px rgba(249, 115, 22, 0.30); }
+}
+
+/* "Ouvir" (listening) phrase card: give the translation room to breathe. */
+.phrase-translation { margin-top: 4px; }

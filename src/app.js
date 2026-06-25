@@ -64,44 +64,82 @@ function playSynthBeep(isCorrect) {
   if (!soundEnabled) return;
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
+    osc.type = 'sine';                 // smooth, no buzz
     osc.connect(gain);
     gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.0001, now);   // start silent -> soft attack (no click)
 
     if (isCorrect) {
-      // Harmonic pleasant double beep (D5 -> A5)
-      osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.005, ctx.currentTime + 0.35);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.35);
+      // Gentle rising chime C5 -> E5 -> G5 (glide, not hard jumps).
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.24);
+      gain.gain.exponentialRampToValueAtTime(0.12, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+      osc.start(now); osc.stop(now + 0.52);
     } else {
-      // Soft minor tone drop (A3 -> D3)
-      osc.frequency.setValueAtTime(220, ctx.currentTime);
-      osc.frequency.setValueAtTime(147.14, ctx.currentTime + 0.12);
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.005, ctx.currentTime + 0.45);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.45);
+      // Soft descending "aw" G4 -> D4 (no harsh sub-bass).
+      osc.frequency.setValueAtTime(392.0, now);
+      osc.frequency.exponentialRampToValueAtTime(293.66, now + 0.18);
+      gain.gain.exponentialRampToValueAtTime(0.10, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+      osc.start(now); osc.stop(now + 0.42);
     }
+    osc.onended = () => ctx.close();   // release the AudioContext (no leak)
   } catch (e) {
     console.error("Synthesizer error:", e);
   }
 }
 
-// Text to Speech
+// ── TEXT TO SPEECH (listening) ──────────────────────────────
+// Pick the best available English voice so English sentences are not
+// read by the system's default (often Portuguese) voice.
+let ttsVoice = null;
+
+function pickEnglishVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  const en = voices.filter(v => /^en[-_]?/i.test(v.lang));
+  if (!en.length) return null;
+  const prefer = ['natural', 'google us english', 'google uk english',
+    'aria', 'jenny', 'guy', 'michelle', 'samantha', 'zira', 'david', 'mark', 'google'];
+  const score = (v) => {
+    const n = (v.name || '').toLowerCase();
+    let s = 0;
+    prefer.forEach((p, i) => { if (n.includes(p)) s = Math.max(s, prefer.length - i); });
+    if (/^en[-_]?us/i.test(v.lang)) s += 3;
+    else if (/^en[-_]?gb/i.test(v.lang)) s += 2;
+    if (v.localService === false) s += 1;   // online voices are usually nicer
+    return s;
+  };
+  return en.slice().sort((a, b) => score(b) - score(a))[0];
+}
+
+function initTTS() {
+  if (!('speechSynthesis' in window)) return;
+  const load = () => { const v = pickEnglishVoice(); if (v) ttsVoice = v; };
+  load();
+  // Voices often load asynchronously; refresh when they arrive.
+  window.speechSynthesis.onvoiceschanged = load;
+}
+
 function playTTS(text) {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
-  } else {
+  if (!('speechSynthesis' in window)) {
     showToast("Síntese de voz não suportada neste sistema.", "error");
+    return;
   }
+  window.speechSynthesis.cancel();
+  if (!ttsVoice) ttsVoice = pickEnglishVoice();
+  const utterance = new SpeechSynthesisUtterance(text);
+  if (ttsVoice) utterance.voice = ttsVoice;
+  utterance.lang = (ttsVoice && ttsVoice.lang) || 'en-US';
+  utterance.rate = 0.92;
+  utterance.pitch = 1.0;
+  window.speechSynthesis.speak(utterance);
 }
 
 // ── WINDOW CONTROLS ─────────────────────────────────────────
@@ -905,35 +943,10 @@ async function loadNewPronunciationPhrase() {
       : 'Avançado 🔴';
 
     document.getElementById('phrase-text').textContent = currentPhrase;
-    document.getElementById('phrase-phonetic').textContent = `[ ${getPhoneticMock(currentPhrase)} ]`;
 
     // Clear previous results
     document.getElementById('pronunciation-result').classList.add('hidden');
   }
-}
-
-function getPhoneticMock(phrase) {
-  // Premium simulated phonetic transcription dictionary
-  return phrase.toLowerCase()
-    .replace(/the/g, 'ðə')
-    .replace(/cat/g, 'kæt')
-    .replace(/sat/g, 'sæt')
-    .replace(/on/g, 'ɒn')
-    .replace(/mat/g, 'mæt')
-    .replace(/she/g, 'ʃiː')
-    .replace(/sells/g, 'selz')
-    .replace(/seashells/g, 'ˈsiːʃelz')
-    .replace(/seashore/g, 'ˈsiːʃɔː')
-    .replace(/morning/g, 'ˈmɔːnɪŋ')
-    .replace(/weather/g, 'ˈweðə')
-    .replace(/beautiful/g, 'ˈbjuːtɪfl')
-    .replace(/philosophical/g, 'ˌfɪləˈsɒfɪkl')
-    .replace(/implications/g, 'ˌɪmplɪˈkeɪʃnz')
-    .replace(/intelligence/g, 'ɪnˈtelɪdʒəns')
-    .replace(/artificial/g, 'ˌɑːtɪˈfɪʃl')
-    .replace(/unprecedented/g, 'ʌnˈpresɪdentɪd')
-    .replace(/skepticism/g, 'ˈskeptɪsɪzəm')
-    .replace(/geopolitical/g, 'ˌdʒiːəʊpəˈlɪtɪkl');
 }
 
 function evaluateSpeechPronunciation(transcript) {
@@ -1229,6 +1242,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadExercises();
   await loadLessonPath();
   initPronunciationModule();
+  initTTS();
 
   // Settings Save Button bind
   const saveBtn = document.getElementById('btn-save-settings');
