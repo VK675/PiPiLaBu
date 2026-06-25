@@ -142,6 +142,22 @@ function playTTS(text) {
   window.speechSynthesis.speak(utterance);
 }
 
+// Play the bundled neural-TTS clip for a phrase (much nicer than the
+// system voice); fall back to live speech synthesis if there is no file.
+let phraseAudio = null;
+function playPhraseAudio(text) {
+  const file = (window.PRON_AUDIO || {})[text];
+  if (file) {
+    try {
+      if (phraseAudio) { phraseAudio.pause(); phraseAudio.currentTime = 0; }
+      phraseAudio = new Audio('./' + file);
+      phraseAudio.play().catch(() => playTTS(text));   // fall back if blocked
+      return;
+    } catch (e) { /* fall through to TTS */ }
+  }
+  playTTS(text);
+}
+
 // ── WINDOW CONTROLS ─────────────────────────────────────────
 function initWindowControls() {
   const minBtn = document.getElementById('wc-min');
@@ -176,6 +192,8 @@ function initNavigation() {
       if (viewId === 'progress') loadProgressTab();
       if (viewId === 'settings') checkOllamaConnection();
       if (viewId === 'school') renderLessonPath();
+      // Warm up the offline voice model so the mic is ready without a wait.
+      if (viewId === 'pronunciation' && window.PronSpeech) window.PronSpeech.preload().catch(() => {});
     });
   });
 
@@ -876,52 +894,60 @@ function initPronunciationModule() {
   if (!btnNew || !btnMic || !btnListen) return;
 
   btnNew.onclick = loadNewPronunciationPhrase;
-  btnListen.onclick = () => playTTS(currentPhrase);
+  btnListen.onclick = () => playPhraseAudio(currentPhrase);
 
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
+  // Offline speech recognition (Vosk) — works in Electron, unlike the
+  // browser's webkitSpeechRecognition (which needs a Google API key).
+  const speech = window.PronSpeech;
+  if (!speech || !speech.isAvailable()) {
     document.getElementById('no-speech-notice').classList.remove('hidden');
     btnMic.disabled = true;
     return;
   }
 
-  recognition = new SpeechRecognition();
-  recognition.continuous = false;
-  recognition.lang = 'en-US';
-  recognition.interimResults = false;
+  const micStatus = document.getElementById('mic-status');
+  const micStatusMsg = micStatus ? micStatus.querySelector('p') : null;
+  const setMicMsg = (txt) => { if (micStatusMsg) micStatusMsg.textContent = txt; };
 
-  recognition.onstart = () => {
-    isListening = true;
-    btnMic.classList.add('active');
-    document.getElementById('mic-status').classList.remove('hidden');
-    document.getElementById('pronunciation-result').classList.add('hidden');
-  };
+  speech.on('status', (s) => {
+    if (s === 'loading-model') {
+      btnMic.classList.add('loading');
+      if (micStatus) micStatus.classList.remove('hidden');
+      setMicMsg('A preparar o motor de voz (só na primeira vez)…');
+    } else if (s === 'listening') {
+      isListening = true;
+      btnMic.classList.remove('loading');
+      btnMic.classList.add('active');
+      if (micStatus) micStatus.classList.remove('hidden');
+      setMicMsg('O sistema está a ouvir… Fala agora com clareza.');
+      document.getElementById('pronunciation-result').classList.add('hidden');
+    } else if (s === 'stopped') {
+      isListening = false;
+      btnMic.classList.remove('active', 'loading');
+      if (micStatus) micStatus.classList.add('hidden');
+    }
+  });
 
-  recognition.onend = () => {
-    isListening = false;
-    btnMic.classList.remove('active');
-    document.getElementById('mic-status').classList.add('hidden');
-  };
+  speech.on('result', (text) => {
+    const t = (text || '').trim();
+    if (!t) return;
+    evaluateSpeechPronunciation(t);
+    speech.stop();
+  });
 
-  recognition.onerror = (e) => {
-    console.error("Erro no reconhecimento de voz:", e);
-    showToast("Não consegui ouvir bem, tenta de novo.", "error");
-  };
-
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    evaluateSpeechPronunciation(transcript);
-  };
-
-  btnMic.onclick = () => {
-    if (isListening) {
-      recognition.stop();
-    } else {
-      if (!currentPhrase) {
-        showToast("Por favor, escolhe primeiro uma frase!", "error");
-        return;
-      }
-      recognition.start();
+  btnMic.onclick = async () => {
+    if (speech.isActive()) { speech.stop(); return; }
+    if (!currentPhrase) {
+      showToast("Por favor, escolhe primeiro uma frase!", "error");
+      return;
+    }
+    try {
+      await speech.start();
+    } catch (e) {
+      console.error("Erro no reconhecimento de voz:", e);
+      btnMic.classList.remove('active', 'loading');
+      if (micStatus) micStatus.classList.add('hidden');
+      showToast("Não foi possível aceder ao microfone.", "error");
     }
   };
 

@@ -61,6 +61,13 @@ function createWindow() {
     }
   });
 
+  // Allow microphone access for the offline speech-recognition (speaking) module.
+  const ses = mainWindow.webContents.session;
+  const allowMedia = (permission) =>
+    permission === 'media' || permission === 'microphone' || permission === 'audioCapture';
+  ses.setPermissionRequestHandler((_wc, permission, callback) => callback(allowMedia(permission)));
+  ses.setPermissionCheckHandler((_wc, permission) => allowMedia(permission));
+
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   mainWindow.once('ready-to-show', () => {

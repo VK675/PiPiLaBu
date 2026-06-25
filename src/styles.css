@@ -3001,3 +3001,12 @@ html[data-theme="light"] .mic-waves span { background-color: var(--cyan-400); }
 
 /* "Ouvir" (listening) phrase card: give the translation room to breathe. */
 .phrase-translation { margin-top: 4px; }
+
+/* Mic "loading the voice model" state (first speaking use). */
+.btn-mic.loading {
+  border-color: var(--amber-400) !important;
+  color: var(--amber-400) !important;
+  animation: micLoadPulse 1s ease-in-out infinite !important;
+  cursor: progress;
+}
+@keyframes micLoadPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }

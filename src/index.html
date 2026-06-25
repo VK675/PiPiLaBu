@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'">
+        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-eval' blob:; worker-src 'self' blob:; media-src 'self' blob:">
   <title>PiPiLabu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -414,7 +414,7 @@
             <line x1="12" y1="8" x2="12" y2="12"></line>
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
-          <p>O motor de reconhecimento de voz (SpeechRecognition) não está ativo. Recomenda-se utilizar o Google Chrome ou Microsoft Edge.</p>
+          <p>O motor de reconhecimento de voz offline não pôde ser carregado. Reinicia a aplicação e tenta novamente.</p>
         </div>
 
       </div>
@@ -702,6 +702,9 @@
 <div class="toast-container" id="toast-container"></div>
 
 <!-- ── MAIN SCRIPT ───────────────────────────────────────────── -->
+<script src="./vendor/vosk.js"></script>
+<script src="./speech.js"></script>
+<script src="./audio-manifest.js"></script>
 <script src="./intro.js"></script>
 <script src="./app.js"></script>
 </body>

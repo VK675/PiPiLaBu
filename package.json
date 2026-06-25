@@ -19,6 +19,10 @@
       "exercises.json",
       "package.json"
     ],
+    "asarUnpack": [
+      "src/models/**",
+      "src/vendor/**"
+    ],
     "win": {
       "signAndEditExecutable": false,
       "target": [
