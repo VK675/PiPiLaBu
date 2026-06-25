@@ -52,49 +52,51 @@
 }
 
 html[data-theme="light"] {
-  /* Light Frosted Crystal Theme */
-  --bg-deep:          #f1f5f9;
-  --bg-mid:           #e2e8f0;
-  --bg-card:          rgba(255, 255, 255, 0.45);
-  --bg-card-hover:    rgba(255, 255, 255, 0.65);
-  --bg-card-solid:    #ffffff;
-  --glass-1:          rgba(255, 255, 255, 0.35);
-  --glass-2:          rgba(255, 255, 255, 0.55);
-  --glass-3:          rgba(0, 0, 0, 0.03);
-  --glass-4:          rgba(0, 0, 0, 0.06);
+  /* Warm "PiPiLabu" Cream Theme — soft, light & easy on the eyes.
+     Accent tokens (cyan/blue/violet) are repointed to warm sunset hues,
+     so the whole UI turns warm without touching every rule. */
+  --bg-deep:          #fdf6ec;
+  --bg-mid:           #fbecd8;
+  --bg-card:          rgba(255, 252, 246, 0.72);
+  --bg-card-hover:    rgba(255, 252, 246, 0.92);
+  --bg-card-solid:    #fffdf8;
+  --glass-1:          rgba(255, 255, 255, 0.46);
+  --glass-2:          rgba(255, 255, 255, 0.66);
+  --glass-3:          rgba(124, 45, 18, 0.045);
+  --glass-4:          rgba(124, 45, 18, 0.08);
 
-  --border-0:         rgba(0, 0, 0, 0.03);
-  --border-1:         rgba(0, 0, 0, 0.08);
-  --border-2:         rgba(0, 0, 0, 0.14);
-  --border-accent:    rgba(59, 130, 246, 0.4);
-  --border-glow:      rgba(59, 130, 246, 0.15);
+  --border-0:         rgba(124, 45, 18, 0.05);
+  --border-1:         rgba(124, 45, 18, 0.10);
+  --border-2:         rgba(124, 45, 18, 0.17);
+  --border-accent:    rgba(249, 115, 22, 0.42);
+  --border-glow:      rgba(249, 115, 22, 0.16);
 
-  --text-primary:     #0f172a;
-  --text-secondary:   #334155;
-  --text-muted:       #64748b;
+  --text-primary:     #43261a;
+  --text-secondary:   #7c5544;
+  --text-muted:       #ac8b78;
 
-  --cyan-500:         #0284c7;
-  --cyan-400:         #0ea5e9;
-  --cyan-300:         #38bdf8;
-  --cyan-100:         #e0f2fe;
-  --blue-500:         #2563eb;
-  --blue-400:         #3b82f6;
-  --violet-500:       #7c3aed;
-  --violet-400:       #8b5cf6;
+  --cyan-500:         #ea580c;
+  --cyan-400:         #f97316;
+  --cyan-300:         #fb923c;
+  --cyan-100:         #ffedd5;
+  --blue-500:         #f59e0b;
+  --blue-400:         #fbbf24;
+  --violet-500:       #f97316;
+  --violet-400:       #fb923c;
   --amber-400:        #d97706;
   --amber-300:        #f59e0b;
-  --green-500:        #16a34a;
+  --green-500:        #15a34a;
   --green-400:        #22c55e;
   --red-500:          #dc2626;
   --red-400:          #ef4444;
 
-  --orb-1-color:      rgba(14, 165, 233, 0.14);
-  --orb-2-color:      rgba(167, 139, 250, 0.12);
-  --orb-3-color:      rgba(244, 63, 94, 0.07);
+  --orb-1-color:      rgba(251, 146, 60, 0.20);
+  --orb-2-color:      rgba(250, 204, 21, 0.18);
+  --orb-3-color:      rgba(248, 165, 90, 0.13);
 
-  --shadow-card:      0 12px 35px rgba(100, 116, 139, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --shadow-glow:      0 0 25px rgba(59, 130, 246, 0.10);
-  --shadow-input:     0 2px 8px rgba(148, 163, 184, 0.08);
+  --shadow-card:      0 14px 36px rgba(180, 120, 70, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --shadow-glow:      0 0 26px rgba(249, 115, 22, 0.14);
+  --shadow-input:     0 2px 9px rgba(180, 120, 70, 0.11);
 }
 
 /* ── LAYOUT CONSTANTS ───────────────────────────────────────── */
@@ -2898,4 +2900,72 @@ html[data-theme="light"] .author-role {
   .lesson-path-header { flex-direction: column; align-items: stretch; gap: 12px; }
   .lp-coach-bubble { max-width: none; }
   .lp-stats { justify-content: center; }
+}
+
+/* ============================================================
+   FRIENDLY / MEME FINISHING TOUCHES (PiPiLabu)
+   Rounded display font + warm details to match the intro & mascot.
+   ============================================================ */
+
+/* Rounded, playful headings (Fredoka) on the big display text. */
+.hero-title,
+.titlebar-name,
+.section-title,
+.config-header h2,
+.pronunciation-header h2,
+.progress-header h2,
+.authors-hero h2,
+.results-title,
+.results-big,
+.stat-number,
+.prog-card-value,
+.lp-stat-num,
+.overlay-header h2 {
+  font-family: 'Fredoka', 'Outfit', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Warm text selection in the light theme. */
+html[data-theme="light"] ::selection {
+  background-color: rgba(249, 115, 22, 0.22);
+  color: inherit;
+}
+
+/* Softer, rounder cards in the warm theme. */
+html[data-theme="light"] .glass-panel,
+html[data-theme="light"] .topic-card,
+html[data-theme="light"] .exercise-card {
+  border-radius: 26px;
+}
+
+/* Active nav pill gets a soft warm fill instead of a cold glow. */
+html[data-theme="light"] .nav-btn.active {
+  background-color: rgba(249, 115, 22, 0.12);
+  box-shadow: 0 2px 10px rgba(249, 115, 22, 0.10);
+}
+
+/* The little mascot that can sit inside hero / empty areas. */
+.app-mascot {
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 14px 22px rgba(124, 45, 18, 0.22));
+  animation: appMascotFloat 3.6s ease-in-out infinite;
+}
+@keyframes appMascotFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(-1.5deg); }
+}
+
+/* Hero gets room for the mascot on the right. */
+.hero-mascot {
+  width: clamp(120px, 16vw, 190px);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Hide the decorative hero mascot when the window is too narrow to
+   fit text + mascot + stats without clipping (min window is 860px). */
+@media (max-width: 1024px) {
+  .hero-mascot { display: none; }
 }

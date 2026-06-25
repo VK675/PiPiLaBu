@@ -1207,7 +1207,7 @@ async function saveSettingsPanel() {
 // ── INITIALIZATION ON PAGE LOAD ─────────────────────────────
 async function initThemeSystem() {
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
-  const savedTheme = await window.em.store.get('theme') || 'dark';
+  const savedTheme = await window.em.store.get('theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 
   if (themeToggleBtn) {
