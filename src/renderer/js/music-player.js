@@ -1,14 +1,16 @@
 'use strict';
 
-/* ── Good Kid Music Player (ficheiros locais) ───────────────── */
+/* ── Music Player (pasta de música do utilizador) ───────────── */
+// A app não inclui música: o utilizador escolhe uma pasta no seu
+// computador e o leitor toca os ficheiros de lá.
 (function () {
-  const playlist = (window.MUSIC_PLAYLIST || []).filter(t => t && t.full);
-  if (!playlist.length) return;
+  if (!window.em || !window.em.music) return;
 
   // ── State ────────────────────────────────────────────────────
   const state = {
+    playlist: [],
+    folderName: '',
     trackIndex: 0,
-    mode: 'instrumental', // 'full' | 'instrumental'
     playing: false,
     volume: 0.35,
     showList: false
@@ -21,16 +23,6 @@
   audio.addEventListener('timeupdate', updateProgress);
   audio.addEventListener('loadedmetadata', updateProgress);
   audio.addEventListener('error', onAudioError);
-
-  // True if the current track has a usable instrumental file.
-  function hasInstrumental(track) {
-    return !!(track && track.instrumental);
-  }
-  // Pick a URL respecting the chosen mode, falling back to full.
-  function urlFor(track) {
-    if (state.mode === 'instrumental' && hasInstrumental(track)) return track.instrumental;
-    return track.full;
-  }
 
   let els = {};
 
@@ -49,8 +41,8 @@
         <div class="mp-track-info">
           <span class="mp-note-icon">♪</span>
           <div class="mp-text-wrap">
-            <span class="mp-title" id="mp-title">Good Kid</span>
-            <span class="mp-mode-badge" id="mp-mode-badge">Instrumental</span>
+            <span class="mp-title" id="mp-title">A tua música</span>
+            <span class="mp-mode-badge" id="mp-badge">Sem pasta</span>
           </div>
         </div>
 
@@ -83,13 +75,8 @@
           </button>
         </div>
 
-        <div class="mp-mode-toggle">
-          <button class="mp-mode-btn" id="mp-mode-full" title="Com voz">🎤</button>
-          <button class="mp-mode-btn mp-mode-active" id="mp-mode-inst" title="Instrumental">🎵</button>
-        </div>
-
         <div class="mp-volume-wrap">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.6">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mp-volume-icon">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
           </svg>
@@ -105,8 +92,11 @@
 
       <div class="mp-list hidden" id="mp-list">
         <div class="mp-list-header">
-          <span>Good Kid — Creators Music</span>
-          <a class="mp-site-link" href="#" id="mp-site-link" title="Abrir goodkidofficial.com">↗ Site</a>
+          <span id="mp-list-heading">A tua música</span>
+          <span class="mp-folder-actions">
+            <button class="mp-folder-btn" id="mp-choose" title="Escolher a pasta com a tua música">📁 Escolher pasta</button>
+            <button class="mp-folder-btn hidden" id="mp-forget" title="Deixar de usar esta pasta">✕</button>
+          </span>
         </div>
         <div class="mp-list-items" id="mp-list-items"></div>
       </div>
@@ -126,87 +116,143 @@
     els = {
       player:      document.getElementById('music-player'),
       title:       document.getElementById('mp-title'),
-      modeBadge:   document.getElementById('mp-mode-badge'),
+      badge:       document.getElementById('mp-badge'),
       play:        document.getElementById('mp-play'),
       prev:        document.getElementById('mp-prev'),
       next:        document.getElementById('mp-next'),
-      modeFull:    document.getElementById('mp-mode-full'),
-      modeInst:    document.getElementById('mp-mode-inst'),
       volume:      document.getElementById('mp-volume'),
       progress:    document.getElementById('mp-progress-fill'),
       progressBar: document.getElementById('mp-progress-bar'),
       list:        document.getElementById('mp-list'),
+      listHeading: document.getElementById('mp-list-heading'),
       listItems:   document.getElementById('mp-list-items'),
       toggleList:  document.getElementById('mp-toggle-list'),
+      choose:      document.getElementById('mp-choose'),
+      forget:      document.getElementById('mp-forget'),
       hide:        document.getElementById('mp-hide'),
-      showPill:    document.getElementById('mp-show-pill'),
-      siteLink:    document.getElementById('mp-site-link')
+      showPill:    document.getElementById('mp-show-pill')
     };
 
-    buildPlaylist();
     bindEvents();
+    restore();
+  }
+
+  // ── Library ──────────────────────────────────────────────────
+  async function restore() {
+    const savedVolume = Number(await window.em.store.get('music_volume'));
+    if (Number.isFinite(savedVolume) && savedVolume >= 0 && savedVolume <= 1) {
+      state.volume = savedVolume;
+      audio.volume = savedVolume;
+      els.volume.value = savedVolume;
+    }
+    if (await window.em.store.get('music_hidden')) setHidden(true);
+    applyLibrary(await window.em.music.getLibrary());
+  }
+
+  async function chooseFolder() {
+    const lib = await window.em.music.chooseFolder();
+    if (lib.canceled) return;
+    stopPlayback();
+    applyLibrary(lib);
+    if (!state.playlist.length) setList(true);
+  }
+
+  async function forgetFolder() {
+    await window.em.music.forgetFolder();
+    stopPlayback();
+    applyLibrary({ folder: null, tracks: [] });
+  }
+
+  function applyLibrary(lib) {
+    state.playlist = (lib && lib.tracks) || [];
+    state.folderName = (lib && lib.name) || '';
+    state.trackIndex = 0;
+
+    const hasFolder = !!(lib && lib.folder);
+    els.listHeading.textContent = hasFolder ? `📁 ${state.folderName}` : 'A tua música';
+    els.choose.textContent = hasFolder ? 'Mudar pasta' : '📁 Escolher pasta';
+    els.forget.classList.toggle('hidden', !hasFolder);
+
+    buildPlaylist(hasFolder);
     updateTrackUI();
   }
 
-  function buildPlaylist() {
+  function buildPlaylist(hasFolder) {
     els.listItems.innerHTML = '';
-    playlist.forEach((track, i) => {
+
+    if (!state.playlist.length) {
+      const empty = document.createElement('p');
+      empty.className = 'mp-list-empty';
+      empty.textContent = hasFolder
+        ? 'Não encontrei músicas nesta pasta (mp3, wav, ogg, flac, m4a…).'
+        : 'Escolhe uma pasta do teu computador com música para ouvires enquanto estudas.';
+      els.listItems.appendChild(empty);
+      return;
+    }
+
+    state.playlist.forEach((track, i) => {
       const item = document.createElement('div');
       item.className = 'mp-list-item' + (i === state.trackIndex ? ' mp-list-active' : '');
-      item.dataset.idx = i;
-      item.innerHTML = `
-        <span class="mp-list-num">${String(i + 1).padStart(2, '0')}</span>
-        <span class="mp-list-title">${track.title || 'Sem título'}</span>
-        <span class="mp-list-artist">Good Kid</span>
-      `;
+
+      const num = document.createElement('span');
+      num.className = 'mp-list-num';
+      num.textContent = String(i + 1).padStart(2, '0');
+
+      // Os nomes vêm de ficheiros do utilizador: textContent, nunca innerHTML.
+      const title = document.createElement('span');
+      title.className = 'mp-list-title';
+      title.textContent = track.title;
+
+      const folder = document.createElement('span');
+      folder.className = 'mp-list-artist';
+      folder.textContent = track.folder;
+
+      item.append(num, title, folder);
       item.addEventListener('click', () => { state.trackIndex = i; loadAndPlay(); });
       els.listItems.appendChild(item);
     });
   }
 
+  // ── Events ───────────────────────────────────────────────────
   function bindEvents() {
     els.play.addEventListener('click', togglePlay);
     els.prev.addEventListener('click', prevTrack);
     els.next.addEventListener('click', nextTrack);
-    els.modeFull.addEventListener('click', () => setMode('full'));
-    els.modeInst.addEventListener('click', () => setMode('instrumental'));
+    els.choose.addEventListener('click', chooseFolder);
+    els.forget.addEventListener('click', forgetFolder);
     els.volume.addEventListener('input', e => {
       state.volume = parseFloat(e.target.value);
       audio.volume = state.volume;
     });
+    els.volume.addEventListener('change', () => window.em.store.set('music_volume', state.volume));
     els.progressBar.addEventListener('click', e => {
       if (!audio.duration) return;
       const rect = els.progressBar.getBoundingClientRect();
       audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
     });
-    els.toggleList.addEventListener('click', () => {
-      state.showList = !state.showList;
-      els.list.classList.toggle('hidden', !state.showList);
-      els.toggleList.classList.toggle('mp-btn-active', state.showList);
-    });
-    els.hide.addEventListener('click', () => {
-      els.player.classList.add('mp-hidden');
-      els.showPill.classList.remove('hidden');
-    });
-    els.showPill.addEventListener('click', () => {
-      els.player.classList.remove('mp-hidden');
-      els.showPill.classList.add('hidden');
-    });
-    els.siteLink.addEventListener('click', e => {
-      e.preventDefault();
-      if (window.em && window.em.shell) {
-        window.em.shell.openExternal('https://goodkidofficial.com/creators/');
-      } else {
-        window.open('https://goodkidofficial.com/creators/', '_blank');
-      }
-    });
+    els.toggleList.addEventListener('click', () => setList(!state.showList));
+    els.hide.addEventListener('click', () => setHidden(true));
+    els.showPill.addEventListener('click', () => setHidden(false));
+  }
+
+  function setList(show) {
+    state.showList = show;
+    els.list.classList.toggle('hidden', !show);
+    els.toggleList.classList.toggle('mp-btn-active', show);
+  }
+
+  function setHidden(hidden) {
+    els.player.classList.toggle('mp-hidden', hidden);
+    els.showPill.classList.toggle('hidden', !hidden);
+    window.em.store.set('music_hidden', hidden);
   }
 
   // ── Playback ─────────────────────────────────────────────────
   function loadAndPlay() {
-    const track = playlist[state.trackIndex];
+    const track = state.playlist[state.trackIndex];
+    if (!track) return;
     updateTrackUI();
-    audio.src = urlFor(track);
+    audio.src = track.url;
     audio.currentTime = 0;
     audio.play()
       .then(() => { state.playing = true; updatePlayBtn(); })
@@ -215,7 +261,18 @@
     updateListHighlight();
   }
 
+  function stopPlayback() {
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
+    state.playing = false;
+    els.progress.style.width = '0%';
+    updatePlayBtn();
+  }
+
   function togglePlay() {
+    // Sem músicas, o botão play abre a escolha da pasta.
+    if (!state.playlist.length) { chooseFolder(); return; }
     if (!audio.src) { loadAndPlay(); return; }
     if (state.playing) {
       audio.pause();
@@ -227,50 +284,37 @@
   }
 
   function prevTrack() {
-    state.trackIndex = (state.trackIndex - 1 + playlist.length) % playlist.length;
+    if (!state.playlist.length) return;
+    state.trackIndex = (state.trackIndex - 1 + state.playlist.length) % state.playlist.length;
     loadAndPlay();
   }
   function nextTrack() {
-    state.trackIndex = (state.trackIndex + 1) % playlist.length;
+    if (!state.playlist.length) return;
+    state.trackIndex = (state.trackIndex + 1) % state.playlist.length;
     loadAndPlay();
   }
 
-  function setMode(mode) {
-    if (state.mode === mode) return;
-    // Block switching to instrumental when the current track has none.
-    if (mode === 'instrumental' && !hasInstrumental(playlist[state.trackIndex])) return;
-    state.mode = mode;
-    els.modeFull.classList.toggle('mp-mode-active', mode === 'full');
-    els.modeInst.classList.toggle('mp-mode-active', mode === 'instrumental');
-    updateTrackUI();
-    if (audio.src) loadAndPlay();
-  }
-
   function onAudioError() {
-    // File missing / unreadable — surface it instead of failing silently.
+    if (!audio.getAttribute('src')) return;   // stopPlayback() limpa o src
+    // Ficheiro apagado/movido ou formato não suportado.
     state.playing = false;
     updatePlayBtn();
-    els.title.textContent = '⚠ Ficheiro não encontrado';
-    console.warn('[MusicPlayer] Não foi possível carregar:', audio.src,
-      '\nVerifica se o ficheiro existe em src/music/ e se o nome bate certo com music-manifest.js');
+    els.title.textContent = '⚠ Não foi possível tocar este ficheiro';
+    console.warn('[MusicPlayer] Não foi possível carregar:', audio.src);
   }
 
   // ── UI helpers ───────────────────────────────────────────────
   function updateTrackUI() {
-    const track = playlist[state.trackIndex];
-    els.title.textContent = track.title || 'Sem título';
-
-    const instAvailable = hasInstrumental(track);
-    // If instrumental missing, force 'full' display & disable the 🎵 button.
-    const effectiveMode = (state.mode === 'instrumental' && !instAvailable) ? 'full' : state.mode;
-    els.modeBadge.textContent = effectiveMode === 'full' ? 'Com voz' : 'Instrumental';
-    els.modeBadge.classList.toggle('mp-badge-full', effectiveMode === 'full');
-
-    els.modeInst.disabled = !instAvailable;
-    els.modeInst.classList.toggle('mp-mode-disabled', !instAvailable);
-    els.modeInst.title = instAvailable ? 'Instrumental' : 'Sem versão instrumental para esta faixa';
-    els.modeFull.classList.toggle('mp-mode-active', effectiveMode === 'full');
-    els.modeInst.classList.toggle('mp-mode-active', effectiveMode === 'instrumental');
+    const track = state.playlist[state.trackIndex];
+    if (track) {
+      els.title.textContent = track.title;
+      els.badge.textContent = `${state.trackIndex + 1} / ${state.playlist.length}`;
+      els.play.title = 'Play/Pause';
+    } else {
+      els.title.textContent = 'A tua música';
+      els.badge.textContent = state.folderName ? 'Pasta vazia' : 'Escolher pasta';
+      els.play.title = 'Escolher a pasta com a tua música';
+    }
   }
 
   function updatePlayBtn() {
@@ -284,7 +328,7 @@
   }
 
   function updateListHighlight() {
-    document.querySelectorAll('.mp-list-item').forEach((el, i) => {
+    els.listItems.querySelectorAll('.mp-list-item').forEach((el, i) => {
       el.classList.toggle('mp-list-active', i === state.trackIndex);
     });
   }

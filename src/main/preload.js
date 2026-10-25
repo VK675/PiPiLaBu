@@ -12,8 +12,7 @@ contextBridge.exposeInMainWorld('em', {
   window: {
     minimize:    ()  => invoke('window:minimize'),
     maximize:    ()  => invoke('window:maximize'),
-    close:       ()  => invoke('window:close'),
-    isMaximized: ()  => invoke('window:isMaximized')
+    close:       ()  => invoke('window:close')
   },
 
   // Exercises — reads exercises.json from disk via main process
@@ -24,13 +23,14 @@ contextBridge.exposeInMainWorld('em', {
   // Persistent preferences via electron-store
   store: {
     get:    (key)        => invoke('store:get', key),
-    set:    (key, value) => invoke('store:set', key, value),
-    getAll: ()           => invoke('store:getAll')
+    set:    (key, value) => invoke('store:set', key, value)
   },
 
-  // Shell
-  shell: {
-    openExternal: (url) => invoke('shell:openExternal', url)
+  // Music — pasta local escolhida pelo utilizador
+  music: {
+    getLibrary:   () => invoke('music:getLibrary'),
+    chooseFolder: () => invoke('music:chooseFolder'),
+    forgetFolder: () => invoke('music:forgetFolder')
   },
 
   // Ollama Integration

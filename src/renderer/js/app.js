@@ -19,6 +19,7 @@ let soundEnabled = true;
 let ollamaModel = 'llama3.2:latest';
 let ollamaOnline = false;
 let exercisesDb = null;
+let pronunciationSentences = {};
 
 // Practice Session State
 let currentConfig = {
@@ -33,8 +34,6 @@ let userAnswers = [];
 
 // Pronunciation Session State
 let currentPhrase = '';
-let isListening = false;
-let recognition = null;
 
 // ── UTILITIES ───────────────────────────────────────────────
 function escapeHtml(str = '') {
@@ -63,7 +62,7 @@ function showToast(message, type = 'info') {
 function playSynthBeep(isCorrect) {
   if (!soundEnabled) return;
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = new AudioContext();
     const now = ctx.currentTime;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
@@ -236,6 +235,7 @@ async function loadExercises() {
   const res = await window.em.exercises.getAll();
   if (res.ok) {
     exercisesDb = res.data.topics;
+    pronunciationSentences = res.data.pronunciation_sentences || {};
     if (!exercisesDb[currentConfig.topic]) {
       currentConfig.topic = Object.keys(exercisesDb)[0] || 'simple_past';
     }
@@ -310,9 +310,9 @@ function updateHomeRecentList() {
     const item = document.createElement('div');
     item.className = 'recent-item';
 
-    const diffColor = session.difficulty === 'beginner' ? 'var(--green-400)'
-                    : session.difficulty === 'intermediate' ? 'var(--amber-400)'
-                    : 'var(--red-400)';
+    const diffTone = session.difficulty === 'beginner' ? 'tone-green'
+                   : session.difficulty === 'intermediate' ? 'tone-amber'
+                   : 'tone-red';
 
     const diffLabel = session.difficulty === 'beginner' ? 'Iniciante'
                     : session.difficulty === 'intermediate' ? 'Intermédio'
@@ -322,7 +322,7 @@ function updateHomeRecentList() {
       <span class="recent-item-icon">📝</span>
       <div class="recent-item-info">
         <div class="recent-item-name">${escapeHtml(session.topic)}</div>
-        <div class="recent-item-meta">${session.date} • Dificuldade: <span style="color:${diffColor};font-weight:600;">${diffLabel}</span></div>
+        <div class="recent-item-meta">${session.date} • Dificuldade: <span class="diff-label ${diffTone}">${diffLabel}</span></div>
       </div>
       <span class="recent-item-score">${session.correct} / ${session.total}</span>
     `;
@@ -481,9 +481,9 @@ function renderExerciseCard(ex) {
 
   wrap.innerHTML = `
     <div class="exercise-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+      <div class="exercise-card-head">
         <span class="exercise-type-tag">📝 ${typeLabel}</span>
-        <button class="btn-ghost btn-sm" id="btn-tts-listen" title="Ouvir" style="display:flex;align-items:center;gap:6px;">🔊 Ouvir</button>
+        <button class="btn-ghost btn-sm" id="btn-tts-listen" title="Ouvir">🔊 Ouvir</button>
       </div>
       <h3 class="exercise-question">${escapeHtml(ex.question)}</h3>
       ${ex.hint ? `<p class="exercise-hint">💡 Dica: ${escapeHtml(ex.hint)}</p>` : ''}
@@ -495,11 +495,9 @@ function renderExerciseCard(ex) {
         <div class="feedback-explanation" id="ex-feedback-text"></div>
         
         <!-- AI Explanation Box -->
-        <div class="ai-explanation-box hidden" id="ex-ai-box" style="margin-top:16px; padding-top:16px; border-top:1px dashed var(--border-2);">
-          <strong style="color:var(--cyan-400); display:block; font-size:0.8rem; text-transform:uppercase; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-            ✨ Explicação da IA (${ollamaModel})
-          </strong>
-          <p id="ex-ai-text" style="font-size:0.82rem; color:var(--text-secondary); line-height:1.55; font-family:inherit; user-select:text;"></p>
+        <div class="ai-explanation-box hidden" id="ex-ai-box">
+          <strong class="ai-box-title">✨ Explicação da IA (${escapeHtml(ollamaModel)})</strong>
+          <div class="ai-box-text" id="ex-ai-text"></div>
         </div>
       </div>
       
@@ -579,9 +577,6 @@ async function verifyAnswer(ex, givenAns) {
 
   checkBtn.disabled = true;
 
-  let isCorrect = false;
-  let explanationText = ex.explanation || '';
-
   // Lock UI
   if (ex.type === 'multiple_choice') {
     document.querySelectorAll('.mc-option').forEach(o => o.disabled = true);
@@ -591,30 +586,11 @@ async function verifyAnswer(ex, givenAns) {
     document.getElementById('ex-translation-input').disabled = true;
   }
 
-  // Grade Answer (Dynamic Ollama AI vs exact string matching)
-  if (ex.type === 'translation' && ollamaOnline) {
+  const { isCorrect, explanation: explanationText } = await gradeAnswer(ex, givenAns, () => {
     titleEl.textContent = "🧠 A IA está a avaliar a tua tradução...";
-    feedbackEl.className = "exercise-feedback correct";
+    feedbackEl.className = "exercise-feedback";
     feedbackEl.classList.remove('hidden');
-
-    const result = await window.em.ollama.checkTranslation({
-      model: ollamaModel,
-      question: ex.question,
-      correctPhrase: ex.answer,
-      userPhrase: givenAns
-    });
-
-    if (result.ok) {
-      isCorrect = result.correct;
-      explanationText = result.explanation;
-    } else {
-      isCorrect = checkStrictMatch(givenAns, ex.answer);
-      explanationText = ex.explanation + `\n\n*(Nota: O Ollama falhou a correção inteligente: ${result.error})*`;
-    }
-  } else {
-    // Normal exact comparison (Choices, Blanks, or Offline Translation fallback)
-    isCorrect = checkStrictMatch(givenAns, ex.answer);
-  }
+  });
 
   playSynthBeep(isCorrect);
   if (isCorrect) sessionScore++;
@@ -643,8 +619,8 @@ async function verifyAnswer(ex, givenAns) {
   titleEl.textContent = isCorrect ? '🎉 Resposta Correta!' : '❌ Resposta Incorreta...';
 
   textEl.innerHTML = `
-    <strong>Resposta esperada:</strong> <span style="font-family:'JetBrains Mono',monospace;font-weight:600;">${escapeHtml(ex.answer)}</span>
-    <p style="margin-top: 8px; color:var(--text-secondary);">${escapeHtml(explanationText)}</p>
+    <strong>Resposta esperada:</strong> <span class="answer-code">${escapeHtml(ex.answer)}</span>
+    <p class="feedback-note">${escapeHtml(explanationText)}</p>
   `;
 
   // Enable Ollama explanation button if local model is connected
@@ -669,12 +645,70 @@ async function verifyAnswer(ex, givenAns) {
   };
 }
 
-function checkStrictMatch(str1, str2) {
-  const norm = (s) => s.toLowerCase()
-    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "")
+// ── ANSWER MATCHING ─────────────────────────────────────────
+// Unambiguous contractions are expanded directly; 's and 'd after a
+// pronoun can mean two things, so both readings are generated.
+const CONTRACTIONS = [
+  [/\bwon't\b/g, 'will not'], [/\bshan't\b/g, 'shall not'], [/\bcan't\b/g, 'can not'],
+  [/\bcannot\b/g, 'can not'], [/n't\b/g, ' not'], [/'re\b/g, ' are'], [/'ve\b/g, ' have'],
+  [/\bi'm\b/g, 'i am'], [/'ll\b/g, ' will'], [/\blet's\b/g, 'let us']
+];
+const AMBIGUOUS_PRONOUN = '(he|she|it|that|there|what|who|where|here|how|i|you|we|they)';
+
+function answerVariants(str) {
+  let s = String(str).toLowerCase().replace(/[’‘`]/g, "'");
+  CONTRACTIONS.forEach(([re, rep]) => { s = s.replace(re, rep); });
+
+  let variants = [s];
+  const expand = (suffix, readings) => {
+    const re = new RegExp(`\\b${AMBIGUOUS_PRONOUN}'${suffix}\\b`);
+    variants = variants.flatMap(v => {
+      let out = [v];
+      while (out.some(o => re.test(o))) {
+        out = out.flatMap(o => re.test(o) ? readings.map(r => o.replace(re, `$1 ${r}`)) : [o]);
+      }
+      return out;
+    });
+  };
+  expand('s', ['is', 'has']);
+  expand('d', ['would', 'had']);
+
+  return variants.map(v => v
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_~()?"«»¿¡]/g, ' ')
     .replace(/\s+/g, ' ')
-    .trim();
-  return norm(str1) === norm(str2);
+    .trim());
+}
+
+function checkStrictMatch(given, expected) {
+  const a = answerVariants(given);
+  const b = new Set(answerVariants(expected));
+  return a.some(v => b.has(v));
+}
+
+function isAnswerCorrect(ex, given) {
+  return [ex.answer, ...(ex.accepted || [])].some(ref => checkStrictMatch(given, ref));
+}
+
+// Grades an answer for both Praticar and Escola. Local matching first;
+// translations that don't match locally are reviewed by Ollama if available.
+async function gradeAnswer(ex, given, onAiStart) {
+  const result = { isCorrect: isAnswerCorrect(ex, given), explanation: ex.explanation || '' };
+  if (result.isCorrect || ex.type !== 'translation' || !ollamaOnline) return result;
+
+  if (onAiStart) onAiStart();
+  const ai = await window.em.ollama.checkTranslation({
+    model: ollamaModel,
+    question: ex.question,
+    correctPhrase: [ex.answer, ...(ex.accepted || [])].join(' | '),
+    userPhrase: given
+  });
+  if (ai.ok) {
+    result.isCorrect = ai.correct;
+    result.explanation = ai.explanation || result.explanation;
+  } else {
+    result.explanation += `\n\n(Nota: o Ollama não conseguiu avaliar a tradução: ${ai.error})`;
+  }
+  return result;
 }
 
 function formatAIExplanation(rawText) {
@@ -691,34 +725,20 @@ function formatAIExplanation(rawText) {
     if (correctMatch) {
       const correctVal = correctMatch[1].trim();
       if (correctVal) {
-        html += `
-          <div style="margin-bottom:14px; padding:12px 16px; background:var(--glass-2); border-left:4px solid var(--cyan-400); border-radius:var(--radius-sm); font-family:inherit;">
-            <strong style="color:var(--cyan-400); font-size:0.8rem; display:block; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.04em;">Resposta Correta Recomendada</strong>
-            <span style="font-size:0.9rem; color:var(--text-primary); font-weight:600; font-family:'JetBrains Mono', monospace;">${escapeHtml(correctVal)}</span>
-          </div>
-        `;
+        html += `<div class="ai-correct-answer">${escapeHtml(correctVal)}</div>`;
       }
     }
     if (explanationMatch) {
       const explanationVal = explanationMatch[1].trim();
       if (explanationVal) {
-        html += `
-          <div style="line-height:1.6; font-size:0.86rem; color:var(--text-secondary); padding:4px 0;">
-            <strong style="color:var(--violet-400); font-size:0.8rem; display:block; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em;">Explicação Pedagógica da IA</strong>
-            <p style="margin:0;">${escapeHtml(explanationVal).replace(/\n/g, '<br>')}</p>
-          </div>
-        `;
+        html += `<p>${escapeHtml(explanationVal).replace(/\n/g, '<br>')}</p>`;
       }
     }
     return html;
   }
 
   // Fallback: If it's not structured, just display it with linebreaks
-  return `
-    <div style="line-height:1.6; font-size:0.86rem; color:var(--text-secondary); padding:4px 0;">
-      <p style="margin:0;">${escapeHtml(cleanText).replace(/\n/g, '<br>')}</p>
-    </div>
-  `;
+  return `<p>${escapeHtml(cleanText).replace(/\n/g, '<br>')}</p>`;
 }
 
 async function getAIExplanation(ex, givenAns, isCorrect, origEx) {
@@ -795,15 +815,15 @@ function finishPracticeSession() {
   // Breakdown metrics
   document.getElementById('results-breakdown').innerHTML = `
     <div class="breakdown-item">
-      <span class="breakdown-value" style="color:var(--cyan-400);">${pct}%</span>
+      <span class="breakdown-value tone-cyan">${pct}%</span>
       <span class="breakdown-label">Precisão</span>
     </div>
     <div class="breakdown-item">
-      <span class="breakdown-value" style="color:var(--green-400);">${score}</span>
+      <span class="breakdown-value tone-green">${score}</span>
       <span class="breakdown-label">Corretas</span>
     </div>
     <div class="breakdown-item">
-      <span class="breakdown-value" style="color:var(--red-400);">${total - score}</span>
+      <span class="breakdown-value tone-red">${total - score}</span>
       <span class="breakdown-label">Erradas</span>
     </div>
   `;
@@ -825,7 +845,7 @@ function finishPracticeSession() {
             ? `<span class="ans-correct">✓ A tua resposta: "${escapeHtml(ans.givenAnswer)}"</span>`
             : `<span class="ans-given-wrong">✗ A tua resposta: "${escapeHtml(ans.givenAnswer)}"</span> | <span class="ans-correct">Esperado: "${escapeHtml(ans.answer)}"</span>`
           }
-          <div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;line-height:1.45;">${escapeHtml(ans.explanation)}</div>
+          <div class="review-item-expl">${escapeHtml(ans.explanation)}</div>
         </div>
       `;
       reviewList.appendChild(item);
@@ -915,14 +935,12 @@ function initPronunciationModule() {
       if (micStatus) micStatus.classList.remove('hidden');
       setMicMsg('A preparar o motor de voz (só na primeira vez)…');
     } else if (s === 'listening') {
-      isListening = true;
       btnMic.classList.remove('loading');
       btnMic.classList.add('active');
       if (micStatus) micStatus.classList.remove('hidden');
       setMicMsg('O sistema está a ouvir… Fala agora com clareza.');
       document.getElementById('pronunciation-result').classList.add('hidden');
     } else if (s === 'stopped') {
-      isListening = false;
       btnMic.classList.remove('active', 'loading');
       if (micStatus) micStatus.classList.add('hidden');
     }
@@ -954,25 +972,21 @@ function initPronunciationModule() {
   loadNewPronunciationPhrase();
 }
 
-async function loadNewPronunciationPhrase() {
-  const res = await window.em.exercises.getAll();
-  if (res.ok && res.data.pronunciation_sentences) {
-    const sentences = res.data.pronunciation_sentences[currentConfig.difficulty] || [];
-    if (sentences.length === 0) return;
+function loadNewPronunciationPhrase() {
+  const sentences = pronunciationSentences[currentConfig.difficulty] || [];
+  if (sentences.length === 0) return;
 
-    const randStr = sentences[Math.floor(Math.random() * sentences.length)];
-    currentPhrase = randStr;
+  currentPhrase = sentences[Math.floor(Math.random() * sentences.length)];
 
-    document.getElementById('phrase-category').textContent =
-      currentConfig.difficulty === 'beginner' ? 'Iniciante 🟢'
-      : currentConfig.difficulty === 'intermediate' ? 'Intermédio 🟡'
-      : 'Avançado 🔴';
+  document.getElementById('phrase-category').textContent =
+    currentConfig.difficulty === 'beginner' ? 'Iniciante 🟢'
+    : currentConfig.difficulty === 'intermediate' ? 'Intermédio 🟡'
+    : 'Avançado 🔴';
 
-    document.getElementById('phrase-text').textContent = currentPhrase;
+  document.getElementById('phrase-text').textContent = currentPhrase;
 
-    // Clear previous results
-    document.getElementById('pronunciation-result').classList.add('hidden');
-  }
+  // Clear previous results
+  document.getElementById('pronunciation-result').classList.add('hidden');
 }
 
 function evaluateSpeechPronunciation(transcript) {
@@ -989,22 +1003,20 @@ function evaluateSpeechPronunciation(transcript) {
   scoreFill.style.width = `${score}%`;
   resultEl.classList.remove('hidden');
 
+  icon.classList.remove('is-good', 'is-ok', 'is-bad');
   if (score >= 80) {
     icon.textContent = '✓';
-    icon.style.background = 'rgba(74,222,128,.15)';
-    icon.style.color = 'var(--green-400)';
+    icon.classList.add('is-good');
     msg.textContent = `Excelente pronúncia! (${score}% de precisão)`;
     playSynthBeep(true);
   } else if (score >= 50) {
     icon.textContent = '⚡';
-    icon.style.background = 'rgba(251,191,36,.15)';
-    icon.style.color = 'var(--amber-400)';
+    icon.classList.add('is-ok');
     msg.textContent = `Boa pronúncia, mas podes polir melhor. (${score}% de precisão)`;
     playSynthBeep(true);
   } else {
     icon.textContent = '✗';
-    icon.style.background = 'rgba(239,68,68,.15)';
-    icon.style.color = 'var(--red-400)';
+    icon.classList.add('is-bad');
     msg.textContent = `Tenta falar mais claro e ao ritmo certo. (${score}% de precisão)`;
     playSynthBeep(false);
   }
@@ -1016,16 +1028,14 @@ function evaluateSpeechPronunciation(transcript) {
     if (empty) empty.remove();
 
     const item = document.createElement('div');
-    item.className = 'recent-item';
-    item.style.padding = '10px 14px';
-    item.style.fontSize = '0.82rem';
+    item.className = 'recent-item pron-history-item';
 
-    const scoreColor = score >= 80 ? 'var(--green-400)' : score >= 50 ? 'var(--amber-400)' : 'var(--red-400)';
+    const scoreTone = score >= 80 ? 'tone-green' : score >= 50 ? 'tone-amber' : 'tone-red';
 
     item.innerHTML = `
-      <span style="font-weight:600; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">"${escapeHtml(currentPhrase)}"</span>
-      <span style="color:var(--text-muted); margin:0 12px; font-style:italic;">Ouviu: "${escapeHtml(transcript)}"</span>
-      <span style="color:${scoreColor}; font-weight:700; flex-shrink:0;">${score}%</span>
+      <span class="pron-hist-phrase">"${escapeHtml(currentPhrase)}"</span>
+      <span class="pron-hist-heard">Ouviu: "${escapeHtml(transcript)}"</span>
+      <span class="pron-hist-score ${scoreTone}">${score}%</span>
     `;
 
     histList.insertBefore(item, histList.firstChild);
@@ -1108,13 +1118,13 @@ function loadProgressTab() {
       const accuracy = completed > 0 ? Math.round((correct / completed) * 100) : 0;
 
       const barHtml = `
-          <div style="margin-bottom:16px;">
-            <div style="display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:5px; font-weight:500;">
+        <div class="topic-bar">
+          <div class="topic-bar-head">
             <span>${escapeHtml(topic.icon || '📖')} ${escapeHtml(topic.label)}</span>
-            <span style="color:var(--cyan-400);">${accuracy}% (${completed} Qs)</span>
+            <span class="tone-cyan">${accuracy}% (${completed} Qs)</span>
           </div>
-          <div style="height:6px; background:var(--glass-2); border-radius:99px; overflow:hidden;">
-            <div style="height:100%; width:${accuracy}%; background:linear-gradient(90deg, var(--cyan-500), var(--blue-400)); border-radius:99px;"></div>
+          <div class="topic-bar-track">
+            <div class="topic-bar-fill" style="width:${accuracy}%"></div>
           </div>
         </div>
       `;
@@ -1135,9 +1145,9 @@ function loadProgressTab() {
       const item = document.createElement('div');
       item.className = 'recent-item';
 
-      const diffColor = session.difficulty === 'beginner' ? 'var(--green-400)'
-                      : session.difficulty === 'intermediate' ? 'var(--amber-400)'
-                      : 'var(--red-400)';
+      const diffTone = session.difficulty === 'beginner' ? 'tone-green'
+                     : session.difficulty === 'intermediate' ? 'tone-amber'
+                     : 'tone-red';
 
       const diffLabel = session.difficulty === 'beginner' ? 'Iniciante'
                       : session.difficulty === 'intermediate' ? 'Intermédio'
@@ -1147,9 +1157,9 @@ function loadProgressTab() {
         <span class="recent-item-icon">🏆</span>
         <div class="recent-item-info">
           <div class="recent-item-name">${escapeHtml(session.topic)}</div>
-          <div class="recent-item-meta">${session.date} • Dificuldade: <span style="color:${diffColor};font-weight:600;">${diffLabel}</span></div>
+          <div class="recent-item-meta">${session.date} • Dificuldade: <span class="diff-label ${diffTone}">${diffLabel}</span></div>
         </div>
-        <span class="recent-item-score" style="font-weight:700;">${session.correct} / ${session.total}</span>
+        <span class="recent-item-score">${session.correct} / ${session.total}</span>
       `;
       list.appendChild(item);
     });
@@ -1182,13 +1192,13 @@ async function checkOllamaConnection() {
 
   if (!dot || !text || !select) return;
 
-  dot.className = "diff-dot diff-amber";
+  dot.className = "diff-dot dot-lg diff-amber";
   text.textContent = "A estabelecer ligação com o Ollama...";
 
   ollamaOnline = await window.em.ollama.isOnline();
 
   if (ollamaOnline) {
-    dot.className = "diff-dot diff-green";
+    dot.className = "diff-dot dot-lg diff-green";
     text.textContent = "Ollama Conectado Localmente";
 
     const res = await window.em.ollama.getModels();
@@ -1215,7 +1225,7 @@ async function checkOllamaConnection() {
       select.appendChild(o);
     }
   } else {
-    dot.className = "diff-dot diff-red";
+    dot.className = "diff-dot dot-lg diff-red";
     text.textContent = "Ollama Desconectado (Inicia o Ollama no teu PC)";
 
     select.innerHTML = '';
@@ -1280,9 +1290,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Initial silent verification of Ollama connection status
   ollamaOnline = await window.em.ollama.isOnline();
-  if (ollamaOnline) {
-    console.log("Ollama detectado localmente com sucesso.");
-  }
 });
 
 // ============================================================
@@ -1293,7 +1300,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 const LIBRARY_BOOKS = {
   simple_past: {
     title: 'Simple Past Tense', icon: '📖',
-    description: 'Ações concluídas no passado',
     pages: [
       {
         title: 'Quando usar o Simple Past',
@@ -1317,7 +1323,7 @@ const LIBRARY_BOOKS = {
       {
         title: 'Verbos Regulares vs Irregulares',
         html: `
-          <p><strong>Verbos regulares</strong> — adiciona <span style="color:var(--cyan-400);">-ed</span>:</p>
+          <p><strong>Verbos regulares</strong> — adiciona <span class="tone-cyan">-ed</span>:</p>
           <table class="book-table">
             <tr><th>Infinitivo</th><th>Simple Past</th><th>Regra</th></tr>
             <tr><td>walk</td><td>walked</td><td>+ ed</td></tr>
@@ -1325,7 +1331,7 @@ const LIBRARY_BOOKS = {
             <tr><td>study</td><td>studied</td><td>y → ied</td></tr>
             <tr><td>stop</td><td>stopped</td><td>dobra consoante</td></tr>
           </table>
-          <p style="margin-top:14px;"><strong>Verbos irregulares</strong> — formas próprias:</p>
+          <p class="book-spaced"><strong>Verbos irregulares</strong> — formas próprias:</p>
           <table class="book-table">
             <tr><th>Infinitivo</th><th>Simple Past</th></tr>
             <tr><td>go</td><td>went</td></tr>
@@ -1344,9 +1350,9 @@ const LIBRARY_BOOKS = {
           <div class="book-example">
             <p>✅ She <strong>didn't go</strong> to the party.</p>
             <p>✅ I <strong>didn't see</strong> him yesterday.</p>
-            <p>❌ ~~She didn't went~~ (errado!)</p>
+            <p>❌ <s>She didn't went</s> (errado!)</p>
           </div>
-          <div class="book-rule" style="margin-top:14px;">
+          <div class="book-rule book-spaced">
             <strong>Interrogativa:</strong> <em>Did</em> + subject + infinitivo?
           </div>
           <div class="book-example">
@@ -1359,7 +1365,6 @@ const LIBRARY_BOOKS = {
   },
   present_perfect: {
     title: 'Present Perfect', icon: '⏱️',
-    description: 'Passado com ligação ao presente',
     pages: [
       {
         title: 'Estrutura do Present Perfect',
@@ -1402,12 +1407,12 @@ const LIBRARY_BOOKS = {
             <p>✅ I <strong>saw</strong> him <em>yesterday</em>.</p>
             <p>✅ She <strong>visited</strong> Paris <em>in 2018</em>.</p>
           </div>
-          <div class="book-rule" style="margin-top:14px;"><strong>Present Perfect</strong> — sem tempo específico ou resultado no presente</div>
+          <div class="book-rule book-spaced"><strong>Present Perfect</strong> — sem tempo específico ou resultado no presente</div>
           <div class="book-example">
             <p>✅ I <strong>have seen</strong> him recently.</p>
             <p>✅ She <strong>has visited</strong> Paris. (experiência de vida)</p>
           </div>
-          <p style="margin-top:12px; color:var(--amber-400); font-size:0.88rem;">
+          <p class="book-tip">
             💡 Se o tempo é específico → Simple Past. Se é vago ou ligado ao presente → Present Perfect.
           </p>`
       }
@@ -1415,7 +1420,6 @@ const LIBRARY_BOOKS = {
   },
   phrasal_verbs: {
     title: 'Phrasal Verbs', icon: '🔤',
-    description: 'Verbos compostos essenciais',
     pages: [
       {
         title: 'O que são Phrasal Verbs?',
@@ -1469,7 +1473,6 @@ const LIBRARY_BOOKS = {
   },
   business_english: {
     title: 'Business English', icon: '💼',
-    description: 'Inglês profissional e corporativo',
     pages: [
       {
         title: 'Emails Profissionais',
@@ -1525,7 +1528,6 @@ const LIBRARY_BOOKS = {
   },
   conditionals: {
     title: 'Conditionals', icon: '🔀',
-    description: 'Frases condicionais (if clauses)',
     pages: [
       {
         title: 'Zero & First Conditional',
@@ -1538,7 +1540,7 @@ const LIBRARY_BOOKS = {
             <p>✅ If you heat water to 100°C, it <strong>boils</strong>.</p>
             <p>✅ If it rains, the ground <strong>gets</strong> wet.</p>
           </div>
-          <div class="book-rule" style="margin-top:14px;">
+          <div class="book-rule book-spaced">
             <strong>First Conditional</strong> — situações reais/prováveis<br>
             <em>If + present simple, will + infinitive</em>
           </div>
@@ -1559,7 +1561,7 @@ const LIBRARY_BOOKS = {
             <p>✅ If she <strong>knew</strong> his number, she <strong>would call</strong> him.</p>
             <p>✅ If I <strong>were</strong> you, I <strong>would accept</strong> the offer.</p>
           </div>
-          <div class="book-rule" style="margin-top:14px;">
+          <div class="book-rule book-spaced">
             💡 "If I <strong>were</strong>" (não "was") é o subjuntivo formal correto.
           </div>`
       },
@@ -1574,7 +1576,7 @@ const LIBRARY_BOOKS = {
             <p>✅ If I <strong>had studied</strong> more, I <strong>would have passed</strong>.</p>
             <p>✅ If she <strong>had left</strong> earlier, she <strong>wouldn't have missed</strong> the train.</p>
           </div>
-          <div class="book-rule" style="margin-top:14px;">
+          <div class="book-rule book-spaced">
             <strong>Resumo:</strong>
             <ul>
               <li>Zero: if + present → present</li>
@@ -1588,7 +1590,6 @@ const LIBRARY_BOOKS = {
   },
   vocabulary: {
     title: 'Vocabulary', icon: '📝',
-    description: 'Vocabulário e expressões essenciais',
     pages: [
       {
         title: 'Palavras Académicas',
@@ -1629,7 +1630,7 @@ const LIBRARY_BOOKS = {
             <tr><td>get</td><td>permission, experience, feedback, lost</td></tr>
             <tr><td>have</td><td>a meeting, a chat, difficulty, fun</td></tr>
           </table>
-          <div class="book-rule" style="margin-top:12px;">
+          <div class="book-rule book-spaced">
             💡 Não se diz "do a decision" — diz-se "make a decision". Aprende sempre em par.
           </div>`
       }
@@ -1651,6 +1652,7 @@ const LESSON_LEVELS = ['beginner', 'intermediate', 'advanced'];
 const LEVEL_LABEL = { beginner: 'Iniciante', intermediate: 'Intermédio', advanced: 'Avançado' };
 const LEVEL_DOT   = { beginner: 'diff-green', intermediate: 'diff-amber', advanced: 'diff-red' };
 const LESSON_SIZE = 6;
+const LESSON_PASS_RATIO = 2 / 3;   // 4 de 6 para avançar no caminho
 
 // Lista ordenada das 18 lições
 const LESSONS = [];
@@ -1935,7 +1937,7 @@ function renderLessonExercise() {
 
   document.getElementById('lesson-exercise-card').innerHTML = `
     <div class="exercise-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div class="exercise-card-head">
         <span class="exercise-type-tag">📝 ${typeLabel}</span>
         <button class="btn-ghost btn-sm" id="ln-tts">🔊 Ouvir</button>
       </div>
@@ -1978,11 +1980,16 @@ function renderLessonExercise() {
   }
 }
 
-function verifyLessonAnswer(ex, given) {
+async function verifyLessonAnswer(ex, given) {
   const checkBtn = document.getElementById('ln-check');
   checkBtn.disabled = true;
 
-  const isCorrect = checkStrictMatch(given, ex.answer);
+  const feedback = document.getElementById('ln-feedback');
+  const { isCorrect, explanation } = await gradeAnswer(ex, given, () => {
+    feedback.className = 'exercise-feedback';
+    setText('ln-feedback-title', '🧠 A IA está a avaliar a tua tradução...');
+    setText('ln-feedback-text', '');
+  });
   playSynthBeep(isCorrect);
   if (isCorrect) lessonQuiz.score++;
 
@@ -1998,13 +2005,11 @@ function verifyLessonAnswer(ex, given) {
     if (inp) { inp.disabled = true; inp.classList.add(isCorrect ? 'correct' : 'wrong'); }
   }
 
-  const feedback = document.getElementById('ln-feedback');
-  feedback.classList.remove('hidden');
   feedback.className = 'exercise-feedback ' + (isCorrect ? 'correct' : 'wrong');
   setText('ln-feedback-title', isCorrect ? '🎉 Correto!' : '❌ Incorreto');
   document.getElementById('ln-feedback-text').innerHTML =
-    `<strong>Resposta:</strong> <span style="font-family:'JetBrains Mono',monospace;font-weight:600;">${escapeHtml(ex.answer)}</span>` +
-    (ex.explanation ? `<p style="margin-top:8px;color:var(--text-secondary);font-size:0.82rem;">${escapeHtml(ex.explanation)}</p>` : '');
+    `<strong>Resposta:</strong> <span class="answer-code">${escapeHtml(ex.answer)}</span>` +
+    (explanation ? `<p class="feedback-note">${escapeHtml(explanation)}</p>` : '');
 
   setText('lesson-score-badge', '✓ ' + lessonQuiz.score);
 
@@ -2021,21 +2026,24 @@ async function showLessonResults() {
   const total = lessonQuiz.exercises.length;
   const score = lessonQuiz.score;
   const pct = total > 0 ? Math.round((score / total) * 100) : 0;
-  const icon = pct === 100 ? '🔥' : pct >= 75 ? '🏆' : pct >= 50 ? '⭐' : '💪';
-  const msg = pct === 100 ? 'Perfeito! 100% de precisão!'
+  const needed = Math.ceil(total * LESSON_PASS_RATIO);
+  const passed = score >= needed;
+  const icon = !passed ? '💪' : pct === 100 ? '🔥' : pct >= 75 ? '🏆' : '⭐';
+  const msg = !passed ? `Precisas de pelo menos ${needed} de ${total} para avançar. Revê a teoria e tenta outra vez!`
+            : pct === 100 ? 'Perfeito! 100% de precisão!'
             : pct >= 75 ? 'Excelente trabalho!'
-            : pct >= 50 ? 'Bom esforço, continua!'
-            : 'Lição concluída — revê a teoria se precisares.';
+            : 'Bom esforço, continua!';
 
   setText('lesson-results-icon', icon);
+  setText('lesson-results-title', passed ? 'Lição Concluída!' : 'Quase lá!');
   setText('lesson-results-big', score);
   setText('lesson-results-total', '/ ' + total);
   setText('lesson-results-msg', pct + '% de precisão — ' + msg);
 
-  // Avança o progresso do caminho (só na 1ª vez para este índice)
+  // Avança o progresso do caminho (só na 1ª vez para este índice e se passou)
   const i = activeLesson ? activeLesson.index : lessonPath.done;
   let advanced = false;
-  if (i === lessonPath.done && lessonPath.done < LESSONS.length) {
+  if (passed && i === lessonPath.done && lessonPath.done < LESSONS.length) {
     bumpLessonStreak();
     lessonPath.done++;
     lessonPath.lastDate = todayStr();
@@ -2066,8 +2074,18 @@ async function showLessonResults() {
   repeatBtn.textContent = '🔄 Repetir';
   repeatBtn.onclick = () => startLessonQuiz(activeLesson.index);
 
-  actions.appendChild(doneBtn);
-  actions.appendChild(repeatBtn);
+  if (passed) {
+    actions.appendChild(doneBtn);
+    actions.appendChild(repeatBtn);
+  } else {
+    // Sem passar, o caminho a seguir é repetir; "Sair" só fecha.
+    repeatBtn.className = 'btn-primary';
+    repeatBtn.textContent = '🔄 Tentar outra vez';
+    doneBtn.className = 'btn-secondary';
+    doneBtn.textContent = 'Sair';
+    actions.appendChild(repeatBtn);
+    actions.appendChild(doneBtn);
+  }
 }
 
 function bumpLessonStreak() {

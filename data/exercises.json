@@ -79,6 +79,11 @@
             "type": "translation",
             "question": "Translate to English: 'Ela cozinhou o jantar ontem à noite.'",
             "answer": "She cooked dinner last night",
+            "accepted": [
+              "She cooked dinner yesterday evening",
+              "She cooked the dinner last night",
+              "She made dinner last night"
+            ],
             "hint": "Regular verb 'cook' + time marker",
             "explanation": "'Cook' is a regular verb (cooked). 'Last night' indicates the past time."
           },
@@ -134,6 +139,10 @@
             "type": "translation",
             "question": "Translate to English: 'Nós visitámos o museu ontem.'",
             "answer": "We visited the museum yesterday",
+            "accepted": [
+              "Yesterday we visited the museum",
+              "We visited the museum yesterday"
+            ],
             "hint": "visited + yesterday",
             "explanation": "'Visit' is regular: visited. 'Yesterday' marks a completed past action."
           }
@@ -178,6 +187,10 @@
             "type": "translation",
             "question": "Translate: 'Eles não vieram à reunião porque estavam ocupados.'",
             "answer": "They didn't come to the meeting because they were busy",
+            "accepted": [
+              "They didn't come to the meeting as they were busy",
+              "They didn't go to the meeting because they were busy"
+            ],
             "hint": "Negative form: didn't + base verb",
             "explanation": "Negative Simple Past: 'didn't + base verb'. 'Were' is past of 'are' (to be)."
           },
@@ -218,8 +231,12 @@
           {
             "id": "sp_i_8",
             "type": "translation",
-            "question": "Translate: 'Quanto tempo você ficou em Lisboa no ano passado?'",
+            "question": "Translate: 'Quanto tempo ficaste em Lisboa no ano passado?'",
             "answer": "How long did you stay in Lisbon last year?",
+            "accepted": [
+              "How long were you in Lisbon last year?",
+              "How long did you stay in Lisbon last year?"
+            ],
             "hint": "Question with 'How long' + did",
             "explanation": "Wh-questions in past: How long + did + subject + base verb?"
           },
@@ -262,6 +279,10 @@
             "type": "translation",
             "question": "Translate: 'Ela perdeu o comboio porque acordou tarde.'",
             "answer": "She missed the train because she woke up late",
+            "accepted": [
+              "She missed the train because she got up late",
+              "She missed the train because she overslept"
+            ],
             "hint": "missed + woke up",
             "explanation": "'Missed' is regular; 'woke up' is the past of 'wake up'."
           }
@@ -304,8 +325,13 @@
           {
             "id": "sp_a_4",
             "type": "translation",
-            "question": "Translate: 'Se eu soubesse da conferência, teria me preparado melhor.'",
+            "question": "Translate: 'Se eu soubesse da conferência, ter-me-ia preparado melhor.'",
             "answer": "Had I known about the conference, I would have prepared better",
+            "accepted": [
+              "If I had known about the conference, I would have prepared better",
+              "Had I known about the conference, I would have been better prepared",
+              "If I had known about the conference, I would have been better prepared"
+            ],
             "hint": "Third conditional with inversion (Had I + past participle)",
             "explanation": "Advanced inversion: 'Had I known' replaces 'If I had known'. This is formal/literary style."
           },
@@ -361,6 +387,11 @@
             "type": "translation",
             "question": "Translate formally: 'Mal tínhamos chegado quando a palestra começou.'",
             "answer": "Hardly had we arrived when the lecture began",
+            "accepted": [
+              "Hardly had we arrived when the lecture started",
+              "Scarcely had we arrived when the lecture began",
+              "No sooner had we arrived than the lecture began"
+            ],
             "hint": "Hardly had + subject + past participle",
             "explanation": "This is an advanced inverted structure: 'Hardly had we arrived when...'."
           },
@@ -459,6 +490,16 @@
             "type": "translation",
             "question": "Translate using a phrasal verb: 'Por favor, desligue a televisão.'",
             "answer": "Please turn off the television",
+            "accepted": [
+              "Please turn off the TV",
+              "Please turn the TV off",
+              "Please turn the television off",
+              "Please switch off the TV",
+              "Please switch off the television",
+              "Please switch the TV off",
+              "Turn off the TV, please",
+              "Turn off the television, please"
+            ],
             "hint": "turn + off",
             "explanation": "'Turn off' means to stop a device from working. Opposite: 'turn on'."
           },
@@ -527,6 +568,11 @@
             "type": "translation",
             "question": "Translate using a phrasal verb: 'Levanta-te, por favor.'",
             "answer": "Please stand up",
+            "accepted": [
+              "Stand up, please",
+              "Please get up",
+              "Get up, please"
+            ],
             "hint": "stand + up",
             "explanation": "'Stand up' is used when someone rises to their feet."
           },
@@ -582,8 +628,13 @@
           {
             "id": "pv_i_4",
             "type": "translation",
-            "question": "Translate: 'Você deveria pensar bem antes de aceitar aquela oferta de emprego.'",
+            "question": "Translate: 'Devias pensar bem antes de aceitares aquela oferta de emprego.'",
             "answer": "You should think it over before accepting that job offer",
+            "accepted": [
+              "You should think it over before you accept that job offer",
+              "You should think it through before accepting that job offer",
+              "You should think carefully before accepting that job offer"
+            ],
             "hint": "think over = considerar cuidadosamente",
             "explanation": "'Think over' means to carefully consider something before making a decision."
           },
@@ -639,6 +690,9 @@
             "type": "translation",
             "question": "Translate: 'Eles ficaram sem leite durante o pequeno-almoço.'",
             "answer": "They ran out of milk during breakfast",
+            "accepted": [
+              "They ran out of milk at breakfast"
+            ],
             "hint": "run out of = ficar sem",
             "explanation": "'Run out of' means to have none left."
           },
@@ -702,8 +756,14 @@
           {
             "id": "pv_a_3",
             "type": "translation",
-            "question": "Translate: 'As negociações fracassaram, o que levou ambas as partes a reconsiderar sua posição.'",
+            "question": "Translate: 'As negociações fracassaram, o que levou ambas as partes a reconsiderar a sua posição.'",
             "answer": "The negotiations fell through, which prompted both parties to reconsider their position",
+            "accepted": [
+              "The negotiations fell through, which led both parties to reconsider their position",
+              "The negotiations broke down, which led both parties to reconsider their position",
+              "The negotiations fell through, which prompted both parties to reconsider their positions",
+              "The negotiations broke down, which prompted both parties to reconsider their position"
+            ],
             "hint": "fall through = fracassar/não se concretizar",
             "explanation": "'Fall through' means to fail to happen or be completed, especially plans or deals."
           },
@@ -746,6 +806,9 @@
             "type": "translation",
             "question": "Translate: 'Ele compensou o atraso trabalhando até tarde.'",
             "answer": "He made up for the delay by working late",
+            "accepted": [
+              "He made up for the delay by working until late"
+            ],
             "hint": "make up for = compensate",
             "explanation": "'Make up for' means to compensate for something negative."
           },
@@ -788,6 +851,11 @@
             "type": "translation",
             "question": "Translate: 'A equipa continuou apesar dos obstáculos.'",
             "answer": "The team carried on despite the obstacles",
+            "accepted": [
+              "The team carried on in spite of the obstacles",
+              "The team kept going despite the obstacles",
+              "The team went on despite the obstacles"
+            ],
             "hint": "carry on = continue",
             "explanation": "'Carry on' means to continue doing something."
           },
@@ -865,6 +933,10 @@
             "type": "translation",
             "question": "Translate: 'Por favor, encontre em anexo o relatório solicitado.'",
             "answer": "Please find attached the requested report",
+            "accepted": [
+              "Please find the requested report attached",
+              "Please find attached the report you requested"
+            ],
             "hint": "Standard phrase for sending attachments",
             "explanation": "'Please find attached' is the standard Business English phrase for email attachments. Alternative: 'I have attached...' or 'Attached please find...'"
           },
@@ -920,6 +992,12 @@
             "type": "translation",
             "question": "Translate: 'Obrigado pela sua resposta rápida.'",
             "answer": "Thank you for your quick reply",
+            "accepted": [
+              "Thank you for your prompt reply",
+              "Thank you for your quick response",
+              "Thanks for your quick reply",
+              "Thank you for your prompt response"
+            ],
             "hint": "quick reply",
             "explanation": "This is a common polite phrase in professional emails."
           },
@@ -988,8 +1066,13 @@
           {
             "id": "be_i_4",
             "type": "translation",
-            "question": "Translate in a professional tone: 'Precisamos adiar a reunião de amanhã. Podemos reagendar para quinta-feira?'",
+            "question": "Translate in a professional tone: 'Precisamos de adiar a reunião de amanhã. Podemos reagendar para quinta-feira?'",
             "answer": "I'm afraid we need to reschedule tomorrow's meeting. Would Thursday work for you?",
+            "accepted": [
+              "We need to postpone tomorrow's meeting. Can we reschedule for Thursday?",
+              "We need to postpone tomorrow's meeting. Could we reschedule for Thursday?",
+              "I'm afraid we need to postpone tomorrow's meeting. Could we reschedule for Thursday?"
+            ],
             "hint": "Use 'I'm afraid' to soften bad news",
             "explanation": "'I'm afraid' softens negative messages. 'Would... work for you?' is more polite than 'Can we meet on Thursday?'"
           },
@@ -1045,6 +1128,11 @@
             "type": "translation",
             "question": "Translate professionally: 'Podemos discutir isto na próxima reunião?'",
             "answer": "Can we discuss this in the next meeting?",
+            "accepted": [
+              "Could we discuss this at the next meeting?",
+              "Can we discuss this at the next meeting?",
+              "Could we discuss this in the next meeting?"
+            ],
             "hint": "discuss this",
             "explanation": "'Discuss' is transitive in English: discuss this, not discuss about this."
           },
@@ -1102,6 +1190,11 @@
             "type": "translation",
             "question": "Translate formally: 'Gostaríamos de discutir os termos do contrato com mais detalhes antes de prosseguirmos.'",
             "answer": "We would like to discuss the contractual terms in greater detail before proceeding",
+            "accepted": [
+              "We would like to discuss the terms of the contract in more detail before proceeding",
+              "We would like to discuss the terms of the contract in greater detail before we proceed",
+              "We would like to discuss the contract terms in more detail before proceeding"
+            ],
             "hint": "Use formal vocabulary: contractual, in greater detail, proceeding",
             "explanation": "'Contractual terms' (not 'contract conditions'), 'in greater detail' (not 'more'), 'proceeding' (not 'going ahead')."
           },
@@ -1136,6 +1229,11 @@
             "type": "translation",
             "question": "Translate formally: 'Agradecemos a sua compreensão relativamente a este assunto.'",
             "answer": "We appreciate your understanding regarding this matter",
+            "accepted": [
+              "We appreciate your understanding in this matter",
+              "We appreciate your understanding regarding this issue",
+              "Thank you for your understanding regarding this matter"
+            ],
             "hint": "regarding this matter",
             "explanation": "This is a formal closing phrase often used after explaining a problem."
           },
@@ -1178,6 +1276,11 @@
             "type": "translation",
             "question": "Translate: 'Devemos alinhar os objetivos do projeto com as expectativas do cliente.'",
             "answer": "We should align the project's objectives with the client's expectations",
+            "accepted": [
+              "We should align the project objectives with the client's expectations",
+              "We must align the project's objectives with the client's expectations",
+              "We should align the project's goals with the client's expectations"
+            ],
             "hint": "align objectives with expectations",
             "explanation": "'Align X with Y' is a common business collocation."
           },
@@ -1305,6 +1408,10 @@
             "type": "translation",
             "question": "Translate: 'Eu já terminei o trabalho.'",
             "answer": "I have already finished the work",
+            "accepted": [
+              "I have already finished the job",
+              "I have already finished my work"
+            ],
             "hint": "already + past participle",
             "explanation": "'Already' goes between 'have' and the past participle."
           },
@@ -1376,8 +1483,11 @@
           {
             "id": "pp_i_3",
             "type": "translation",
-            "question": "Translate: 'É a primeira vez que ela dirige um carro elétrico.'",
+            "question": "Translate: 'É a primeira vez que ela conduz um carro elétrico.'",
             "answer": "It's the first time she has driven an electric car",
+            "accepted": [
+              "This is the first time she has driven an electric car"
+            ],
             "hint": "It's the first/second/only time + Present Perfect",
             "explanation": "'It's the first time...' is always followed by Present Perfect. This structure shows a new experience."
           },
@@ -1420,6 +1530,11 @@
             "type": "translation",
             "question": "Translate: 'Trabalho aqui há três meses.'",
             "answer": "I have worked here for three months",
+            "accepted": [
+              "I have been working here for three months",
+              "I have worked here for 3 months",
+              "I have been working here for 3 months"
+            ],
             "hint": "for three months",
             "explanation": "Use Present Perfect because the work started in the past and continues now."
           },
@@ -1462,6 +1577,11 @@
             "type": "translation",
             "question": "Translate: 'Ela tem estudado muito ultimamente.'",
             "answer": "She has been studying a lot lately",
+            "accepted": [
+              "She has been studying hard lately",
+              "She has been studying a lot recently",
+              "She has been studying hard recently"
+            ],
             "hint": "has been + -ing",
             "explanation": "'Lately' often goes with Present Perfect Continuous."
           },
@@ -1496,8 +1616,13 @@
           {
             "id": "pp_a_2",
             "type": "translation",
-            "question": "Translate formally: 'A pesquisa revelou que o nível de poluição tem aumentado dramaticamente desde 2000.'",
+            "question": "Translate formally: 'A investigação revelou que o nível de poluição tem aumentado drasticamente desde 2000.'",
             "answer": "The research has revealed that pollution levels have risen dramatically since 2000",
+            "accepted": [
+              "Research has revealed that pollution levels have increased dramatically since 2000",
+              "The research has revealed that the level of pollution has risen dramatically since 2000",
+              "The study has revealed that pollution levels have increased dramatically since 2000"
+            ],
             "hint": "Two Present Perfect constructions with 'since'",
             "explanation": "Both 'has revealed' (recent discovery) and 'have risen' (ongoing trend since 2000) use Present Perfect correctly."
           },
@@ -1519,6 +1644,10 @@
             "type": "translation",
             "question": "Translate formally: 'A procura por soluções sustentáveis tem crescido significativamente nos últimos anos.'",
             "answer": "The demand for sustainable solutions has grown significantly in recent years",
+            "accepted": [
+              "Demand for sustainable solutions has grown significantly in recent years",
+              "The demand for sustainable solutions has increased significantly in recent years"
+            ],
             "hint": "has grown + in recent years",
             "explanation": "'In recent years' commonly pairs with Present Perfect for recent trends."
           },
@@ -1548,6 +1677,9 @@
             "type": "translation",
             "question": "Translate: 'Nunca antes a empresa tinha enfrentado um desafio tão complexo.'",
             "answer": "Never before has the company faced such a complex challenge",
+            "accepted": [
+              "Never before had the company faced such a complex challenge"
+            ],
             "hint": "Negative adverbial inversion",
             "explanation": "With 'Never before' at the beginning, use inversion: has the company faced."
           },
@@ -1590,6 +1722,11 @@
             "type": "translation",
             "question": "Translate formally: 'Até agora, não recebemos qualquer confirmação oficial.'",
             "answer": "So far, we have not received any official confirmation",
+            "accepted": [
+              "So far we have not received any official confirmation",
+              "To date, we have not received any official confirmation",
+              "Up to now, we have not received any official confirmation"
+            ],
             "hint": "so far + Present Perfect",
             "explanation": "'So far' means up to now, so Present Perfect is natural."
           },
@@ -1688,6 +1825,10 @@
             "type": "translation",
             "question": "Translate: 'Se estiver sol, vamos à praia.'",
             "answer": "If it's sunny, we will go to the beach",
+            "accepted": [
+              "If it is sunny, we are going to the beach",
+              "If it's sunny, we'll go to the beach"
+            ],
             "hint": "If + present, will + base verb",
             "explanation": "This is a real possible future situation, so use First Conditional."
           },
@@ -1730,6 +1871,11 @@
             "type": "translation",
             "question": "Translate: 'Se chegares tarde, vais perder o filme.'",
             "answer": "If you arrive late, you will miss the movie",
+            "accepted": [
+              "If you arrive late, you will miss the film",
+              "If you are late, you will miss the movie",
+              "If you are late, you will miss the film"
+            ],
             "hint": "arrive late + will miss",
             "explanation": "Use First Conditional for a likely future result."
           },
@@ -1766,6 +1912,9 @@
             "type": "translation",
             "question": "Translate: 'Se eu tivesse estudado mais, teria passado no exame.'",
             "answer": "If I had studied more, I would have passed the exam",
+            "accepted": [
+              "If I had studied harder, I would have passed the exam"
+            ],
             "hint": "Third conditional (impossible past situation)",
             "explanation": "Third Conditional expresses regret about the past. The implication: I didn't study, so I didn't pass."
           },
@@ -1863,6 +2012,11 @@
             "type": "translation",
             "question": "Translate: 'Se ele falasse inglês melhor, conseguiria o emprego.'",
             "answer": "If he spoke better English, he would get the job",
+            "accepted": [
+              "If he spoke English better, he would get the job",
+              "If he spoke better English, he could get the job",
+              "If he spoke English better, he could get the job"
+            ],
             "hint": "Second conditional",
             "explanation": "Use Past Simple after if and would + base verb in the result."
           },
@@ -1897,8 +2051,13 @@
           {
             "id": "co_a_2",
             "type": "translation",
-            "question": "Translate using inversion: 'Se você tivesse me avisado mais cedo, eu poderia ter ajudado.'",
+            "question": "Translate using inversion: 'Se me tivesses avisado mais cedo, eu poderia ter ajudado.'",
             "answer": "Had you warned me earlier, I could have helped",
+            "accepted": [
+              "Had you told me earlier, I could have helped",
+              "Had you warned me sooner, I could have helped",
+              "Had you warned me earlier, I would have been able to help"
+            ],
             "hint": "Inversion: Had + subject + Past Participle (omit 'If')",
             "explanation": "Formal/literary inversion omits 'if': 'Had you warned' = 'If you had warned'. Common in formal writing and legal language."
           },
@@ -1920,6 +2079,10 @@
             "type": "translation",
             "question": "Translate with inversion: 'Se o projeto falhasse, perderíamos o financiamento.'",
             "answer": "Were the project to fail, we would lose the funding",
+            "accepted": [
+              "Should the project fail, we would lose the funding",
+              "Were the project to fail, we would lose our funding"
+            ],
             "hint": "Were + subject + to + verb",
             "explanation": "This is a formal inverted Second Conditional."
           },
@@ -1949,6 +2112,10 @@
             "type": "translation",
             "question": "Translate: 'Se não fosse pela tua ajuda, eu ainda estaria perdido.'",
             "answer": "If it were not for your help, I would still be lost",
+            "accepted": [
+              "If it wasn't for your help, I would still be lost",
+              "Were it not for your help, I would still be lost"
+            ],
             "hint": "If it were not for...",
             "explanation": "Use 'If it were not for' to show that something prevents a bad present result."
           },
@@ -1991,6 +2158,12 @@
             "type": "translation",
             "question": "Translate formally: 'Caso necessite de assistência, contacte a receção.'",
             "answer": "Should you require assistance, please contact reception",
+            "accepted": [
+              "Should you need assistance, please contact reception",
+              "Should you require assistance, contact reception",
+              "Should you need any assistance, please contact reception",
+              "Should you require assistance, please contact the reception"
+            ],
             "hint": "Should you require...",
             "explanation": "This is a formal First Conditional used in notices and emails."
           },
@@ -2102,6 +2275,10 @@
             "type": "translation",
             "question": "Translate: 'A comida está deliciosa.'",
             "answer": "The food is delicious",
+            "accepted": [
+              "The food is tasty",
+              "The meal is delicious"
+            ],
             "hint": "delicious",
             "explanation": "'Delicious' means very tasty."
           },
@@ -2144,6 +2321,10 @@
             "type": "translation",
             "question": "Translate: 'Ela é muito simpática.'",
             "answer": "She is very friendly",
+            "accepted": [
+              "She is very nice",
+              "She is very kind"
+            ],
             "hint": "friendly",
             "explanation": "'Friendly' is often used for a nice, kind person."
           }
@@ -2222,6 +2403,9 @@
             "type": "translation",
             "question": "Translate: 'A solução foi eficaz, mas cara.'",
             "answer": "The solution was effective but expensive",
+            "accepted": [
+              "The solution was effective but costly"
+            ],
             "hint": "effective but expensive",
             "explanation": "'Effective' means producing the desired result."
           },
@@ -2264,6 +2448,11 @@
             "type": "translation",
             "question": "Translate: 'Ele tem uma forte tendência para adiar tarefas.'",
             "answer": "He has a strong tendency to postpone tasks",
+            "accepted": [
+              "He has a strong tendency to procrastinate",
+              "He has a strong tendency to put off tasks",
+              "He has a strong tendency to delay tasks"
+            ],
             "hint": "tendency + postpone",
             "explanation": "'Tendency' means a habit or inclination to do something."
           },
@@ -2355,6 +2544,9 @@
             "type": "translation",
             "question": "Translate: 'A decisão foi arbitrária e difícil de justificar.'",
             "answer": "The decision was arbitrary and difficult to justify",
+            "accepted": [
+              "The decision was arbitrary and hard to justify"
+            ],
             "hint": "arbitrary",
             "explanation": "'Arbitrary' means based on personal choice rather than reason or rules."
           },
@@ -2397,6 +2589,9 @@
             "type": "translation",
             "question": "Translate: 'A explicação dele foi convincente, mas incompleta.'",
             "answer": "His explanation was convincing but incomplete",
+            "accepted": [
+              "His explanation was persuasive but incomplete"
+            ],
             "hint": "convincing but incomplete",
             "explanation": "'Convincing' means able to make people believe something."
           },

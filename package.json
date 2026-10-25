@@ -1,9 +1,9 @@
 {
   "name": "pipilabu",
   "version": "1.0.0",
-  "description": "PiPiLabu — Aplicativo Desktop para Aprendizado de Inglês",
+  "description": "PiPiLabu — Aplicação desktop para aprender inglês",
   "author": "PiPiLabu App",
-  "main": "src/main.js",
+  "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
@@ -16,12 +16,12 @@
     "productName": "PiPiLabu",
     "files": [
       "src/**/*",
-      "exercises.json",
+      "data/**/*",
       "package.json"
     ],
     "asarUnpack": [
-      "src/models/**",
-      "src/vendor/**"
+      "src/renderer/assets/models/**",
+      "src/renderer/vendor/**"
     ],
     "win": {
       "signAndEditExecutable": false,

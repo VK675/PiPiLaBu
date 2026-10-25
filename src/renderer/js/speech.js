@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  const MODEL_URL = './models/vosk-model-small-en-us-0.15.tar.gz';
+  const MODEL_URL = './assets/models/vosk-model-small-en-us-0.15.tar.gz';
   const SAMPLE_RATE = 16000;
 
   let model = null;

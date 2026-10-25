@@ -1,8 +1,9 @@
 'use strict';
 
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path  = require('path');
 const fs    = require('fs');
+const { pathToFileURL } = require('url');
 
 // ── electron-store (ESM compat shim) ────────────────────────
 let Store;
@@ -51,6 +52,7 @@ function createWindow() {
     backgroundColor: '#070d1a',
     show:            false,
     titleBarStyle:   'hidden',
+    icon:            path.join(__dirname, '..', 'renderer', 'assets', 'images', 'logo.png'),
     webPreferences: {
       preload:             path.join(__dirname, 'preload.js'),
       contextIsolation:    true,
@@ -68,7 +70,7 @@ function createWindow() {
   ses.setPermissionRequestHandler((_wc, permission, callback) => callback(allowMedia(permission)));
   ses.setPermissionCheckHandler((_wc, permission) => allowMedia(permission));
 
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
@@ -76,8 +78,8 @@ function createWindow() {
   });
 
   if (process.env.PIPI_SMOKE) {
-    mainWindow.webContents.on('console-message', (_e, level, message) => {
-      if (level >= 2) console.log('[renderer-error]', message);
+    mainWindow.webContents.on('console-message', (e) => {
+      if (e.level === 'warning' || e.level === 'error') console.log('[renderer-error]', e.message);
     });
     mainWindow.webContents.once('did-finish-load', async () => {
       await new Promise(r => setTimeout(r, 900));
@@ -124,13 +126,10 @@ ipcMain.handle('window:maximize', () => {
 ipcMain.handle('window:close', () => {
   mainWindow && mainWindow.close();
 });
-ipcMain.handle('window:isMaximized', () => {
-  return mainWindow ? mainWindow.isMaximized() : false;
-});
 
 // ── IPC — Exercises ──────────────────────────────────────────
 ipcMain.handle('exercises:getAll', () => {
-  const p = path.join(__dirname, '..', 'exercises.json');
+  const p = path.join(__dirname, '..', '..', 'data', 'exercises.json');
   try {
     const raw = fs.readFileSync(p, 'utf-8');
     return { ok: true, data: JSON.parse(raw) };
@@ -153,15 +152,63 @@ ipcMain.handle('store:set', async (_, key, value) => {
   return true;
 });
 
-ipcMain.handle('store:getAll', async () => {
+// ── IPC — Music (pasta de música escolhida pelo utilizador) ──
+// A app não traz música: cada pessoa escolhe uma pasta sua e o leitor
+// toca os ficheiros de lá.
+const MUSIC_EXT = new Set(['.mp3', '.wav', '.ogg', '.oga', '.flac', '.m4a', '.aac', '.opus', '.webm']);
+const MUSIC_MAX_DEPTH = 3;
+const MUSIC_MAX_TRACKS = 1000;
+
+function scanMusicFolder(root) {
+  const tracks = [];
+  const walk = (dir, depth) => {
+    let entries;
+    try { entries = fs.readdirSync(dir, { withFileTypes: true }); }
+    catch (_) { return; }
+    entries.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+    for (const e of entries) {
+      if (tracks.length >= MUSIC_MAX_TRACKS) return;
+      if (e.name.startsWith('.')) continue;
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) {
+        if (depth < MUSIC_MAX_DEPTH) walk(full, depth + 1);
+      } else if (MUSIC_EXT.has(path.extname(e.name).toLowerCase())) {
+        tracks.push({
+          title:  path.basename(e.name, path.extname(e.name)),
+          folder: path.relative(root, dir),
+          url:    pathToFileURL(full).href
+        });
+      }
+    }
+  };
+  walk(root, 0);
+  return tracks;
+}
+
+async function musicLibrary() {
   const store = await getStore();
-  if (!store) return {};
-  return store.store;
+  const folder = store && store.get('music_folder');
+  if (!folder || !fs.existsSync(folder)) return { ok: true, folder: null, tracks: [] };
+  return { ok: true, folder, name: path.basename(folder), tracks: scanMusicFolder(folder) };
+}
+
+ipcMain.handle('music:getLibrary', () => musicLibrary());
+
+ipcMain.handle('music:chooseFolder', async () => {
+  const res = await dialog.showOpenDialog(mainWindow, {
+    title: 'Escolhe a pasta com a tua música',
+    properties: ['openDirectory']
+  });
+  if (res.canceled || !res.filePaths.length) return { ok: false, canceled: true };
+  const store = await getStore();
+  if (store) store.set('music_folder', res.filePaths[0]);
+  return musicLibrary();
 });
 
-// ── IPC — Shell ──────────────────────────────────────────────
-ipcMain.handle('shell:openExternal', async (_, url) => {
-  if (/^https?:\/\//.test(url)) shell.openExternal(url);
+ipcMain.handle('music:forgetFolder', async () => {
+  const store = await getStore();
+  if (store) store.delete('music_folder');
+  return { ok: true };
 });
 
 // ── IPC — Ollama Integration ──────────────────────────────────
@@ -249,7 +296,7 @@ Deves responder ESTRITAMENTE em formato JSON válido com a seguinte estrutura, s
 }`;
 
   const prompt = `Frase original em português: "${question}"
-Tradução de referência em inglês: "${correctPhrase}"
+Traduções de referência aceites em inglês (separadas por |): "${correctPhrase}"
 Tradução fornecida pelo aluno em inglês: "${userPhrase}"`;
 
   try {
@@ -258,28 +305,25 @@ Tradução fornecida pelo aluno em inglês: "${userPhrase}"`;
       system: systemPrompt,
       prompt: prompt,
       stream: false,
+      format: 'json',
       options: {
-        num_predict: 150,
+        num_predict: 250,
         temperature: 0.2
       }
     });
     
-    let text = data.response.trim();
-    if (text.startsWith('```')) {
-      text = text.replace(/^```(json)?/, '').replace(/```$/, '').trim();
+    // Os modelos pequenos às vezes juntam texto ou ``` à volta do JSON:
+    // extrai o primeiro objeto { ... } da resposta.
+    const text = (data.response || '').trim();
+    const match = text.match(/\{[\s\S]*\}/);
+    let parsed = null;
+    try { parsed = match ? JSON.parse(match[0]) : null; } catch (_) { parsed = null; }
+
+    if (!parsed || typeof parsed.correct !== 'boolean') {
+      // Sem um veredito claro não adivinhamos: a app usa a correção local.
+      return { ok: false, error: 'resposta da IA em formato inválido' };
     }
-    
-    try {
-      const parsed = JSON.parse(text);
-      return { ok: true, correct: !!parsed.correct, explanation: parsed.explanation };
-    } catch (parseError) {
-      // Caso a resposta não venha em JSON puro apesar do prompt
-      return { 
-        ok: true, 
-        correct: text.toLowerCase().includes('true') || !text.toLowerCase().includes('errado'), 
-        explanation: text 
-      };
-    }
+    return { ok: true, correct: parsed.correct, explanation: parsed.explanation || '' };
   } catch (e) {
     return { ok: false, error: e.message };
   }
